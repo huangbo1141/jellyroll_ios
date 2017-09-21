@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ViewMessage">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="msg_login_fail.png" translatesAutoresizingMaskIntoConstraints="NO" id="fpZ-de-QAg">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fpZ-de-QAg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Mi4-ul-BQt"/>
+                <constraint firstItem="fpZ-de-QAg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RVh-xC-TBk"/>
+                <constraint firstAttribute="trailing" secondItem="fpZ-de-QAg" secondAttribute="trailing" id="WP6-Ss-7VH"/>
+                <constraint firstAttribute="bottom" secondItem="fpZ-de-QAg" secondAttribute="bottom" id="bb3-OV-Br6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imgContent" destination="fpZ-de-QAg" id="7Ee-FD-bQH"/>
+            </connections>
+            <point key="canvasLocation" x="-250" y="-303"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="msg_login_fail.png" width="600" height="100"/>
+    </resources>
+</document>
