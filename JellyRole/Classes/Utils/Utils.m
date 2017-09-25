@@ -229,6 +229,62 @@
     return strTimeStamp;//[NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
 }
 
++(NSString *)stringToDate:(NSString *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    
+    [formatter setTimeZone:timeZone];
+    [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateTime = [formatter dateFromString:date];
+    if (dateTime == nil) {
+        
+        dateTime = [NSDate date];
+    }
+    
+    [formatter setDateFormat : @"MMM dd yyyy"];
+    
+    return [formatter stringFromDate:dateTime];;
+}
+
+
++(NSString *)stringToTime:(NSString *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    
+    [formatter setTimeZone:timeZone];
+    [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateTime = [formatter dateFromString:date];
+    if (dateTime == nil) {
+        
+        dateTime = [NSDate date];
+    }
+    
+    [formatter setDateFormat : @"HH:mm a"];
+    
+    return [formatter stringFromDate:dateTime];;
+}
+
+
++(NSString*)selectRandomBallImageName:(NSString*)barid {
+    int r = arc4random_uniform(16);
+    if (barid!=nil) {
+        r = [barid intValue];
+    }
+    
+    r = r%16;
+    if (r == 0) {
+        r = 1;
+    }
+    NSString* name = [NSString stringWithFormat:@"%dball",r];
+    return name;
+    
+    //    UIImage* image = [UIImage imageNamed:name];
+    //    return image;
+    
+}
+
 
 
 @end

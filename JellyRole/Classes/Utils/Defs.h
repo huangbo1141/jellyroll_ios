@@ -37,6 +37,27 @@
 
 #define kAPI_MYPROFILE [kHostURL stringByAppendingString:@"webservice/get_my_profile.php?user_id=%@"]
 
+#define kAPI_STATS [kHostURL stringByAppendingString:@"webservice/get_stats.php?user_id=%@"]
+
+#define kAPI_FORGETPASSWORD [kHostURL stringByAppendingString:@"webservice/forgot_password.php?email=%@"]
+
+#define kAPI_RESENDCODE [kHostURL stringByAppendingString:@"webservice/resend_code.php?email=%@"]
+
+#define kAPI_VERIFIYCODE [kHostURL stringByAppendingString:@"webservice/verification.php?email=%@&guid=%@"]
+
+#define kAPI_ALLBARS [kHostURL stringByAppendingString:@"webservice/get_all_bar.php?user_id=%@"]
+
+#define kAPI_ADDLOCATION [kHostURL stringByAppendingString:@"webservice/create_bar.php"]
+#define kAPI_AddLocationParams @"location_name=%@&address=%@&city=%@&state=%@&zip=%@&lat=%@&long=%@&user_id=%@&bar_status=yes&place_id=%@"
+
+#define kAPI_ALLPENDINGGAMES [kHostURL stringByAppendingString:@"webservice/get_all_bar_pending.php?user_id=%@"]
+
+#define kAPI_CONFIRMGAME [kHostURL stringByAppendingString:@"webservice/confirm.php"]
+#define kAPI_ConfirmGameParams @"game_id=%@&status=%@"
+
+
+#define GoogleDirectionAPI @"AIzaSyCmvC_H5S08MvkO-ixoQTpJQGXdu5qyVWg"
+
 //Functions
 #define TextNumericNospace @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.~`@#$%^&*()_-+=|\?/>.<':;"
 #define TextNumericspace @" ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.~`@#$%^&*()_-+=|\?/>.<':;"
@@ -63,6 +84,12 @@
 #define kLightBlueColor [UIColor colorWithRed:241.0/255.0 green:244.0/255.0 blue:254.0/255.0 alpha:1.0]
 #define kDarkBlackColor [UIColor colorWithRed:82.0/255.0 green:84.0/255.0 blue:95.0/255.0 alpha:1.0]
 #define kLightBlackColor [UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:215.0/255.0 alpha:1.0]
+
+#define kYalletColor [UIColor colorWithRed:133.0/255.0 green:44.0/255.0 blue:139.0/255.0 alpha:1.0]
+#define kOrangeColor [UIColor colorWithRed:238.0/255.0 green:160.0/255.0 blue:55.0/255.0 alpha:1.0]
+#define kRedColor [UIColor colorWithRed:219.0/255.0 green:59.0/255.0 blue:50.0/255.0 alpha:1.0]
+#define kFroColor [UIColor colorWithRed:88.0/255.0 green:177.0/255.0 blue:204.0/255.0 alpha:1.0]
+#define kGreenColor [UIColor colorWithRed:153.0/255.0 green:196.0/255.0 blue:85.0/255.0 alpha:1.0]
 
 // Device Specific
 #define kScreenHeight             [[UIScreen mainScreen] bounds].size.height

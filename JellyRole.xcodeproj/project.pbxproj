@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0E905A43837784435CB5040C /* Pods_JellyRole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */; };
+		D1282F4F1F74F4B30064ED2C /* ArtPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F4E1F74F4B30064ED2C /* ArtPiece.m */; };
+		D1282F521F7520C80064ED2C /* testing.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F511F7520C80064ED2C /* testing.m */; };
+		D1282F581F763C620064ED2C /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F571F763C620064ED2C /* MapVC.m */; };
 		D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12C70451F70F48900285B6B /* FeedbackVC.m */; };
 		D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB21F73290200B67244 /* FriendsVC.m */; };
 		D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB51F73500200B67244 /* ProfileVC.m */; };
@@ -21,6 +24,8 @@
 		D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22E11F6FE732007EF10F /* SignupVC.m */; };
 		D15B22E51F700577007EF10F /* MenuVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22E41F700577007EF10F /* MenuVC.m */; };
 		D15B22E81F700695007EF10F /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22E71F700695007EF10F /* HomeVC.m */; };
+		D163A03E1F73D29A0047325C /* ForgetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A03D1F73D29A0047325C /* ForgetPassVC.m */; };
+		D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A0401F73D8290047325C /* VerifiyEmailVC.m */; };
 		D17D51961F61E1BE00AACDDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51951F61E1BE00AACDDC /* main.m */; };
 		D17D519F1F61E1BE00AACDDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17D519D1F61E1BE00AACDDC /* Main.storyboard */; };
 		D17D51A11F61E1BE00AACDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D17D51A01F61E1BE00AACDDC /* Assets.xcassets */; };
@@ -48,6 +53,17 @@
 		D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E31F62254800AACDDC /* CustomeButton.m */; };
 		D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E61F62258900AACDDC /* UIButton+Font.m */; };
 		D17D51EA1F6275FD00AACDDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17D51E91F6275FD00AACDDC /* MapKit.framework */; };
+		D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */; };
+		D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99121F78D6A8001CC21C /* BaseModel.m */; };
+		D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99181F78D6A8001CC21C /* GooglePlace.m */; };
+		D1DB994C1F78D6A8001CC21C /* GooglePlaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB991A1F78D6A8001CC21C /* GooglePlaceResult.m */; };
+		D1DB99621F78D6F8001CC21C /* EftGoogleAddressComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99611F78D6F8001CC21C /* EftGoogleAddressComponent.m */; };
+		D1DB99651F79005B001CC21C /* NotificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99641F79005B001CC21C /* NotificationVC.m */; };
+		D1DB99681F790F55001CC21C /* NotificationRequetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99671F790F55001CC21C /* NotificationRequetVC.m */; };
+		D1E951521F737B310017A818 /* StatsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951511F737B310017A818 /* StatsScrollView.m */; };
+		D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951541F739BF90017A818 /* StatsRankingView.m */; };
+		D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951571F73C1AF0017A818 /* LocationStateVC.m */; };
+		D1F56EB51F736FED00E270A8 /* StatsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F56EB41F736FED00E270A8 /* StatsVC.m */; };
 		D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */; };
 		D1F865471F71522E0004E422 /* PoolTermsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865461F71522E0004E422 /* PoolTermsVC.m */; };
 /* End PBXBuildFile section */
@@ -55,6 +71,12 @@
 /* Begin PBXFileReference section */
 		86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JellyRole.release.xcconfig"; path = "Pods/Target Support Files/Pods-JellyRole/Pods-JellyRole.release.xcconfig"; sourceTree = "<group>"; };
 		B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JellyRole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1282F4D1F74F4B30064ED2C /* ArtPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtPiece.h; sourceTree = "<group>"; };
+		D1282F4E1F74F4B30064ED2C /* ArtPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtPiece.m; sourceTree = "<group>"; };
+		D1282F501F7520C70064ED2C /* testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testing.h; sourceTree = "<group>"; };
+		D1282F511F7520C80064ED2C /* testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testing.m; sourceTree = "<group>"; };
+		D1282F561F763C620064ED2C /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
+		D1282F571F763C620064ED2C /* MapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVC.m; sourceTree = "<group>"; };
 		D12C70441F70F48900285B6B /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		D12C70451F70F48900285B6B /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		D14C8DB11F73290200B67244 /* FriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsVC.h; sourceTree = "<group>"; };
@@ -80,6 +102,10 @@
 		D15B22E41F700577007EF10F /* MenuVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuVC.m; sourceTree = "<group>"; };
 		D15B22E61F700695007EF10F /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
 		D15B22E71F700695007EF10F /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
+		D163A03C1F73D29A0047325C /* ForgetPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPassVC.h; sourceTree = "<group>"; };
+		D163A03D1F73D29A0047325C /* ForgetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassVC.m; sourceTree = "<group>"; };
+		D163A03F1F73D8290047325C /* VerifiyEmailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifiyEmailVC.h; sourceTree = "<group>"; };
+		D163A0401F73D8290047325C /* VerifiyEmailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiyEmailVC.m; sourceTree = "<group>"; };
 		D17D51911F61E1BE00AACDDC /* JellyRole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JellyRole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D51951F61E1BE00AACDDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D17D519E1F61E1BE00AACDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -119,6 +145,27 @@
 		D17D51E51F62258900AACDDC /* UIButton+Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Font.h"; sourceTree = "<group>"; };
 		D17D51E61F62258900AACDDC /* UIButton+Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Font.m"; sourceTree = "<group>"; };
 		D17D51E91F6275FD00AACDDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D1DB99001F7674D2001CC21C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View_SearchMAP.xib; sourceTree = "<group>"; };
+		D1DB99111F78D6A8001CC21C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		D1DB99121F78D6A8001CC21C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		D1DB99171F78D6A8001CC21C /* GooglePlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlace.h; sourceTree = "<group>"; };
+		D1DB99181F78D6A8001CC21C /* GooglePlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlace.m; sourceTree = "<group>"; };
+		D1DB99191F78D6A8001CC21C /* GooglePlaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GooglePlaceResult.h; sourceTree = "<group>"; };
+		D1DB991A1F78D6A8001CC21C /* GooglePlaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GooglePlaceResult.m; sourceTree = "<group>"; };
+		D1DB99601F78D6F8001CC21C /* EftGoogleAddressComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EftGoogleAddressComponent.h; sourceTree = "<group>"; };
+		D1DB99611F78D6F8001CC21C /* EftGoogleAddressComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EftGoogleAddressComponent.m; sourceTree = "<group>"; };
+		D1DB99631F79005B001CC21C /* NotificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationVC.h; sourceTree = "<group>"; };
+		D1DB99641F79005B001CC21C /* NotificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationVC.m; sourceTree = "<group>"; };
+		D1DB99661F790F55001CC21C /* NotificationRequetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationRequetVC.h; sourceTree = "<group>"; };
+		D1DB99671F790F55001CC21C /* NotificationRequetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationRequetVC.m; sourceTree = "<group>"; };
+		D1E951501F737B310017A818 /* StatsScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsScrollView.h; sourceTree = "<group>"; };
+		D1E951511F737B310017A818 /* StatsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsScrollView.m; sourceTree = "<group>"; };
+		D1E951531F739BF90017A818 /* StatsRankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsRankingView.h; sourceTree = "<group>"; };
+		D1E951541F739BF90017A818 /* StatsRankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsRankingView.m; sourceTree = "<group>"; };
+		D1E951561F73C1AF0017A818 /* LocationStateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationStateVC.h; sourceTree = "<group>"; };
+		D1E951571F73C1AF0017A818 /* LocationStateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationStateVC.m; sourceTree = "<group>"; };
+		D1F56EB31F736FED00E270A8 /* StatsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsVC.h; sourceTree = "<group>"; };
+		D1F56EB41F736FED00E270A8 /* StatsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsVC.m; sourceTree = "<group>"; };
 		D1F865421F71487C0004E422 /* PrivacyPolicyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyVC.h; sourceTree = "<group>"; };
 		D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyVC.m; sourceTree = "<group>"; };
 		D1F865451F71522E0004E422 /* PoolTermsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolTermsVC.h; sourceTree = "<group>"; };
@@ -151,16 +198,22 @@
 		D15B22C41F6FB3EF007EF10F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D15B22E61F700695007EF10F /* HomeVC.h */,
-				D15B22E71F700695007EF10F /* HomeVC.m */,
-				D15B22E31F700577007EF10F /* MenuVC.h */,
-				D15B22E41F700577007EF10F /* MenuVC.m */,
 				D15B22C51F6FB40C007EF10F /* SplashVC.h */,
 				D15B22C61F6FB40C007EF10F /* SplashVC.m */,
 				D15B22C81F6FB722007EF10F /* LoginVC.h */,
 				D15B22C91F6FB722007EF10F /* LoginVC.m */,
 				D15B22E01F6FE732007EF10F /* SignupVC.h */,
 				D15B22E11F6FE732007EF10F /* SignupVC.m */,
+				D15B22E31F700577007EF10F /* MenuVC.h */,
+				D15B22E41F700577007EF10F /* MenuVC.m */,
+				D15B22E61F700695007EF10F /* HomeVC.h */,
+				D15B22E71F700695007EF10F /* HomeVC.m */,
+				D1282F561F763C620064ED2C /* MapVC.h */,
+				D1282F571F763C620064ED2C /* MapVC.m */,
+				D1E951561F73C1AF0017A818 /* LocationStateVC.h */,
+				D1E951571F73C1AF0017A818 /* LocationStateVC.m */,
+				D1DB99631F79005B001CC21C /* NotificationVC.h */,
+				D1DB99641F79005B001CC21C /* NotificationVC.m */,
 				D12C70441F70F48900285B6B /* FeedbackVC.h */,
 				D12C70451F70F48900285B6B /* FeedbackVC.m */,
 				D1F865421F71487C0004E422 /* PrivacyPolicyVC.h */,
@@ -171,6 +224,14 @@
 				D14C8DB21F73290200B67244 /* FriendsVC.m */,
 				D14C8DB41F73500200B67244 /* ProfileVC.h */,
 				D14C8DB51F73500200B67244 /* ProfileVC.m */,
+				D1F56EB31F736FED00E270A8 /* StatsVC.h */,
+				D1F56EB41F736FED00E270A8 /* StatsVC.m */,
+				D163A03C1F73D29A0047325C /* ForgetPassVC.h */,
+				D163A03D1F73D29A0047325C /* ForgetPassVC.m */,
+				D163A03F1F73D8290047325C /* VerifiyEmailVC.h */,
+				D163A0401F73D8290047325C /* VerifiyEmailVC.m */,
+				D1282F501F7520C70064ED2C /* testing.h */,
+				D1282F511F7520C80064ED2C /* testing.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -178,6 +239,7 @@
 		D15B22CD1F6FC722007EF10F /* DataManager */ = {
 			isa = PBXGroup;
 			children = (
+				D1DB99021F78D6A8001CC21C /* Model2 */,
 				D15B22CE1F6FC722007EF10F /* AppPrefData.h */,
 				D15B22CF1F6FC722007EF10F /* AppPrefData.m */,
 				D15B22D21F6FC722007EF10F /* DataManager.h */,
@@ -223,6 +285,7 @@
 				D17D51A21F61E1BE00AACDDC /* LaunchScreen.storyboard */,
 				D17D51A51F61E1BE00AACDDC /* Info.plist */,
 				D17D51941F61E1BE00AACDDC /* Supporting Files */,
+				D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */,
 			);
 			path = JellyRole;
 			sourceTree = "<group>";
@@ -291,6 +354,8 @@
 		D17D51CF1F62015A00AACDDC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D1282F4D1F74F4B30064ED2C /* ArtPiece.h */,
+				D1282F4E1F74F4B30064ED2C /* ArtPiece.m */,
 				D15B22DB1F6FDF50007EF10F /* ViewMessage.h */,
 				D15B22DC1F6FDF50007EF10F /* ViewMessage.m */,
 				D15B22DD1F6FDF50007EF10F /* ViewMessage.xib */,
@@ -298,6 +363,12 @@
 				D17D51D11F62019000AACDDC /* LeaderboardView.m */,
 				D17D51D31F62196500AACDDC /* GameView.h */,
 				D17D51D41F62196500AACDDC /* GameView.m */,
+				D1E951501F737B310017A818 /* StatsScrollView.h */,
+				D1E951511F737B310017A818 /* StatsScrollView.m */,
+				D1E951531F739BF90017A818 /* StatsRankingView.h */,
+				D1E951541F739BF90017A818 /* StatsRankingView.m */,
+				D1DB99661F790F55001CC21C /* NotificationRequetVC.h */,
+				D1DB99671F790F55001CC21C /* NotificationRequetVC.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -334,6 +405,21 @@
 				B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D1DB99021F78D6A8001CC21C /* Model2 */ = {
+			isa = PBXGroup;
+			children = (
+				D1DB99601F78D6F8001CC21C /* EftGoogleAddressComponent.h */,
+				D1DB99611F78D6F8001CC21C /* EftGoogleAddressComponent.m */,
+				D1DB99111F78D6A8001CC21C /* BaseModel.h */,
+				D1DB99121F78D6A8001CC21C /* BaseModel.m */,
+				D1DB99171F78D6A8001CC21C /* GooglePlace.h */,
+				D1DB99181F78D6A8001CC21C /* GooglePlace.m */,
+				D1DB99191F78D6A8001CC21C /* GooglePlaceResult.h */,
+				D1DB991A1F78D6A8001CC21C /* GooglePlaceResult.m */,
+			);
+			path = Model2;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +487,7 @@
 				D17D51CE1F61FB1000AACDDC /* OpenSans-SemiBoldItalic.ttf in Resources */,
 				D17D51A41F61E1BE00AACDDC /* LaunchScreen.storyboard in Resources */,
 				D17D51C91F61FB1000AACDDC /* OpenSans-Italic.ttf in Resources */,
+				D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */,
 				D17D51C51F61FB1000AACDDC /* OpenSans-Bold.ttf in Resources */,
 				D17D51C71F61FB1000AACDDC /* OpenSans-ExtraBold.ttf in Resources */,
 				D17D51B91F61E7FE00AACDDC /* FontAwesome.otf in Resources */,
@@ -473,12 +560,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F56EB51F736FED00E270A8 /* StatsVC.m in Sources */,
+				D1E951521F737B310017A818 /* StatsScrollView.m in Sources */,
+				D1282F521F7520C80064ED2C /* testing.m in Sources */,
+				D1DB99651F79005B001CC21C /* NotificationVC.m in Sources */,
 				D17D51E11F6223A100AACDDC /* Utils.m in Sources */,
 				D15B22E81F700695007EF10F /* HomeVC.m in Sources */,
+				D1282F4F1F74F4B30064ED2C /* ArtPiece.m in Sources */,
 				D15B22E51F700577007EF10F /* MenuVC.m in Sources */,
 				D15B22CA1F6FB722007EF10F /* LoginVC.m in Sources */,
+				D1282F581F763C620064ED2C /* MapVC.m in Sources */,
 				D15B22C71F6FB40C007EF10F /* SplashVC.m in Sources */,
 				D17D51DC1F6221F500AACDDC /* UILabel+Font.m in Sources */,
+				D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */,
+				D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */,
+				D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */,
+				D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */,
+				D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */,
 				D17D51D51F62196500AACDDC /* GameView.m in Sources */,
 				D17D51B11F61E44400AACDDC /* AppDelegate.m in Sources */,
 				D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */,
@@ -486,7 +584,9 @@
 				D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */,
 				D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */,
 				D15B22D71F6FC722007EF10F /* AppPrefData.m in Sources */,
+				D163A03E1F73D29A0047325C /* ForgetPassVC.m in Sources */,
 				D15B22DE1F6FDF50007EF10F /* ViewMessage.m in Sources */,
+				D1DB99621F78D6F8001CC21C /* EftGoogleAddressComponent.m in Sources */,
 				D17D51B21F61E44400AACDDC /* B_Nav_VC.m in Sources */,
 				D1F865471F71522E0004E422 /* PoolTermsVC.m in Sources */,
 				D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */,
@@ -497,6 +597,8 @@
 				D15B22D91F6FC722007EF10F /* DataManager.m in Sources */,
 				D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */,
 				D17D51961F61E1BE00AACDDC /* main.m in Sources */,
+				D1DB994C1F78D6A8001CC21C /* GooglePlaceResult.m in Sources */,
+				D1DB99681F790F55001CC21C /* NotificationRequetVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +619,14 @@
 				D17D51A31F61E1BE00AACDDC /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D1DB99001F7674D2001CC21C /* Base */,
+			);
+			name = View_SearchMAP.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -617,7 +727,7 @@
 			baseConfigurationReference = FADABCACF4B3361F19DF6828 /* Pods-JellyRole.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -626,8 +736,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15f95d15-a4f4-40fb-91df-57185f99e87b";
-				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
+				PROVISIONING_PROFILE = "e2c84d7e-daaa-4794-9359-7d1f1f877b49";
+				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Debug;
 		};
@@ -636,7 +746,7 @@
 			baseConfigurationReference = 86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -645,8 +755,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "15f95d15-a4f4-40fb-91df-57185f99e87b";
-				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
+				PROVISIONING_PROFILE = "e2c84d7e-daaa-4794-9359-7d1f1f877b49";
+				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Release;
 		};

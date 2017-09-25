@@ -126,7 +126,7 @@
                     [pref setUserName:dict1[@"username"]];
                     [pref setUserID:dict1[@"user_id"]];
                     [pref setImageURL:dict1[@"image"]];
-                    [pref setUserEmail:dict1[@"email"]];
+                    //[pref setUserEmail:dict1[@"email"]];
                     [pref setAddress:dict1[@"address"]];
                     [pref setMemberSince:dict1[@"created_time"]];
                     [pref saveAllData];
@@ -136,7 +136,18 @@
                     
                     if ([dict1[@"active_flag"] isEqualToString:@"no"]) {
                         
-                        [_gAppDelegate showAlertDilog:kAppName message:dict1[@"msg"]];
+                        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+                        
+                        [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                            
+                            [self performSegueWithIdentifier:@"VerifySegue" sender:nil];
+                        }]];
+                        
+                        if (![Utils isIphone]) {
+                            alert.popoverPresentationController.sourceView = self.view;
+                        }
+                        
+                        [self presentViewController:alert animated:true completion:nil];
                         
                     } else {
                         

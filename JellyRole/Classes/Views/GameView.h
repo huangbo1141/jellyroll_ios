@@ -11,5 +11,6 @@
 @interface GameView : UITableView
 
 - (void)setView;
+- (void)updateData:(NSArray *)array;
 
 @end

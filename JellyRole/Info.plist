@@ -25,6 +25,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>JellyRoll app access your location for map.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>JellyRoll app access your location for map. </string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>JellyRoll app access your photo in library to upload your photo and Share with other users. </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Open Sans</string>

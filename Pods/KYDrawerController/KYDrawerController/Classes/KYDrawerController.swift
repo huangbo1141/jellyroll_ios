@@ -319,6 +319,10 @@ open class KYDrawerController: UIViewController, UIGestureRecognizerDelegate {
             return false
         }
     }
+    
+    override open var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     /**************************************************************************/
     // MARK: - Public Method

@@ -1,0 +1,24 @@
+//
+//  MainVCViewController.h
+//  JellyRole
+//
+//  Created by Kapil Kumar on 9/23/17.
+//  Copyright © 2017 Kapil Kumar. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@protocol MapVCDelegates <NSObject>
+
+- (void)loadLocationStateVC:(UIImage *)image ;
+
+@end
+
+@interface MapVC : UIViewController
+
+@property(nonatomic, weak) id <MapVCDelegates> delegate;
+
+- (void)hideDialogPublic;
+- (UIImage*)captureViewS;
+
+@end

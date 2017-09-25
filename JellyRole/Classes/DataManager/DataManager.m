@@ -40,6 +40,7 @@ static DataManager* gDataMgr = nil;
 #pragma mark --
 #pragma mark WebServices request
 
+
 - (void)sendGetRequest:(NSString *)url completion:(void(^)(id result))completionBlock {
     
     

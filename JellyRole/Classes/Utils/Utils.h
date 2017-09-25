@@ -32,5 +32,8 @@
 + (void)resignFromResponder:(UIView *)view;
 + (NSString *)getCurrentDate;
 + (NSString *)uniqueFileName;
++(NSString *)stringToDate:(NSString *)date;
++(NSString *)stringToTime:(NSString *)date;
++(NSString*)selectRandomBallImageName:(NSString*)barid;
 
 @end

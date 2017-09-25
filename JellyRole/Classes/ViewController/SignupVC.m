@@ -134,9 +134,19 @@
                     AppPrefData* pref = _gAppPrefData;
                     [pref setUserEmail:_txt_email.text];
                     [pref saveAllData];
+
+                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
                     
-                    [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                        [self performSegueWithIdentifier:@"VerifiySegue" sender:nil];
+                    }]];
                     
+                    if (![Utils isIphone]) {
+                        alert.popoverPresentationController.sourceView = self.view;
+                    }
+                    
+                    [self presentViewController:alert animated:true completion:nil];
                     //[_multiColorLoader stopAnimation];
                    /* NSLog(@"check 5");
                     UIAlertView *  Myalert=[[UIAlertView alloc]initWithTitle:@"Info" message:[dict1 objectForKey:@"msg"] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

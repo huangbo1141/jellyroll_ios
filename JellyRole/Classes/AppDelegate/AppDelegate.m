@@ -9,10 +9,14 @@
 #import "AppDelegate.h"
 #import <UserNotifications/UserNotifications.h>
 #import "ViewMessage.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface AppDelegate()<UNUserNotificationCenterDelegate>
+@interface AppDelegate()<UNUserNotificationCenterDelegate, CLLocationManagerDelegate>
 {
     UIView* _waitingScreen;
+    
+    CLLocationManager* _locationManager;
+    CLLocation* _lastLocation;
 }
 @end
 
@@ -40,7 +44,7 @@
                               }];
         
     }*/
-    
+    [self startLocationService];
     AppPrefData* pref = _gAppPrefData;
     if (pref.userID.length > 0) {
         
@@ -100,6 +104,40 @@
 
 #pragma mark -
 #pragma mark Private Methods
+-(void)startLocationService {
+    
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    _locationManager.delegate = self;
+    [_locationManager startUpdatingLocation];
+    
+    if ([CLLocationManager locationServicesEnabled] == NO)
+    {
+        NSLog(@"%s: location services are not available.", __PRETTY_FUNCTION__);
+        
+        [_gAppDelegate showAlertDilog:@"Location services" message:@"Location services are not enabled on this device. Please enable location services in settings."];
+        
+        return;
+    }
+    
+    // Request "when in use" location service authorization.
+    // If authorization has been denied previously, we can display an alert if the user has denied location services previously.
+    
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined)
+    {
+        [_locationManager requestWhenInUseAuthorization];
+    }
+    else if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied)
+    {
+        NSLog(@"%s: location services authorization was previously denied by the user.", __PRETTY_FUNCTION__);
+        
+        [_gAppDelegate showAlertDilog:@"Location services" message:@"Location services were previously denied by the you. Please enable location services for this app in settings."];
+        return;
+    }
+    
+    [_locationManager startUpdatingLocation];
+}
+
 - (void)initializeApplication:(UIViewController*)initialViewController
 {
     self.window.rootViewController = initialViewController;
@@ -244,6 +282,23 @@
         if ([_waitingScreen superview] != NULL)
             [_waitingScreen removeFromSuperview];
     }
+}
+
+#pragma mark -
+#pragma mark- CLLocation Manager Delegates
+-(void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation{
+    _lastLocation = newLocation;
+    [_locationManager stopUpdatingLocation];
+    [_locationManager setDelegate:nil];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+       didFailWithError:(NSError *)error {
+    
 }
 
 @end

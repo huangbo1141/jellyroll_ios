@@ -7,22 +7,14 @@
 //
 
 #import "HomeVC.h"
-#import "LeaderboardView.h"
-#import "GameView.h"
-#import <QuartzCore/QuartzCore.h>
+#import "LocationStateVC.h"
+#import "MapVC.h"
+#import "NotificationVC.h"
 
-@interface HomeVC ()
-
-@property (weak, nonatomic) IBOutlet LeaderboardView *leaderboardView;
-@property (weak, nonatomic) IBOutlet GameView *gameView;
-
-@property (weak, nonatomic) IBOutlet UIButton *myRecentBtn;
-@property (weak, nonatomic) IBOutlet UIButton *allRecentBtn;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myRecentLeading;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *myRecentTrailing;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *allRecentTrailing;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *allRecentLeading;
-@property (weak, nonatomic) IBOutlet UILabel *greeLabel;
+@interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate>
+{
+    UINavigationController* _mainVC;
+}
 
 @end
 
@@ -44,10 +36,20 @@
     [super viewWillAppear:animated];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [super viewWillDisappear:animated];
+}
+
 - (UIStatusBarStyle)preferredStatusBarStyle {
  
     
     return UIStatusBarStyleLightContent;
+}
+
+- (void)viewDidLayoutSubviews {
+
+ //       _mainVC.view.frame = CGRectMake(0, 0, 300, 400);
 }
 
 
@@ -57,6 +59,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    
 }
 
 
@@ -65,24 +69,19 @@
 - (void)viewSettings
 {
     [self.navigationController setNavigationBarHidden:true];
+ 
+    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+    MapVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"MapSB"];
+    [vc setDelegate:self];
     
-    [self setStatusBarBackgroundColor:[UIColor colorWithRed:15.0/255.0 green:9.0/255.0 blue:27.0/255.0 alpha:1.0]];
+    _mainVC = [[UINavigationController alloc] initWithRootViewController:vc];
+    [_mainVC.view setBackgroundColor:[UIColor greenColor]];
+    _mainVC.view.frame = CGRectMake(0, 68, self.view.frame.size.width, self.view.frame.size.height-68);
     
-    [_leaderboardView setView];
-    [_gameView setView];
-    
-    _greeLabel.layer.cornerRadius = 5.5;
-    _greeLabel.clipsToBounds = true;
+    [_mainVC setDelegate:self];
+    [self.view addSubview:_mainVC.view];
 }
 
-- (void)setStatusBarBackgroundColor:(UIColor *)color {
-    
-    UIView *statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-    
-    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-        statusBar.backgroundColor = color;
-    }
-}
 
 #pragma mark
 #pragma mark Public Methods
@@ -93,7 +92,7 @@
     
     if (row == 0) {
         
-        [self performSegueWithIdentifier:@"FeedbackSegue" sender:nil];
+        [self performSegueWithIdentifier:@"StatsSegue" sender:nil];
         
     } else if (row == 1) {
         
@@ -139,35 +138,95 @@
 - (IBAction)menuAction:(UIButton *)sender {
     
     KYDrawerController* drawer = (KYDrawerController *)self.navigationController.parentViewController;
-    
     [drawer setDrawerState:DrawerStateOpened animated:true];
+    
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+        
+        MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
+     
+        [mapVC hideDialogPublic];
+    }
+    
 }
 
+- (IBAction)backButtonAction:(UIButton *)sender {
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+        
+        MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
+        [mapVC hideDialogPublic];
+    }
 
-- (IBAction)recentGameAction:(UIButton *)sender {
- 
-    _allRecentLeading.active = false;
-    _allRecentTrailing.active = false;
-    
-    _myRecentLeading.active = true;
-    _myRecentTrailing.active = true;
-    
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_allRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    [_mainVC popViewControllerAnimated:true];
 }
 
-- (IBAction)allGameAction:(UIButton *)sender {
+- (IBAction)notificationAction:(UIButton *)sender {
     
+    if ([_mainVC.visibleViewController isKindOfClass:[NotificationVC class]]) {
+        
+        return;
+    }
+    
+    [_mainVC popViewControllerAnimated:false];
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+        
+        MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
 
-    _allRecentLeading.active = true;
-    _allRecentTrailing.active = true;
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+        NotificationVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationSB"];
+        vc->_mapView = [mapVC captureViewS];
+        [_mainVC pushViewController:vc animated:true];
+    }
+}
+
+- (IBAction)quickPlayAction:(UIButton *)sender {
     
-    _myRecentLeading.active = false;
-    _myRecentTrailing.active = false;
+    if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+        
+        MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
+        [mapVC hideDialogPublic];
+    }
+}
+
+#pragma mark
+#pragma mark UIButton Action Methods
+- (void)loadLocationStateVC:(UIImage *)image {
     
-    [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [_myRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+    LocationStateVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"StatsSB"];
+    vc->_mapView = image;
+    [_mainVC pushViewController:vc animated:true];
+}
+
+#pragma mark
+#pragma mark UINavigationController Delegets
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+
+    NSArray * viewControllers = [[self navigationController] viewControllers];
     
+    DebugLog(@"....%d", viewControllers.count);
+    if (viewControllers.count > 0) {
+        
+    }
+    
+}
+
+- (nullable id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
+                                            animationControllerForOperation:(UINavigationControllerOperation)operation
+                                                         fromViewController:(UIViewController *)fromVC
+                                                           toViewController:(UIViewController *)toVC {
+    
+    DebugLog(@"operation...%ld", (long)operation);
+    
+    if (operation == UINavigationControllerOperationPush) {
+        
+    } else if (operation == UINavigationControllerOperationPop) {
+        
+    }
+    
+    return nil;
 }
 
 
