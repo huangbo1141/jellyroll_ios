@@ -52,8 +52,20 @@
 
 #define kAPI_ALLPENDINGGAMES [kHostURL stringByAppendingString:@"webservice/get_all_bar_pending.php?user_id=%@"]
 
-#define kAPI_CONFIRMGAME [kHostURL stringByAppendingString:@"webservice/confirm.php"]
-#define kAPI_ConfirmGameParams @"game_id=%@&status=%@"
+#define kAPI_CONFIRMGAME [kHostURL stringByAppendingString:@"webservice/confirm.php?game_id=%@&status=%@"]
+#define kAPI_UPDATEPENDINGGAME [kHostURL stringByAppendingString:@"webservice/update_game.php?game_id=%@&show_pending=1"]
+
+#define kAPI_NOTIFICATIONS [kHostURL stringByAppendingString:@"webservice/get_bell.php?user_id=%@"]
+
+#define kAPI_RECENTGAMES [kHostURL stringByAppendingString:@"webservice/get_recent_geme.php?user_id=%@"]
+
+#define kAPI_WINLOSSGAME [kHostURL stringByAppendingString:@"webservice/win_or_loss.php"]
+#define kAPI_WinLossParams @"by_user_id=%@&other_user_id=%@&bar_id=%@&win_or_loss=%@"
+
+#define kAPI_USERGAMESCORE [kHostURL stringByAppendingString:@"webservice/get_score_geme.php?user_id=%@&other_user_id=%@"]
+
+#define kAPI_ALLRECENTGAME [kHostURL stringByAppendingString:@"webservice/get_recent_all_geme.php?user_id=%@&bar_id=%@"]
+
 
 
 #define GoogleDirectionAPI @"AIzaSyCmvC_H5S08MvkO-ixoQTpJQGXdu5qyVWg"

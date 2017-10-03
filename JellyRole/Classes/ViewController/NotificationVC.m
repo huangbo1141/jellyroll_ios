@@ -70,8 +70,9 @@
     _allConfirmRequest = [[NSMutableArray alloc] init];
     _allPendingRequest = [[NSMutableArray alloc] init];
     
-    [_confirmRequest setView];
-    [_pendingRequest setView];
+    [_confirmRequest setView:false];
+    [_pendingRequest setView:true];
+    [_pendingRequest setDelegates:self];
     
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(confirmLeftGesture:)];
@@ -83,16 +84,6 @@
     [_confirmRequest addGestureRecognizer:rightSwipe];
     [_confirmRequest addGestureRecognizer:leftSwipe];
     
-    
-    
-    UISwipeGestureRecognizer *leftSwipe2 = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(pendingLeftGesture:)];
-    leftSwipe2.direction = UISwipeGestureRecognizerDirectionLeft;
-    
-    UISwipeGestureRecognizer * rightSwipe2 = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(pendingRightGesture:)];
-    rightSwipe2.direction = UISwipeGestureRecognizerDirectionRight;
-    
-    [_pendingRequest addGestureRecognizer:rightSwipe2];
-    [_pendingRequest addGestureRecognizer:leftSwipe2];
 }
 
 - (void)getAllPendingData {
@@ -137,10 +128,9 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     
-    NSString* params = [NSString stringWithFormat:kAPI_ConfirmGameParams, gameID, status];
-    
-    
-    [_gAppData sendPostRequest:kAPI_CONFIRMGAME params:params completion:^(id result) {
+    NSString* url = [NSString stringWithFormat:kAPI_CONFIRMGAME, gameID, status];
+
+    [_gAppData sendGETRequest:url completion:^(id result) {
        
         [MBProgressHUD hideHUDForView:self.view animated:true];
         if (result != nil) {
@@ -151,11 +141,7 @@
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
-                [_allConfirmRequest addObjectsFromArray:[dict1 objectForKey:@"data"]];
-                [_allPendingRequest addObjectsFromArray:[dict1 objectForKey:@"data2"]];
-                
-                [_confirmRequest updateData:_allConfirmRequest];
-                [_pendingRequest updateData:_allPendingRequest];
+                [self getAllPendingData];
                 
             } else {
                 
@@ -169,6 +155,31 @@
         [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
+
+- (void)updateStatusDataPendingrequest:(NSString *)gameID {
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    
+    NSString* url = [NSString stringWithFormat:kAPI_UPDATEPENDINGGAME, gameID];
+    
+    [_gAppData sendGETRequest:url completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            [self getAllPendingData];
+        }
+        
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
 
 - (void)showAcceptDialog:(NSDictionary *)dict {
 
@@ -219,76 +230,31 @@
 #pragma mark UIGestureRecognizer Actions
 -(IBAction)confirmLeftGesture:(UIGestureRecognizer *)sender {
     
-    if (sender.state == UISwipeGestureRecognizerDirectionLeft) {
-     
-        CGPoint point = [sender locationInView:_confirmRequest];
+    CGPoint point = [sender locationInView:_confirmRequest];
+    NSIndexPath* indexPath = [_confirmRequest indexPathForRowAtPoint:point];
+    
+    if (indexPath != nil) {
         
-        NSIndexPath* indexPath = [_confirmRequest indexPathForRowAtPoint:point];
-        
-        
-        if (indexPath != nil) {
-            
-            NSDictionary* dict = [_allConfirmRequest objectAtIndex:indexPath.row];
-            [self showAcceptDialog:dict];
-        }
-        
-        
+        NSDictionary* dict = [_allConfirmRequest objectAtIndex:indexPath.row];
+        [self showAcceptDialog:dict];
     }
+
     
 }
 
 -(IBAction)confirmRightGesture:(UIGestureRecognizer *)sender {
     
-    if (sender.state == UISwipeGestureRecognizerDirectionRight) {
-     
-        CGPoint point = [sender locationInView:_confirmRequest];
+    CGPoint point = [sender locationInView:_confirmRequest];
+    
+    NSIndexPath* indexPath = [_confirmRequest indexPathForRowAtPoint:point];
+    
+    
+    if (indexPath != nil) {
         
-        NSIndexPath* indexPath = [_confirmRequest indexPathForRowAtPoint:point];
-        
-        
-        if (indexPath != nil) {
-            
-            NSDictionary* dict = [_allConfirmRequest objectAtIndex:indexPath.row];
-            [self showCancelDialog:dict];
-        }
+        NSDictionary* dict = [_allConfirmRequest objectAtIndex:indexPath.row];
+        [self showCancelDialog:dict];
     }
-    
 }
-
--(IBAction)pendingLeftGesture:(UIGestureRecognizer *)sender {
-    
-    if (sender.state == UISwipeGestureRecognizerDirectionLeft) {
-        
-        CGPoint point = [sender locationInView:_pendingRequest];
-        
-        NSIndexPath* indexPath = [_pendingRequest indexPathForRowAtPoint:point];
-        
-        
-        if (indexPath != nil) {
-            
-            NSDictionary* dict = [_allPendingRequest objectAtIndex:indexPath.row];
-        }
-    }
-    
-}
-
--(IBAction)pendingRightGesture:(UIGestureRecognizer *)sender {
-    
-    if (sender.state == UISwipeGestureRecognizerDirectionRight) {
- 
-        CGPoint point = [sender locationInView:_pendingRequest];
-        
-        NSIndexPath* indexPath = [_pendingRequest indexPathForRowAtPoint:point];
-        
-        
-        if (indexPath != nil) {
-            
-            NSDictionary* dict = [_allPendingRequest objectAtIndex:indexPath.row];
-        }
-    }
-    
-}
-
 
 #pragma mark
 #pragma mark Public Methods
@@ -305,5 +271,13 @@
     [self.navigationController popViewControllerAnimated:true];
 }
 
+
+#pragma mark
+#pragma mark NotificationVC Delegates
+
+- (void)selectedDeleteDict:(NSDictionary *)dict {
+    
+    [self updateStatusDataPendingrequest:dict[@"game_id"]];
+}
 
 @end

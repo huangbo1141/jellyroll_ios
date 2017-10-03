@@ -10,7 +10,7 @@
 
 @protocol MapVCDelegates <NSObject>
 
-- (void)loadLocationStateVC:(UIImage *)image ;
+- (void)loadLocationStateVC:(UIImage *)image data:(NSDictionary *)data;
 
 @end
 

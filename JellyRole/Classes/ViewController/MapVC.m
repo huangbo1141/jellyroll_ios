@@ -238,7 +238,7 @@
 
     if (_delegate != nil) {
         
-        [_delegate loadLocationStateVC:[self captureView:_MAP_VIEW]];
+        [_delegate loadLocationStateVC:[self captureView:_MAP_VIEW] data:data];
     }
 }
 
@@ -524,6 +524,7 @@
     
     }
 }
+
 
 - (void)getAllBarData {
     

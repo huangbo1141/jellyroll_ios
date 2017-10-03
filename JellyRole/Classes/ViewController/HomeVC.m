@@ -10,11 +10,15 @@
 #import "LocationStateVC.h"
 #import "MapVC.h"
 #import "NotificationVC.h"
+#import "QuickPlayVC.h"
 
 @interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate>
 {
     UINavigationController* _mainVC;
 }
+
+@property (weak, nonatomic) IBOutlet UIImageView *notifyImage;
+@property (weak, nonatomic) IBOutlet UIButton *notifyButton;
 
 @end
 
@@ -34,6 +38,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
+    [self getAllNotifyData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -80,6 +85,50 @@
     
     [_mainVC setDelegate:self];
     [self.view addSubview:_mainVC.view];
+}
+
+- (void)getAllNotifyData {
+    
+    NSString* API = [NSString stringWithFormat:kAPI_NOTIFICATIONS, _gAppPrefData.userID];
+    
+    [_gAppData sendGETRequest:API completion:^(id result) {
+        
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            
+            if(dict1[@"bellcount"] != nil) {
+                
+                NSString* c = dict1[@"bellcount"][@"c"];
+                NSString* p = dict1[@"bellcount"][@"p"];
+                int confirm_cnt = [c intValue];
+                int pending_cnt = [p intValue];
+                
+                confirm_cnt = confirm_cnt + pending_cnt;
+                if (confirm_cnt > 0) {
+                
+                    [_notifyButton setTitle:[NSString stringWithFormat:@"%d", confirm_cnt] forState:UIControlStateNormal];
+                    [_notifyImage setImage:[UIImage imageNamed:@"notification1"]];
+                } else {
+                
+                    [_notifyButton setTitle:@"" forState:UIControlStateNormal];
+                    [_notifyImage setImage:[UIImage imageNamed:@"notification"]];
+                }
+                
+            } else {
+                
+                [_notifyButton setTitle:@"" forState:UIControlStateNormal];
+                [_notifyImage setImage:[UIImage imageNamed:@"notification"]];
+            }
+            
+            [self getAllNotifyData];
+        }
+    } failure:^(id result) {
+        
+        [self getAllNotifyData];
+    }];
 }
 
 
@@ -168,6 +217,18 @@
         return;
     }
     
+    UIImage* image = nil;
+    if ([_mainVC.visibleViewController isKindOfClass:[QuickPlayVC class]]) {
+        
+        QuickPlayVC* vc = (QuickPlayVC *)_mainVC.visibleViewController;
+        image = vc->_mapView;
+    } else if ([_mainVC.visibleViewController isKindOfClass:[NotificationVC class]]) {
+        
+        NotificationVC* vc = (NotificationVC *)_mainVC.visibleViewController;
+        image = vc->_mapView;
+    }
+    
+    
     [_mainVC popViewControllerAnimated:false];
     
     if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
@@ -176,28 +237,86 @@
 
         UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
         NotificationVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationSB"];
-        vc->_mapView = [mapVC captureViewS];
+        vc->_mapView = image != nil ? image : [mapVC captureViewS];
         [_mainVC pushViewController:vc animated:true];
     }
 }
 
 - (IBAction)quickPlayAction:(UIButton *)sender {
     
+    UIImage* image = nil;
+    if ([_mainVC.visibleViewController isKindOfClass:[QuickPlayVC class]]) {
+        
+        QuickPlayVC* quickVC = (QuickPlayVC *)_mainVC.visibleViewController;
+        
+        if (quickVC->_isLocation) {
+            
+            image = quickVC->_mapView;
+        } else {
+        
+            return;
+        }
+    }
+    
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[NotificationVC class]]) {
+        
+        NotificationVC* vc = (NotificationVC *)_mainVC.visibleViewController;
+        image = vc->_mapView;
+    }
+    
+    [_mainVC popViewControllerAnimated:false];
+    
     if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
         
         MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
-        [mapVC hideDialogPublic];
+        
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+        QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
+        vc->_mapView = image != nil ? image : [mapVC captureViewS];
+        [_mainVC pushViewController:vc animated:true];
     }
+    
+    
 }
 
 #pragma mark
 #pragma mark UIButton Action Methods
-- (void)loadLocationStateVC:(UIImage *)image {
+- (void)loadLocationStateVC:(UIImage *)image data:(NSDictionary *)data {
     
-    UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+    /*UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
     LocationStateVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"StatsSB"];
     vc->_mapView = image;
-    [_mainVC pushViewController:vc animated:true];
+    [_mainVC pushViewController:vc animated:true];*/
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[QuickPlayVC class]]) {
+        
+        return;
+    }
+    
+    /*UIImage* image = nil;
+    if ([_mainVC.visibleViewController isKindOfClass:[NotificationVC class]]) {
+        
+        NotificationVC* vc = (NotificationVC *)_mainVC.visibleViewController;
+        image = vc->_mapView;
+    }*/
+    
+    [_mainVC popViewControllerAnimated:false];
+    
+    if ([_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+        
+        MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
+        
+        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+        QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
+        vc->_mapView = image != nil ? image : [mapVC captureViewS];
+        vc->_isLocation = true;
+        vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:data];
+        
+        [_mainVC pushViewController:vc animated:true];
+    }
+
+    
 }
 
 #pragma mark

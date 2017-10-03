@@ -53,6 +53,7 @@
 		D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E31F62254800AACDDC /* CustomeButton.m */; };
 		D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E61F62258900AACDDC /* UIButton+Font.m */; };
 		D17D51EA1F6275FD00AACDDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17D51E91F6275FD00AACDDC /* MapKit.framework */; };
+		D1DAB9891F83189B00F3BFB1 /* UserComparisionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */; };
 		D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */; };
 		D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99121F78D6A8001CC21C /* BaseModel.m */; };
 		D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99181F78D6A8001CC21C /* GooglePlace.m */; };
@@ -64,6 +65,7 @@
 		D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951541F739BF90017A818 /* StatsRankingView.m */; };
 		D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951571F73C1AF0017A818 /* LocationStateVC.m */; };
 		D1F56EB51F736FED00E270A8 /* StatsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F56EB41F736FED00E270A8 /* StatsVC.m */; };
+		D1F699091F82A7BC005F37BA /* QuickPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F699081F82A7BC005F37BA /* QuickPlayVC.m */; };
 		D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */; };
 		D1F865471F71522E0004E422 /* PoolTermsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865461F71522E0004E422 /* PoolTermsVC.m */; };
 /* End PBXBuildFile section */
@@ -145,6 +147,8 @@
 		D17D51E51F62258900AACDDC /* UIButton+Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Font.h"; sourceTree = "<group>"; };
 		D17D51E61F62258900AACDDC /* UIButton+Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Font.m"; sourceTree = "<group>"; };
 		D17D51E91F6275FD00AACDDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D1DAB9871F83189B00F3BFB1 /* UserComparisionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserComparisionView.h; sourceTree = "<group>"; };
+		D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserComparisionView.m; sourceTree = "<group>"; };
 		D1DB99001F7674D2001CC21C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View_SearchMAP.xib; sourceTree = "<group>"; };
 		D1DB99111F78D6A8001CC21C /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		D1DB99121F78D6A8001CC21C /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
@@ -166,6 +170,8 @@
 		D1E951571F73C1AF0017A818 /* LocationStateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationStateVC.m; sourceTree = "<group>"; };
 		D1F56EB31F736FED00E270A8 /* StatsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsVC.h; sourceTree = "<group>"; };
 		D1F56EB41F736FED00E270A8 /* StatsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsVC.m; sourceTree = "<group>"; };
+		D1F699071F82A7BC005F37BA /* QuickPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickPlayVC.h; sourceTree = "<group>"; };
+		D1F699081F82A7BC005F37BA /* QuickPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickPlayVC.m; sourceTree = "<group>"; };
 		D1F865421F71487C0004E422 /* PrivacyPolicyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyVC.h; sourceTree = "<group>"; };
 		D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyVC.m; sourceTree = "<group>"; };
 		D1F865451F71522E0004E422 /* PoolTermsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolTermsVC.h; sourceTree = "<group>"; };
@@ -232,6 +238,8 @@
 				D163A0401F73D8290047325C /* VerifiyEmailVC.m */,
 				D1282F501F7520C70064ED2C /* testing.h */,
 				D1282F511F7520C80064ED2C /* testing.m */,
+				D1F699071F82A7BC005F37BA /* QuickPlayVC.h */,
+				D1F699081F82A7BC005F37BA /* QuickPlayVC.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -369,6 +377,8 @@
 				D1E951541F739BF90017A818 /* StatsRankingView.m */,
 				D1DB99661F790F55001CC21C /* NotificationRequetVC.h */,
 				D1DB99671F790F55001CC21C /* NotificationRequetVC.m */,
+				D1DAB9871F83189B00F3BFB1 /* UserComparisionView.h */,
+				D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -580,6 +590,7 @@
 				D17D51D51F62196500AACDDC /* GameView.m in Sources */,
 				D17D51B11F61E44400AACDDC /* AppDelegate.m in Sources */,
 				D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */,
+				D1F699091F82A7BC005F37BA /* QuickPlayVC.m in Sources */,
 				D17D51D91F62216C00AACDDC /* CustomLable.m in Sources */,
 				D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */,
 				D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */,
@@ -595,6 +606,7 @@
 				D15B22DA1F6FC722007EF10F /* ParasTV.xcdatamodeld in Sources */,
 				D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */,
 				D15B22D91F6FC722007EF10F /* DataManager.m in Sources */,
+				D1DAB9891F83189B00F3BFB1 /* UserComparisionView.m in Sources */,
 				D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */,
 				D17D51961F61E1BE00AACDDC /* main.m in Sources */,
 				D1DB994C1F78D6A8001CC21C /* GooglePlaceResult.m in Sources */,
@@ -736,7 +748,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e2c84d7e-daaa-4794-9359-7d1f1f877b49";
+				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
 				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Debug;
@@ -755,7 +767,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e2c84d7e-daaa-4794-9359-7d1f1f877b49";
+				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
 				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Release;

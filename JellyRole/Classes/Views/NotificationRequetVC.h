@@ -8,9 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NotificationRequetVCDelegate <NSObject>
+
+@optional
+
+- (void)selectedDeleteDict:(NSDictionary *)dict;
+
+@end
+
+
+
 @interface NotificationRequetVC : UITableView
 
-- (void)setView;
+@property (assign, nonatomic) id delegates;
+
+- (void)setView:(BOOL)isPending ;
 - (void)updateData:(NSArray *)array;
 
 

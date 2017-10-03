@@ -62,17 +62,17 @@
     
     //[label1 setText:dict[@"player1"]];
     [label2 setText:dict[@"player1"]];
-    [label3 setText:dict[@"location_name"]];
+    [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
     [label4 setText:[Utils stringToDate:dict[@"insertime"]]];
     
     if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
      
-        [imageView setImage:[UIImage imageNamed:@"thumb1"]];
-        [label1 setText:@"Win"];
-    } else {
-        
         [imageView setImage:[UIImage imageNamed:@"thumb2"]];
         [label1 setText:@"Loss"];
+    } else {
+        
+        [imageView setImage:[UIImage imageNamed:@"thumb1"]];
+        [label1 setText:@"Win"];
     }
     
     return cell;

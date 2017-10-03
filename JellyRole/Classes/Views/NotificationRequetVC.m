@@ -13,7 +13,9 @@
 @interface NotificationRequetVC ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray* _list;
+    BOOL _isPending;
 }
+
 @end
 
 
@@ -21,12 +23,13 @@
 
 #pragma mark -
 #pragma mark - Public Methods
-- (void)setView {
+- (void)setView:(BOOL)isPending {
     
     [self setDataSource:self];
     [self setDelegate:self];
     
     _list = [[NSArray alloc] init];
+    _isPending = isPending;
 }
 
 - (void)updateData:(NSArray *)array {
@@ -83,12 +86,12 @@
     
     if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
         
-        [winImage setImage:[UIImage imageNamed:@"thumb1"]];
-        [winLabel setText:@"Win"];
-    } else {
-        
         [winImage setImage:[UIImage imageNamed:@"thumb2"]];
         [winLabel setText:@"Loss"];
+    } else {
+        
+        [winImage setImage:[UIImage imageNamed:@"thumb1"]];
+        [winLabel setText:@"Win"];
     }
     
     
@@ -101,6 +104,27 @@
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_delegates != nil) {
+        
+        NSDictionary* dict = [_list objectAtIndex:indexPath.row];
+        [_delegates selectedDeleteDict:dict];
+    }
+    
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return _isPending;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return UITableViewCellEditingStyleDelete;
+}
+
 
 
 #pragma mark - Table view Delegate
