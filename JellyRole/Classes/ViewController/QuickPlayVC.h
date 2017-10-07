@@ -16,6 +16,7 @@
     
     NSMutableDictionary* _selectedBar;
     
+    float _mylatitude, _myLongitude;
 }
 
 @end

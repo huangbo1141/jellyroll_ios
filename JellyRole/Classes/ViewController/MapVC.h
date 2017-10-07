@@ -15,6 +15,11 @@
 @end
 
 @interface MapVC : UIViewController
+{
+
+    @public
+    float _mylatitude, _myLongitude;
+}
 
 @property(nonatomic, weak) id <MapVCDelegates> delegate;
 

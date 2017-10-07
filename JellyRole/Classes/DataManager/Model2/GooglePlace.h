@@ -22,8 +22,10 @@
 @property (nonatomic,strong) NSMutableArray*address_components;
 
 @property (nonatomic,copy) NSString* googlePicture;
-@property (nonatomic,assign) double distance;
+@property (nonatomic,strong) NSMutableArray*weekday_text;
 
+@property (nonatomic,assign) double distance;
+@property (nonatomic,assign) BOOL isOpen;
 
 -(instancetype)initWithDictionary:(NSDictionary*) dict;
 

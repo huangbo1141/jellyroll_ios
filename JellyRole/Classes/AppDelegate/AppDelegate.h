@@ -17,6 +17,7 @@
 - (void)showViewMessage:(UIView *)view type:(int)type;
 - (void)loginSucessful;
 - (void)logoutSucessful;
+- (void)checkFBLogin:(NSString *)email username:(NSString *)userName params:(NSString *)paramss;
 
 @end
 

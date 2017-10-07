@@ -94,8 +94,6 @@
         [winLabel setText:@"Win"];
     }
     
-    
-    
     [userLabel setText:dict[@"username"]];
     [barLabel setText:dict[@"location_name"]];
     [dateLabel setText:[Utils stringToDate:dict[@"insertime"]]];

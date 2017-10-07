@@ -1,3 +1,4 @@
+
 //
 //  ProfileVC.m
 //  JellyRole
@@ -9,7 +10,7 @@
 #import "ProfileVC.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 
-@interface ProfileVC ()
+@interface ProfileVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -37,7 +38,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self getProfileData];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -66,10 +66,11 @@
     _imageView.layer.cornerRadius = 30;
     _imageView.layer.masksToBounds = true;
     
-    [self updateView:@""];
+    [self updateView:@"" emailID:@""];
+    [self getProfileData];
 }
 
-- (void)updateView:(NSString *)userName {
+- (void)updateView:(NSString *)userName emailID:(NSString *)emailID {
     
     [_imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:_gAppPrefData.imageURL]] placeholderImage:[UIImage imageNamed:@"placeholdernew"] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
         
@@ -88,9 +89,23 @@
     [_label1 setText:_gAppPrefData.userName];
     [_label2 setText:[NSString stringWithFormat:@"Member since %@", comp]];
     [_label3 setText:userName];
-    [_label4 setText:_gAppPrefData.userEmail];
+    [_label4 setText:emailID];
 }
 
+- (void)showPickerType:(UIImagePickerControllerSourceType)source {
+    
+    
+    UIImagePickerController* picker = [[UIImagePickerController alloc] init];
+    picker.delegate = self;
+    picker.sourceType = source;
+    
+    if (![Utils isIphone]) {
+        picker.popoverPresentationController.sourceView = self.view;
+    }
+    
+    [self presentViewController:picker animated:true completion:nil];
+    
+}
 
 - (void)getProfileData {
     
@@ -114,7 +129,7 @@
                 [pref setImageURL:[arr_GetData valueForKey:@"image"]];
                 [pref saveAllData];
 
-                [self updateView:[NSString stringWithFormat:@"%@ %@",[arr_GetData valueForKey:@"firstname"], [arr_GetData valueForKey:@"lastname"]]];
+                [self updateView:[NSString stringWithFormat:@"%@ %@",[arr_GetData valueForKey:@"firstname"], [arr_GetData valueForKey:@"lastname"]] emailID:[arr_GetData valueForKey:@"email"]];
                 
             } else {
                 
@@ -128,12 +143,167 @@
     }];
 }
 
+- (void)changePasswodAPI:(NSString *)params {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    [_gAppData sendPostRequest:kAPI_CHANGEPASSWORD params:params completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+            } else {
+                
+                [_gAppDelegate showAlertDilog:@"Error" message:dict1[@"msg"]];
+            }
+            
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
+
+- (void)showCameraDialog {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Import image from..?" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Camera" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            [self showPickerType:UIImagePickerControllerSourceTypeCamera];
+        } else {
+            [_gAppDelegate showAlertDilog:kAppName message:@"Device has no camera"];
+        }
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Gallery" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self showPickerType:UIImagePickerControllerSourceTypePhotoLibrary];
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }]];
+    
+    if (![Utils isIphone]) {
+        alert.popoverPresentationController.sourceView = self.view;
+    }
+    
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+- (void)showAlertDilog2:(NSString *)title message:(NSString *)message {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self showChangePasswordDialog];
+    }]];
+    
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+- (void)showChangePasswordDialog {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Change Password" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"OLD PASSWORD";
+        textField.secureTextEntry = true;
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"NEW PASSWORD";
+        textField.secureTextEntry = true;
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"CONFIRM PASSWORD";
+        
+        textField.secureTextEntry = true;
+    }];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString* text1 = [[alert textFields][0] text];
+        NSString* text2 = [[alert textFields][1] text];
+        NSString* text3 = [[alert textFields][2] text];
+        if (text1.length <= 0) {
+            [self showAlertDilog2:@"Info" message:@"Please enter old password"];                    
+        } else if (text2.length <= 3) {
+            [self showAlertDilog2:@"Info" message:@"Please enter new password"];
+            
+        } else if (![text2 isEqualToString:text3]) {
+            [self showAlertDilog2:@"Info" message:@"Password and confirm password does not match"];
+            
+        } else {
+            
+            NSString* params = [NSString stringWithFormat:kAPI_CHANGEPASSWORDParams, _gAppPrefData.userID, text2, text1];
+            
+            [self changePasswodAPI:params];
+        }
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    if (![Utils isIphone]) {
+        alert.popoverPresentationController.sourceView = self.view;
+    }
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+
 
 #pragma mark
 #pragma mark UIButton Action's
 - (IBAction)backAction:(id)sender {
     
     [self.navigationController popViewControllerAnimated:true];
+}
+- (IBAction)cameraAction:(UIButton *)sender {
+    
+    [self showCameraDialog];
+}
+
+- (IBAction)setHomeAction:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:true];
+}
+- (IBAction)changePasswordAction:(id)sender {
+    
+    [self showChangePasswordDialog];
+}
+
+#pragma mark
+#pragma mark UIImagePickerController Delegates
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo {
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    
+    UIImage* image = info[UIImagePickerControllerOriginalImage];
+    _imageView.image = image;
+    [picker dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
+    [picker dismissViewControllerAnimated:true completion:nil];
 }
 
 @end

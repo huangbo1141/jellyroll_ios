@@ -8,8 +8,11 @@
 
 #import "LoginVC.h"
 #import "ViewMessage.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
-@interface LoginVC ()<UITextViewDelegate>
+
+@interface LoginVC ()<UITextViewDelegate, FBSDKLoginButtonDelegate>
 
 
 @property (weak, nonatomic) IBOutlet UITextField *txt_username;
@@ -82,10 +85,56 @@
     
 }
 
-
-
 #pragma mark
 #pragma mark UIButton Action's
+- (IBAction)fbLoginAction:(UIButton *)sender {
+    
+    [self.view endEditing:true];
+    FBSDKLoginManager* login = [[FBSDKLoginManager alloc] init];
+    //    [login logOut];
+    
+    [login setLoginBehavior:FBSDKLoginBehaviorNative];
+    //    [login setLoginBehavior:FBSDKLoginBehaviorSystemAccount];
+    
+    [login logInWithReadPermissions:@[@"public_profile",@"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+       
+        if( error ){
+            
+            [login logOut];
+            [self fbLoginAction:nil];
+            return;
+        }else if( result.isCancelled ){
+            
+            return;
+        }else{
+            NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+            [parameters setValue:@"id,name,email,first_name,last_name,location" forKey:@"fields"];
+            
+            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
+             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result, NSError *error) {
+                 if (error == nil) {
+                     
+                     
+                     
+                     NSString* params = [NSString stringWithFormat:@"flag=facebook&fb_id=%@&firstname=%@&lastname=%@&image=%@&action=signfb&active_flag=yes&email=%@", result[@"id"], result[@"first_name"], result[@"last_name"], [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=200&height=200",result[@"id"]], result[@"email"]];
+                     
+                     [_gAppDelegate checkFBLogin:result[@"email"] username:[result[@"first_name"] uppercaseString] params:params];
+                     return;
+                 }else{
+                     //                     [CGlobal stopIndicator:self];
+                     [login logOut];
+                     [self fbLoginAction:nil];
+                     return;
+                 }
+                 
+                 
+             }];
+        }
+
+    }];
+}
+
 - (IBAction)removeKeyboardAction:(UIControl *)sender {
     
     [self.view endEditing:true];
@@ -241,6 +290,22 @@
     return YES;
 }
 
+
+#pragma mark
+#pragma mark FBSDKLoginButton Delegates
+- (void)  loginButton:(FBSDKLoginButton *)loginButton
+didCompleteWithResult:(FBSDKLoginManagerLoginResult *)result
+                error:(NSError *)error
+{
+    NSLog(@"mayank fetched user:%@", result.description);
+    //[self FBloginResult];
+    
+}
+
+- (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton
+{
+    NSLog(@"Logged out");
+}
 
 
 

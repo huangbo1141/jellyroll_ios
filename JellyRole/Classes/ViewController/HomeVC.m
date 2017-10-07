@@ -273,6 +273,9 @@
         
         UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
         QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
+        vc->_mylatitude = mapVC->_mylatitude;
+        vc->_myLongitude = mapVC->_myLongitude;
+        
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         [_mainVC pushViewController:vc animated:true];
     }
@@ -311,6 +314,9 @@
         QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         vc->_isLocation = true;
+        vc->_mylatitude = mapVC->_mylatitude;
+        vc->_myLongitude = mapVC->_myLongitude;
+        
         vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:data];
         
         [_mainVC pushViewController:vc animated:true];

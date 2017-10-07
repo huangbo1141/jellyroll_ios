@@ -60,20 +60,39 @@
     
     UILabel* label4 = [cell viewWithTag:105];
     
-    //[label1 setText:dict[@"player1"]];
-    [label2 setText:dict[@"player1"]];
+    BOOL isPlayer1 = false;
+    if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player1"] lowercaseString]]) {
+        
+        isPlayer1 = true;
+        [label2 setText:dict[@"player2"]];
+        
+        if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+            
+            [imageView setImage:[UIImage imageNamed:@"thumb1"]];
+            [label1 setText:@"Win"];
+        } else {
+            
+            [imageView setImage:[UIImage imageNamed:@"thumb2"]];
+            [label1 setText:@"Loss"];
+        }
+        
+    } else {
+        [label2 setText:dict[@"player1"]];
+        
+        if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+            
+            [imageView setImage:[UIImage imageNamed:@"thumb1"]];
+            [label1 setText:@"Win"];
+        } else {
+            
+            [imageView setImage:[UIImage imageNamed:@"thumb2"]];
+            [label1 setText:@"Loss"];
+        }
+    }
+    
+    
     [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
     [label4 setText:[Utils stringToDate:dict[@"insertime"]]];
-    
-    if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
-     
-        [imageView setImage:[UIImage imageNamed:@"thumb2"]];
-        [label1 setText:@"Loss"];
-    } else {
-        
-        [imageView setImage:[UIImage imageNamed:@"thumb1"]];
-        [label1 setText:@"Win"];
-    }
     
     return cell;
 }

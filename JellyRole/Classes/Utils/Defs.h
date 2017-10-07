@@ -3,16 +3,16 @@
 
 
 #ifdef DEBUG
-#define PUSHNOTIFICATION @"ParasTV_dev"   //Development
+#define PUSHNOTIFICATION @"JellyRole_dev"   //Development
 #define DebugLog(s, ...) NSLog(s, ##__VA_ARGS__)
 #else
-#define PUSHNOTIFICATION @"ParasTV"   //Production
+#define PUSHNOTIFICATION @"JellyRole"   //Production
 #define DebugLog(s, ...)
 #endif
 
-#define kAppName @"ParasTV"
+#define kAppName @"JellyRole"
 #define kPreferenceData @"keyPreferenceData"
-#define kDataBaseName @"ParasTV.sqlite"
+#define kDataBaseName @"JellyRole.sqlite"
 
 
 #define kContactUS @"http://www.vtechnolabs.com/parasgold/contact-us/"
@@ -66,7 +66,16 @@
 
 #define kAPI_ALLRECENTGAME [kHostURL stringByAppendingString:@"webservice/get_recent_all_geme.php?user_id=%@&bar_id=%@"]
 
+#define kAPI_OPPONENTDATA [kHostURL stringByAppendingString:@"webservice/get_apponent_by_user_id.php?user_id=%@&bar_id=%@"]
 
+#define kAPI_INVITEGAME [kHostURL stringByAppendingString:@"webservice/invite_game.php?bar_id=%@&by_user_id=%@&by_win_or_lost=%@&other_win_or_lost=%@&other_email=%@"]
+
+#define kAPI_SIGNFB [kHostURL stringByAppendingString:@"webservice/signup_fb.php"]
+#define kAPI_SIGNFBParams @"user_id=%@&device_token=%@&action=%@"
+
+
+#define kAPI_CHANGEPASSWORD [kHostURL stringByAppendingString:@"webservice/change_password.php"]
+#define kAPI_CHANGEPASSWORDParams @"user_id=%@&password=%@&oldpassword=%@"
 
 #define GoogleDirectionAPI @"AIzaSyCmvC_H5S08MvkO-ixoQTpJQGXdu5qyVWg"
 

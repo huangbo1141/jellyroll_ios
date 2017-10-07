@@ -9,6 +9,10 @@ target 'JellyRole' do
 pod 'AFNetworking', '~> 3.0'
 pod 'MBProgressHUD', '~> 1.0.0'
 pod 'KYDrawerController'
+pod “FBSDKCoreKit“
+pod “FBSDKLoginKit“
+pod “FBSDKShareKit“
+
 
 use_frameworks!
 

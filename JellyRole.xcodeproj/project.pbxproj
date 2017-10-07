@@ -18,7 +18,6 @@
 		D15B22CA1F6FB722007EF10F /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22C91F6FB722007EF10F /* LoginVC.m */; };
 		D15B22D71F6FC722007EF10F /* AppPrefData.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22CF1F6FC722007EF10F /* AppPrefData.m */; };
 		D15B22D91F6FC722007EF10F /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22D31F6FC722007EF10F /* DataManager.m */; };
-		D15B22DA1F6FC722007EF10F /* ParasTV.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D15B22D51F6FC722007EF10F /* ParasTV.xcdatamodeld */; };
 		D15B22DE1F6FDF50007EF10F /* ViewMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22DC1F6FDF50007EF10F /* ViewMessage.m */; };
 		D15B22DF1F6FDF50007EF10F /* ViewMessage.xib in Resources */ = {isa = PBXBuildFile; fileRef = D15B22DD1F6FDF50007EF10F /* ViewMessage.xib */; };
 		D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22E11F6FE732007EF10F /* SignupVC.m */; };
@@ -26,6 +25,7 @@
 		D15B22E81F700695007EF10F /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22E71F700695007EF10F /* HomeVC.m */; };
 		D163A03E1F73D29A0047325C /* ForgetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A03D1F73D29A0047325C /* ForgetPassVC.m */; };
 		D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A0401F73D8290047325C /* VerifiyEmailVC.m */; };
+		D170E5041F86746500118C03 /* FriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D170E5031F86746500118C03 /* FriendsView.m */; };
 		D17D51961F61E1BE00AACDDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51951F61E1BE00AACDDC /* main.m */; };
 		D17D519F1F61E1BE00AACDDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17D519D1F61E1BE00AACDDC /* Main.storyboard */; };
 		D17D51A11F61E1BE00AACDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D17D51A01F61E1BE00AACDDC /* Assets.xcassets */; };
@@ -94,7 +94,6 @@
 		D15B22CF1F6FC722007EF10F /* AppPrefData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppPrefData.m; sourceTree = "<group>"; };
 		D15B22D21F6FC722007EF10F /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		D15B22D31F6FC722007EF10F /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
-		D15B22D61F6FC722007EF10F /* ParasTV.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ParasTV.xcdatamodel; sourceTree = "<group>"; };
 		D15B22DB1F6FDF50007EF10F /* ViewMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewMessage.h; sourceTree = "<group>"; };
 		D15B22DC1F6FDF50007EF10F /* ViewMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewMessage.m; sourceTree = "<group>"; };
 		D15B22DD1F6FDF50007EF10F /* ViewMessage.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ViewMessage.xib; sourceTree = "<group>"; };
@@ -108,6 +107,8 @@
 		D163A03D1F73D29A0047325C /* ForgetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPassVC.m; sourceTree = "<group>"; };
 		D163A03F1F73D8290047325C /* VerifiyEmailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerifiyEmailVC.h; sourceTree = "<group>"; };
 		D163A0401F73D8290047325C /* VerifiyEmailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiyEmailVC.m; sourceTree = "<group>"; };
+		D170E5021F86746500118C03 /* FriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsView.h; sourceTree = "<group>"; };
+		D170E5031F86746500118C03 /* FriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsView.m; sourceTree = "<group>"; };
 		D17D51911F61E1BE00AACDDC /* JellyRole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JellyRole.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D51951F61E1BE00AACDDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D17D519E1F61E1BE00AACDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -260,7 +261,6 @@
 		D15B22D41F6FC722007EF10F /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				D15B22D51F6FC722007EF10F /* ParasTV.xcdatamodeld */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -379,6 +379,8 @@
 				D1DB99671F790F55001CC21C /* NotificationRequetVC.m */,
 				D1DAB9871F83189B00F3BFB1 /* UserComparisionView.h */,
 				D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */,
+				D170E5021F86746500118C03 /* FriendsView.h */,
+				D170E5031F86746500118C03 /* FriendsView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -603,7 +605,7 @@
 				D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */,
 				D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */,
 				D17D51D21F62019000AACDDC /* LeaderboardView.m in Sources */,
-				D15B22DA1F6FC722007EF10F /* ParasTV.xcdatamodeld in Sources */,
+				D170E5041F86746500118C03 /* FriendsView.m in Sources */,
 				D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */,
 				D15B22D91F6FC722007EF10F /* DataManager.m in Sources */,
 				D1DAB9891F83189B00F3BFB1 /* UserComparisionView.m in Sources */,
@@ -794,19 +796,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		D15B22D51F6FC722007EF10F /* ParasTV.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				D15B22D61F6FC722007EF10F /* ParasTV.xcdatamodel */,
-			);
-			currentVersion = D15B22D61F6FC722007EF10F /* ParasTV.xcdatamodel */;
-			path = ParasTV.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = D17D51891F61E1BE00AACDDC /* Project object */;
 }

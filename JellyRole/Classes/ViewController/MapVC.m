@@ -22,9 +22,6 @@
     NSTimer* _timer;
     GooglePlaceResult* _gresult;
     
-    float _mylatitude, _myLongitude;
-    
-    
     float _zoom_delta;
     float _zoom_delta_t;
     int _currentKeyboardHeight;

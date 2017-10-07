@@ -42,6 +42,22 @@
             
         }
         
+        if ([dict objectForKey:@"opening_hours"] != nil) {
+            id openingHours = [dict objectForKey:@"opening_hours"];
+            
+            if ([openingHours objectForKey:@"open_now"] != nil) {
+                
+                _isOpen = [[openingHours objectForKey:@"open_now"] boolValue];
+                
+            }
+            
+            if ([openingHours objectForKey:@"weekday_text"] != nil) {
+                
+                _weekday_text = [openingHours objectForKey:@"weekday_text"];
+            }
+        }
+        
+        
     }
     return self;
 }

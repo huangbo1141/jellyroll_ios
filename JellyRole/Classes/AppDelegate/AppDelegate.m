@@ -10,6 +10,7 @@
 #import <UserNotifications/UserNotifications.h>
 #import "ViewMessage.h"
 #import <CoreLocation/CoreLocation.h>
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @interface AppDelegate()<UNUserNotificationCenterDelegate, CLLocationManagerDelegate>
 {
@@ -17,6 +18,8 @@
     
     CLLocationManager* _locationManager;
     CLLocation* _lastLocation;
+    
+    NSString* _newToken;
 }
 @end
 
@@ -33,7 +36,7 @@
     // Override point for customization after application launch.
     
     
-    /*if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
         
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
@@ -43,13 +46,25 @@
                                   }
                               }];
         
-    }*/
+    } else {
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:  [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil]];
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+
+    
     [self startLocationService];
     AppPrefData* pref = _gAppPrefData;
     if (pref.userID.length > 0) {
         
         [self loginSucessful];
     }
+    
+    
     
     return YES;
 }
@@ -75,12 +90,20 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [application setApplicationIconBadgeNumber:0];
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+- (BOOL)application:(UIApplication*)application openURL:(nonnull NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(nonnull id)annotation{
+    
+    
+    return [[FBSDKApplicationDelegate sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+}
+
 
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window
 {
@@ -91,6 +114,20 @@
     
     
     
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    NSString* newToken = [deviceToken description];
+    newToken = [newToken stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    newToken = [newToken stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    //    [GlobalVars sharedInstance].g_userInfo.token = [NSString stringWithFormat:@"%@", newToken];
+    NSLog(@"My token is: %@", newToken);
+    
+    _newToken = newToken;
+    
+    [self updateData:_newToken];
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
@@ -167,6 +204,74 @@
 }
 
 
+- (void)updateData:(NSString *)token {
+    
+    if (_gAppPrefData.userID > 0) {
+
+        NSString* params = [NSString stringWithFormat:kAPI_SIGNFBParams, _gAppPrefData.userID, token, @"update"];
+        
+        [_gAppData sendPostRequest:kAPI_SIGNFB params:params completion:^(id result) {
+            
+            if (result != nil) {
+                
+                NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+                NSLog(@"post function tag  ==%@",dict1);
+                
+                
+                
+            }
+        } failure:^(id result) {
+        }];
+    }
+    
+    
+}
+
+- (void)loginFBLogin:(NSString *)params {
+    
+    
+    [MBProgressHUD showHUDAddedTo:self.window animated:true];
+    [_gAppData sendPostRequest:kAPI_SIGNFB params:params completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            if (dict1[@"row"] != nil) {
+                
+                NSDictionary* row = dict1[@"row"];
+                
+                AppPrefData* pref = _gAppPrefData;
+                [pref setUserName:row[@"username"]];
+                [pref setUserID:row[@"user_id"]];
+                [pref setImageURL:row[@"image"]];
+                //[pref setUserEmail:dict1[@"email"]];
+                [pref setAddress:@""];
+                
+                if ([row[@"created_time"] containsString:@"0000"]) {
+                    
+                    [pref setMemberSince:[Utils stringToDate:row[@"created_time"]]];
+                } else {
+                    [pref setMemberSince:row[@"created_time"]];
+                }
+                [pref saveAllData];
+                [self showViewMessage:self.window type:1];
+                
+            } else {
+                
+                [self showViewMessage:self.window type:2];
+                
+            }
+            
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
+    }];
+}
+
 
 #pragma mark -
 #pragma mark Show Loading View
@@ -206,6 +311,7 @@
 
 - (void)logoutSucessful {
     
+    [self updateData:@"111"];
     [self logoutSucessful2];
     
   /*  NSString* body = [NSString stringWithFormat:kAPI_LOGOUT_PARAM,manager.getUserID, _deviceToken];
@@ -265,7 +371,106 @@
     [self.window.rootViewController presentViewController:alert animated:true completion:nil];
 }
 
+- (void)showAlertDilog2:(NSString *)title message:(NSString *)message params:(NSString *)paramss userName:(NSString *)userName {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self showFBLoginDialog:paramss userName:userName];
+    }]];
+    
+    [self.window.rootViewController presentViewController:alert animated:true completion:nil];
+}
 
+- (void)showFBLoginDialog:(NSString *)paramss userName:(NSString *)userName {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"USERNAME";
+        textField.text = userName;
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"PASSWORD";
+        textField.secureTextEntry = true;
+    }];
+    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+        textField.placeholder = @"CONFIRM PASSWORD";
+        
+        textField.secureTextEntry = true;
+    }];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NSString* text1 = [[alert textFields][0] text];
+        NSString* text2 = [[alert textFields][1] text];
+        NSString* text3 = [[alert textFields][2] text];
+        if (text1.length <= 0) {
+            [_gAppDelegate showAlertDilog2:@"Info" message:@"INPUT USERNAME" params:paramss userName:userName];
+            
+        } else if (text2.length <= 0) {
+            [_gAppDelegate showAlertDilog2:@"Info" message:@"INPUT PASSWORD"  params:paramss userName:userName];
+            
+        } else if (![text2 isEqualToString:text3]) {
+            [_gAppDelegate showAlertDilog2:@"Info" message:@"PASSWORD DON'T MATCH"  params:paramss userName:userName];
+            
+        } else {
+            
+            NSString* params = [NSString stringWithFormat:@"%@&username=%@&password=%@", paramss, text1, text2];
+            
+            [self loginFBLogin:params];
+        }
+        
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    if (![Utils isIphone]) {
+        alert.popoverPresentationController.sourceView = self.window.rootViewController.view;
+    }
+    
+    [self.window.rootViewController presentViewController:alert animated:true completion:nil];
+}
+
+
+- (void)checkFBLogin:(NSString *)email username:(NSString *)userName params:(NSString *)paramss {
+    
+    NSString* params = [NSString stringWithFormat:@"email=%@&action=check", email];
+    
+    [MBProgressHUD showHUDAddedTo:self.window animated:true];
+    [_gAppData sendPostRequest:kAPI_SIGNFB params:params completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            if (dict1[@"row"] != nil) {
+                
+                NSDictionary* row = dict1[@"row"];
+                
+                NSString* params = [NSString stringWithFormat:@"username=%@&password=%@&image=%@&action=signfb", row[@"username"], row[@"password"], row[@"image"]];
+                
+                [self loginFBLogin:params];
+                
+            } else {
+                
+                [self showFBLoginDialog:paramss userName:userName];
+                
+            }
+            
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.window animated:true];
+    }];
+}
 
 #pragma mark -
 #pragma mark ActivityIndicatorMethod
