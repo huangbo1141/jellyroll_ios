@@ -11,6 +11,8 @@
 @interface FeedbackVC ()<UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *tv_Comments;
+@property (weak, nonatomic) IBOutlet UIView *bottomShadowVIew;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView;
 
 @end
 
@@ -54,6 +56,8 @@
 - (void)viewSettings {
     
     [self.navigationController setNavigationBarHidden:true];
+    [Utils dropShadow:_bottomShadowVIew];
+    [Utils dropShadow:_topShadowView];
 }
 
 

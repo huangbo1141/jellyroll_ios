@@ -24,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView;
 
 @end
 
@@ -88,6 +89,9 @@
     
     _imageView.layer.cornerRadius = 30;
     _imageView.layer.masksToBounds = true;
+    
+    [Utils dropShadow:_tableView];
+    [Utils dropShadow:_topShadowView];
 }
 
 #pragma mark - Table view data source

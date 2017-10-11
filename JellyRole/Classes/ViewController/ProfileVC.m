@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *label4;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView;
 
 
 @end
@@ -68,6 +69,7 @@
     
     [self updateView:@"" emailID:@""];
     [self getProfileData];
+    [Utils dropShadow:_topShadowView];
 }
 
 - (void)updateView:(NSString *)userName emailID:(NSString *)emailID {

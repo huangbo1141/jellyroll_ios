@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic ,weak) IBOutlet UISearchBar* searchBar;
+@property (weak, nonatomic) IBOutlet UIView *friendShadowView;
+@property (weak, nonatomic) IBOutlet UIView *inviteShadowView;
 
 @end
 
@@ -77,6 +79,8 @@
         [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
     }
     
+    [Utils dropShadow:_friendShadowView];
+    [Utils dropShadow:_inviteShadowView];
     
     
     

@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *mapImageView;
 @property (weak, nonatomic) IBOutlet NotificationRequetVC *confirmRequest;
 @property (weak, nonatomic) IBOutlet NotificationRequetVC *pendingRequest;
+@property (weak, nonatomic) IBOutlet UIView *confirmationView;
+@property (weak, nonatomic) IBOutlet UIView *pendingView;
 
 @end
 
@@ -83,6 +85,9 @@
     
     [_confirmRequest addGestureRecognizer:rightSwipe];
     [_confirmRequest addGestureRecognizer:leftSwipe];
+    
+    [Utils dropShadow:_confirmationView];
+    [Utils dropShadow:_pendingView];
     
 }
 

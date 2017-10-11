@@ -122,6 +122,11 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UILabel *myTime;
 @property (weak, nonatomic) IBOutlet UILabel *myOpenClose;
 
+@property (weak, nonatomic) IBOutlet UIView *chooseOponentView;
+@property (weak, nonatomic) IBOutlet UIView *locationShadowView;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView;
+@property (weak, nonatomic) IBOutlet UIView *oppoShadowView;
+
 @end
 
 @implementation QuickPlayVC
@@ -151,7 +156,7 @@ typedef enum
   //      [_otherUserLabel setText:data[@"username"]];
         
         [self getGooglePlaces];
-     //   [self getUserGameData];
+        //[self getUserGameData];
     }
     
     
@@ -213,6 +218,11 @@ typedef enum
     _friendsView.delegates = self;
     [_currentLabel setText:_gAppPrefData.userName];
 
+    [Utils dropShadow:_chooseOponentView];
+    [Utils dropShadow:_locationShadowView];
+    [Utils dropShadow:_topShadowView];
+    [Utils dropShadow:_oppoShadowView];
+    [Utils dropShadow:_winSuperView];
 }
 
 - (void)userView:(BOOL)isHide {
@@ -346,7 +356,7 @@ typedef enum
     
     if (games != nil) {
         
-        [_gameTableView updateData:games];
+        [_gameTableView updateData:games isRecent:false];
     }
     
     float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0;
@@ -711,8 +721,6 @@ typedef enum
 
 - (void)getAllRecentGameData {
     
-    
-    
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     
     NSString* url = [NSString stringWithFormat:kAPI_ALLRECENTGAME, _gAppPrefData.userID, _selectedBar[@"bar_id"]];
@@ -729,6 +737,9 @@ typedef enum
             [_data addEntriesFromDictionary:data];
             
             
+            [_allGames removeAllObjects];
+            [_recentGames removeAllObjects];
+            
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 NSArray* list = dict1[@"leaderboard"];
@@ -737,16 +748,19 @@ typedef enum
                     [_leaderboardView updateData:list];
                 }
                 
-                [_allGames removeAllObjects];
-                [_recentGames removeAllObjects];
-                
                 [_allGames addObjectsFromArray:dict1[@"all"]];
                 [_recentGames addObjectsFromArray:dict1[@"recent_game"]];
                 
-                [_gameLocationTableView updateData:_recentGames];
+                [_gameLocationTableView updateData:_recentGames isRecent:false];
+                [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
             } else {
                 
+                
+                [_leaderboardView updateData:nil];
+                
+                [_gameLocationTableView updateData:nil isRecent:false];
+                [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
                 NSString *strMESSAGE;
                 NSRange range = [[dict1 objectForKey:@"msg"] rangeOfString:@"No game found"];
@@ -755,22 +769,20 @@ typedef enum
                 {
                     strMESSAGE=[NSString stringWithFormat:@"No previous game found for this bar"];
                 }
-                else
-                {
-                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:strMESSAGE preferredStyle:UIAlertControllerStyleAlert];
+                
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:strMESSAGE preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
-                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                        
-                        [self.navigationController popViewControllerAnimated:true];
-                    }]];
-                    
-                    if (![Utils isIphone]) {
-                        alert.popoverPresentationController.sourceView = self.view;
-                    }
-                    
-                    [self presentViewController:alert animated:true completion:nil];
-                    
+                    //[self.navigationController popViewControllerAnimated:true];
+                }]];
+                
+                if (![Utils isIphone]) {
+                    alert.popoverPresentationController.sourceView = self.view;
                 }
+                
+                [self presentViewController:alert animated:true completion:nil];
+
             }
             
         }
@@ -791,7 +803,7 @@ typedef enum
     [_userGamesData removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     
-    NSString* url = [NSString stringWithFormat:kAPI_USERGAMESCORE, _gAppPrefData.userID, _data[@"user_id"]];
+    NSString* url = [NSString stringWithFormat:kAPI_USERGAMESCORE, _gAppPrefData.userID, (_data != nil) ? _data[@"user_id"] : _gAppPrefData.userID];
     
     [_gAppData sendGETRequest:url completion:^(id result) {
         
@@ -810,14 +822,13 @@ typedef enum
                     return first<second;
                 }]];
                 
-                [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 [_userGamesData addEntriesFromDictionary:dict1];
                 //[_list addObjectsFromArray:_locData];
                 [self updateView:dict1 games:dict1[@"recent_game"]];
             } else {
                 
             
-                [_gameTableView updateData:nil];
+                [_gameTableView updateData:nil isRecent:false];
                 [_comparisionVC updateData:nil];
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
             }
@@ -988,7 +999,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_allRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_recentGames];
+    [_gameLocationTableView updateData:_recentGames isRecent:false];
 }
 
 - (IBAction)allGameAction:(UIButton *)sender {
@@ -1003,7 +1014,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_myRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_allGames];
+    [_gameLocationTableView updateData:_allGames isRecent:true];
 }
 
 - (IBAction)recentFriendsAction:(UIButton *)sender {

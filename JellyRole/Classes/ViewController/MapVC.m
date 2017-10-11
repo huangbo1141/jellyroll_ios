@@ -158,6 +158,10 @@
     _view_SearchOpponent.hidden = true;
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
+    
+    [Utils dropShadow:_searchView];
+    [Utils dropShadow:_saveLocatioView];
+    [Utils dropShadow:_dialogView];
 }
 
 - (void)hideDialog:(BOOL)isHide {

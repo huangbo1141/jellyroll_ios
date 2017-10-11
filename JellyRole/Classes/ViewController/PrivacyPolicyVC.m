@@ -11,6 +11,7 @@
 @interface PrivacyPolicyVC ()
 
 @property (nonatomic ,weak) IBOutlet UITextView* txt_privacyPolicy;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView;
 
 @end
 
@@ -55,7 +56,8 @@
 - (void)viewSettings {
     
     [self.navigationController setNavigationBarHidden:true];
-    
+ 
+    [Utils dropShadow:_topShadowView];
 }
 
 - (void)getPrivacyData {

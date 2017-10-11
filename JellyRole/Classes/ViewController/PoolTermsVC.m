@@ -27,6 +27,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *barRow;
 @property (weak, nonatomic) IBOutlet UILabel *apaRow;
 @property (weak, nonatomic) IBOutlet UILabel *poolRule;
+@property (weak, nonatomic) IBOutlet UIView *_topShadow1;
+@property (weak, nonatomic) IBOutlet UIView *_topShadow2;
+@property (weak, nonatomic) IBOutlet UIView *_topShadow3;
 
 @end
 
@@ -84,6 +87,9 @@
     _apaRow.hidden = true;
     _poolRule.hidden = true;
     
+    [Utils dropShadow:__topShadow1];
+    [Utils dropShadow:__topShadow2];
+    [Utils dropShadow:__topShadow2];
 }
 
 

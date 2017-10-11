@@ -96,7 +96,7 @@
     
     if (games != nil) {
     
-        [_gameTableView updateData:games];
+        [_gameTableView updateData:games isRecent:false];
     }
     
     int win = [dict[@"overall_win"] intValue];

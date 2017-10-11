@@ -232,7 +232,8 @@
 +(NSString *)stringToDate:(NSString *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    
     
     [formatter setTimeZone:timeZone];
     [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
@@ -242,6 +243,7 @@
         dateTime = [NSDate date];
     }
     
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setDateFormat : @"MMM dd yyyy"];
     
     return [formatter stringFromDate:dateTime];;
@@ -251,7 +253,7 @@
 +(NSString *)stringToTime:(NSString *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    NSTimeZone *timeZone = [NSTimeZone localTimeZone];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
     
     [formatter setTimeZone:timeZone];
     [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
@@ -261,7 +263,9 @@
         dateTime = [NSDate date];
     }
     
-    [formatter setDateFormat : @"HH:mm a"];
+    [formatter setTimeZone:[NSTimeZone localTimeZone]];
+    
+    [formatter setDateFormat : @"hh:mm a"];
     
     return [formatter stringFromDate:dateTime];;
 }
@@ -285,6 +289,15 @@
     
 }
 
-
++(void)dropShadow:(UIView *)view {
+    
+ 
+    view.layer.shadowOpacity = 0.6;
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowRadius = 5.0;
+    //        topImageView.layer.masksToBounds = true;
+    
+    view.layer.shadowOffset = CGSizeMake(5, 5);
+}
 
 @end

@@ -35,5 +35,6 @@
 +(NSString *)stringToDate:(NSString *)date;
 +(NSString *)stringToTime:(NSString *)date;
 +(NSString*)selectRandomBallImageName:(NSString*)barid;
++(void)dropShadow:(UIView *)view;
 
 @end
