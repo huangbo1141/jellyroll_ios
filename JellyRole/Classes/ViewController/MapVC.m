@@ -87,6 +87,7 @@
     
     [_locationManager startUpdatingHeading];
     
+    [_delegate updateTitle:@"Map"];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -158,6 +159,18 @@
     _view_SearchOpponent.hidden = true;
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
+    
+
+    for (UIView* subView in _searchBar.subviews) {
+    
+        DebugLog(@".....%@", subView);
+        if ([subView isKindOfClass:[UITextField class]]) {
+            
+            UITextField* textFiled = (UITextField *)subView;
+            
+            [textFiled setBackgroundColor:[UIColor yellowColor]];
+        }
+    }
     
     [Utils dropShadow:_searchView];
     [Utils dropShadow:_saveLocatioView];
@@ -292,9 +305,9 @@
     
     if (!_isFirstTime) {
         
-        ArtPiece *piece = [_allArtPiece lastObject];
+        /*ArtPiece *piece = [_allArtPiece lastObject];
         
-        [self showSearchedLocation:piece.data[@"lat"] :piece.data[@"long"]];
+        [self showSearchedLocation:piece.data[@"lat"] :piece.data[@"long"]];*/
     }
 }
 
@@ -694,6 +707,7 @@
 
 -(IBAction)createLocationAction:(UIButton*)sender
 {
+    
     [self hideDialogPublic];
     
     _saveLocatioView.hidden = false;
@@ -712,6 +726,7 @@
 
     [_allLocation removeAllObjects];
     [self replaceMarkers];
+    [_delegate updateTitle:@"Add Location"];
 }
 
 
@@ -1237,7 +1252,7 @@
         
         [_MAP_VIEW setRegion:region animated:YES];
         
-        _isFirstTime = false;
+        //_isFirstTime = false;
         
         MKPointAnnotation *point1 = [[MKPointAnnotation alloc] init];
         point1.coordinate = userLocation.coordinate;

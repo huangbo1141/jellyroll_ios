@@ -11,6 +11,7 @@
 @protocol MapVCDelegates <NSObject>
 
 - (void)loadLocationStateVC:(UIImage *)image data:(NSDictionary *)data;
+- (void)updateTitle:(NSString *)title;
 
 @end
 

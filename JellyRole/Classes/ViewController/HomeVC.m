@@ -19,6 +19,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *notifyImage;
 @property (weak, nonatomic) IBOutlet UIButton *notifyButton;
+@property (strong, nonatomic) IBOutlet UILabel *topTitle;
 
 @end
 
@@ -205,6 +206,8 @@
         
         MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
         [mapVC hideDialogPublic];
+        
+        [_topTitle setText:@"Map"];
     }
 
     [_mainVC popViewControllerAnimated:true];
@@ -239,6 +242,8 @@
         NotificationVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationSB"];
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         [_mainVC pushViewController:vc animated:true];
+        
+        _topTitle.text = @"Notifications";
     }
 }
 
@@ -284,7 +289,12 @@
 }
 
 #pragma mark
-#pragma mark UIButton Action Methods
+#pragma mark MapVCDelegates 
+- (void)updateTitle:(NSString *)title {
+    
+    _topTitle.text = title;
+}
+
 - (void)loadLocationStateVC:(UIImage *)image data:(NSDictionary *)data {
     
     /*UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];

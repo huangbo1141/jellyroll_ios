@@ -11,6 +11,7 @@
 		D1282F4F1F74F4B30064ED2C /* ArtPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F4E1F74F4B30064ED2C /* ArtPiece.m */; };
 		D1282F521F7520C80064ED2C /* testing.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F511F7520C80064ED2C /* testing.m */; };
 		D1282F581F763C620064ED2C /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F571F763C620064ED2C /* MapVC.m */; };
+		D12B80561F99E26000EA52B7 /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D12B80551F99E26000EA52B7 /* GameCell.m */; };
 		D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12C70451F70F48900285B6B /* FeedbackVC.m */; };
 		D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB21F73290200B67244 /* FriendsVC.m */; };
 		D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB51F73500200B67244 /* ProfileVC.m */; };
@@ -79,6 +80,8 @@
 		D1282F511F7520C80064ED2C /* testing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = testing.m; sourceTree = "<group>"; };
 		D1282F561F763C620064ED2C /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		D1282F571F763C620064ED2C /* MapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVC.m; sourceTree = "<group>"; };
+		D12B80541F99E26000EA52B7 /* GameCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCell.h; sourceTree = "<group>"; };
+		D12B80551F99E26000EA52B7 /* GameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCell.m; sourceTree = "<group>"; };
 		D12C70441F70F48900285B6B /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		D12C70451F70F48900285B6B /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		D14C8DB11F73290200B67244 /* FriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsVC.h; sourceTree = "<group>"; };
@@ -381,6 +384,8 @@
 				D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */,
 				D170E5021F86746500118C03 /* FriendsView.h */,
 				D170E5031F86746500118C03 /* FriendsView.m */,
+				D12B80541F99E26000EA52B7 /* GameCell.h */,
+				D12B80551F99E26000EA52B7 /* GameCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -587,6 +592,7 @@
 				D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */,
 				D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */,
 				D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */,
+				D12B80561F99E26000EA52B7 /* GameCell.m in Sources */,
 				D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */,
 				D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */,
 				D17D51D51F62196500AACDDC /* GameView.m in Sources */,

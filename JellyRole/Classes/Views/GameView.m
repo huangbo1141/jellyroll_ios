@@ -7,12 +7,15 @@
 //
 
 #import "GameView.h"
+#import "GameCell.h"
 
 @interface GameView ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray* _list;
     BOOL _isRecent;
 }
+
+
 @end
 
 @implementation GameView
@@ -55,7 +58,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    GameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     NSDictionary* dict = [_list objectAtIndex:indexPath.row];
     
@@ -74,11 +77,25 @@
         for (NSLayoutConstraint* cos in imageView.constraints) {
             cos.constant = 0;
         }
+        
+        for (NSLayoutConstraint* cos in label1.constraints) {
+            cos.constant = 51;
+        }
+        
+        cell.lConstraint.constant = 0;
+        
+        
+
     } else {
         
         for (NSLayoutConstraint* cos in imageView.constraints) {
             cos.constant = 18;
         }
+        
+        for (NSLayoutConstraint* cos in label1.constraints) {
+            cos.constant = 27;
+        }
+        cell.lConstraint.constant = 6;
     }
     
     if (_isRecent) {
