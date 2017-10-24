@@ -1252,7 +1252,7 @@
         
         [_MAP_VIEW setRegion:region animated:YES];
         
-        //_isFirstTime = false;
+        _isFirstTime = false;
         
         MKPointAnnotation *point1 = [[MKPointAnnotation alloc] init];
         point1.coordinate = userLocation.coordinate;
