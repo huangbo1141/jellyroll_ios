@@ -87,7 +87,7 @@
     _list = [NSArray arrayWithObjects:@"Stats", @"Friends", @"Pool Rules/Terms", @"Privacy Policy", @"Share this App", @"Feedback", @"Edit Profile", @"Logout", nil];
     _listImages = [NSArray arrayWithObjects:@"Stats", @"Friends", @"Pool", @"Privacy", @"Share", @"Feedback", @"user-2", @"Logout", nil];
     
-    _imageView.layer.cornerRadius = 30;
+    _imageView.layer.cornerRadius = 28;
     _imageView.layer.masksToBounds = true;
     
     [Utils dropShadow:_tableView];
