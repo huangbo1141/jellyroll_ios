@@ -34,6 +34,8 @@
 #define kAPI_INVITEFRIEND [kHostURL stringByAppendingString:@"webservice/invite_friend.php?user_id=%@&email=%@"]
 
 #define kAPI_ADDFRIEND [kHostURL stringByAppendingString:@"webservice/add_friend.php?user_id=%@&email=%@"]
+#define kAPI_ADDFRIEND2 [kHostURL stringByAppendingString:@"webservice/add_friend.php?action=share_byid&id1=%@&id2=%@"]
+
 
 #define kAPI_MYPROFILE [kHostURL stringByAppendingString:@"webservice/get_my_profile.php?user_id=%@"]
 
@@ -77,6 +79,9 @@
 #define kAPI_CHANGEPASSWORD [kHostURL stringByAppendingString:@"webservice/change_password.php"]
 #define kAPI_CHANGEPASSWORDParams @"user_id=%@&password=%@&oldpassword=%@"
 
+
+
+
 #define GoogleDirectionAPI @"AIzaSyCmvC_H5S08MvkO-ixoQTpJQGXdu5qyVWg"
 
 //Functions
@@ -85,7 +90,13 @@
 #define TextName @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
 #define TextNumber @"0123456789"
 
-#define kSHARETEXT @"Start tracking your pool games with us at jellyrollpool.com."
+
+#define kSHAREMAILSUBJECTTEXT @"JellyRoll -- Pool game tracking and stats"
+#define kSHAREMAILTEXT @"%@ wants to play you in pool! Download JellyRoll on the iOS app store and start tracking your pool games with us. Visit the site at jellyrollpool.com"
+#define kSHAREFACEBOOKTEXT @"Download JellyRoll on the iOS app store and track your pool games with me! See what the app is about or drop the creators a line at jellyrollpool.com"
+#define kSHARECOPYTEXT @"Download JellyRoll on the iOS app store and start tracking your pool games with me! Visit the site at jellyrollpool.com"
+
+#define kSHAREFACEBOOKTEXT2 @"I just beat %@ at pool at %@. Track your pool games with JellyRoll on iOS or visit jellyrollpool.com"
 
 
 #define kUserDefaults               [NSUserDefaults standardUserDefaults]

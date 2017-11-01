@@ -63,7 +63,7 @@
 
 -(NSString *)validate
 {
-    if ([_tv_Comments.text isEqualToString:@"Let us know what you think"])
+    if ([_tv_Comments.text isEqualToString:@"How’s the app working for you? Give us feedback here, suggest new functionality (including new stats you want to see, or games like darts or skeeball you’d like to track), or just say hello!"])
     {
         //[tv_Comments becomeFirstResponder];
         return @"Please Enter Your Comments";
@@ -142,7 +142,7 @@
 {
     if(textView == _tv_Comments)
     {
-        if ([textView.text isEqualToString:@"Let us know what you think"])
+        if ([textView.text isEqualToString:@"How’s the app working for you? Give us feedback here, suggest new functionality (including new stats you want to see, or games like darts or skeeball you’d like to track), or just say hello!"])
         {
             _tv_Comments.text=@"";
         }
@@ -157,7 +157,7 @@
     NSString *trimmed = [rawString stringByTrimmingCharactersInSet:whitespace];
     if ([trimmed length] == 0 || textView.text.length==0)
     {
-        _tv_Comments.text = @"Let us know what you think";
+        _tv_Comments.text = @"How’s the app working for you? Give us feedback here, suggest new functionality (including new stats you want to see, or games like darts or skeeball you’d like to track), or just say hello!";
     }
 }
 

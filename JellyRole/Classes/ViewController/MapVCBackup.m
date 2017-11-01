@@ -6,20 +6,18 @@
 //  Copyright © 2017 Kapil Kumar. All rights reserved.
 //
 
-#import "MapVC.h"
+#import "MapVCBackup.h"
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 #import "ArtPiece.h"
 #import "GooglePlaceResult.h"
 #import "EftGoogleAddressComponent.h"
-#import <FBAnnotationClustering/FBAnnotationClustering.h>
 
-@interface MapVC () <CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, FBClusteringManagerDelegate>
+@interface MapVCBackup () <CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate>
 {
     
     NSMutableArray *_allLocation, *_allArtPiece, *_allDialogList;
     CLLocationManager* _locationManager;
-    FBClusteringManager* _clusteringManager;
     
     NSTimer* _timer;
     GooglePlaceResult* _gresult;
@@ -70,7 +68,7 @@
 
 @end
 
-@implementation MapVC
+@implementation MapVCBackup
 
 - (void)viewDidLoad {
     
@@ -138,9 +136,6 @@
     _allLocation = [[NSMutableArray alloc] init];
     _allArtPiece = [[NSMutableArray alloc] init];
     _allDialogList = [[NSMutableArray alloc] init];
-    
-    _clusteringManager = [[FBClusteringManager alloc] init];
-    _clusteringManager.delegate = self;
     
     _MAP_VIEW.mapType = MKMapTypeStandard;
     
@@ -263,7 +258,6 @@
 
 -(void)replaceMarkers {
     
-    [_clusteringManager removeAnnotations:_allArtPiece];
     [_allArtPiece removeAllObjects];
     
     NSArray*array = _MAP_VIEW.annotations;
@@ -302,8 +296,6 @@
         [_MAP_VIEW addAnnotation:point12];
         [_allArtPiece addObject:point12];
     }
-    
-    [_clusteringManager addAnnotations:_allArtPiece];
 }
 
 -(void)getMethod {
@@ -1228,7 +1220,7 @@
 #pragma mark UISearchBar Delegates
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     NSLog(@"regionDidChangeAnimated ,%.6f",_MAP_VIEW.region.span.latitudeDelta);
-    /*float curdelta = _MAP_VIEW.region.span.latitudeDelta;
+    float curdelta = _MAP_VIEW.region.span.latitudeDelta;
     if (curdelta <= _zoom_delta_t && _zoom_delta_t < _zoom_delta) {
         _zoom_delta = curdelta;
         [self replaceMarkers];
@@ -1236,15 +1228,7 @@
         _zoom_delta = curdelta;
         [self replaceMarkers];
     }
-    _zoom_delta = curdelta;*/
-    
-    [[NSOperationQueue new] addOperationWithBlock:^{
-        double scale = _MAP_VIEW.bounds.size.width / _MAP_VIEW.visibleMapRect.size.width;
-        NSArray *annotations = [_clusteringManager clusteredAnnotationsWithinMapRect:mapView.visibleMapRect withZoomScale:scale];
-        
-        [_clusteringManager displayAnnotations:annotations onMapView:mapView];
-    }];
-
+    _zoom_delta = curdelta;
 }
 
 -(void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
@@ -1329,39 +1313,6 @@
         
         _isUserAnnotationView = true;
         return userAnnotationView;
-    } else  if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
-        FBAnnotationCluster *cluster = (FBAnnotationCluster *)annotation;
-        static NSString *reuseId = @"myClusterPin_com.yd.jelly.custom";
-        MKAnnotationView *av = av = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
-        UILabel*lbl;
-        if (av == nil) {
-            av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
-            //lbl.font = [UIFont fontWithName:@"Avenir-Next-Regular" size:12];
-            [lbl setFont:[UIFont systemFontOfSize:8]];
-            lbl.adjustsFontSizeToFitWidth = YES;
-//            lbl.layer.cornerRadius = 15.0;
-            lbl.layer.masksToBounds = true;
-            lbl.backgroundColor = [UIColor clearColor];
-            [lbl setMinimumScaleFactor:8.0/[UIFont labelFontSize]];
-            
-            
-            lbl.textColor = [UIColor blackColor];
-            lbl.textAlignment = NSTextAlignmentCenter;
-            lbl.alpha = 1.0;
-            lbl.tag = 42;
-            av.image = [UIImage imageNamed:@"cluster"];
-            [av addSubview:lbl];
-        }else{
-            lbl = [av viewWithTag:42];
-            //av.image = [UIImage imageNamed:piece.imgname];
-        }
-        
-        lbl.text = [NSString stringWithFormat:@"%lu", (unsigned long)cluster.annotations.count];
-        av.canShowCallout = false;
-        
-        return av;
-
     }
     else if ([annotation isKindOfClass:[ArtPiece class]])
     {
@@ -1421,25 +1372,6 @@
         
         if ([myAnnot.subtitle isEqualToString:@"(null)"]||myAnnot.subtitle == nil )
         {
-            FBAnnotationCluster *cluster = (FBAnnotationCluster *)view.annotation;
-            
-            if ([cluster isKindOfClass:[FBAnnotationCluster class]]) {
-                
-                if (cluster.annotations.count > 1) {
-                    /*UIEdgeInsets edgePadding = UIEdgeInsetsMake(40, 20, 44, 20);
-                    [_MAP_VIEW showCluster:cluster edgePadding:edgePadding animated:YES];*/
-                    
-                    
-                    
-                    /*[[NSOperationQueue new] addOperationWithBlock:^{
-                        double scale = 0.0312;//_MAP_VIEW.bounds.size.width / _MAP_VIEW.visibleMapRect.size.width;
-                        NSArray *annotations = [_clusteringManager clusteredAnnotationsWithinMapRect:mapView.visibleMapRect withZoomScale:scale];
-                        
-                        
-                        [_clusteringManager displayAnnotations:annotations onMapView:mapView];
-                    }];*/
-                }
-            }
         }
         else
         {
@@ -1454,13 +1386,6 @@
     
     [mapView deselectAnnotation:view.annotation animated:false];
     
-}
-
-#pragma mark - FBClusterManager delegate - optional
-
-- (CGFloat)cellSizeFactorForCoordinator:(FBClusteringManager *)coordinator
-{
-    return 1.5;
 }
 
 @end

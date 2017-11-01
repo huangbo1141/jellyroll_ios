@@ -11,6 +11,9 @@
 #import "ViewMessage.h"
 #import <CoreLocation/CoreLocation.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "B_Nav_VC.h"
+#import "HomeVC.h"
+
 
 @interface AppDelegate()<UNUserNotificationCenterDelegate, CLLocationManagerDelegate>
 {
@@ -89,7 +92,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [application setApplicationIconBadgeNumber:0];
+    //[application setApplicationIconBadgeNumber:0];
     [FBSDKAppEvents activateApp];
 }
 
@@ -141,6 +144,64 @@
 
 #pragma mark -
 #pragma mark Private Methods
+- (void)getAllNotifyData {
+    
+    if ([self.window.rootViewController isKindOfClass:[KYDrawerController class]]) {
+    
+        KYDrawerController* elDrawer = (KYDrawerController *)self.window.rootViewController;
+                
+        B_Nav_VC* navVC =  (B_Nav_VC *)elDrawer.mainViewController;
+        HomeVC* mainVC = (HomeVC *)navVC.visibleViewController;
+        
+        NSString* API = [NSString stringWithFormat:kAPI_NOTIFICATIONS, _gAppPrefData.userID];
+        
+        [_gAppData sendGETRequest:API completion:^(id result) {
+            
+            if (result != nil) {
+                
+                NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+                if(dict1[@"bellcount"] != nil) {
+                    
+                    NSString* c = dict1[@"bellcount"][@"c"];
+                    NSString* p = dict1[@"bellcount"][@"p"];
+                    int confirm_cnt = [c intValue];
+                    int pending_cnt = [p intValue];
+                    
+                    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:confirm_cnt];
+                    confirm_cnt = confirm_cnt + pending_cnt;
+                    
+                    if ([mainVC isKindOfClass:[HomeVC class]]) {
+                        
+                        if (confirm_cnt > 0) {
+                            
+                            
+                            [mainVC.notifyButton setTitle:[NSString stringWithFormat:@"%d", confirm_cnt] forState:UIControlStateNormal];
+                            [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification1"]];
+                        } else {
+                            
+                            [mainVC.notifyButton setTitle:@"" forState:UIControlStateNormal];
+                            [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification"]];
+                        }
+                    }
+                } else {
+                    
+                    if ([mainVC isKindOfClass:[HomeVC class]]) {
+                        [mainVC.notifyButton setTitle:@"" forState:UIControlStateNormal];
+                        [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification"]];
+                    }
+                }
+                
+                [self getAllNotifyData];
+            }
+        } failure:^(id result) {
+            
+            [self getAllNotifyData];
+        }];
+        
+    }
+}
+
+
 -(void)startLocationService {
     
     _locationManager = [[CLLocationManager alloc] init];
@@ -306,7 +367,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [self initializeApplication:[self initialSetUpView:@"Main_SB"]];
+        
+        [self getAllNotifyData];
     });
+    
+    
 }
 
 - (void)logoutSucessful {

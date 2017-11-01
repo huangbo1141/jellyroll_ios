@@ -10,6 +10,8 @@
 
 @interface HomeVC : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *notifyImage;
+@property (weak, nonatomic) IBOutlet UIButton *notifyButton;
 
 - (void)performIndexAction:(int)row;
 

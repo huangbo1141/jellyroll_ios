@@ -272,12 +272,12 @@
 
 
 +(NSString*)selectRandomBallImageName:(NSString*)barid {
-    int r = arc4random_uniform(16);
+    int r = arc4random_uniform(15);
     if (barid!=nil) {
         r = [barid intValue];
     }
     
-    r = r%16;
+    r = r%15;
     if (r == 0) {
         r = 1;
     }

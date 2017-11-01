@@ -12,7 +12,7 @@ pod 'KYDrawerController'
 pod “FBSDKCoreKit“
 pod “FBSDKLoginKit“
 pod “FBSDKShareKit“
-
+pod "FBAnnotationClustering"
 
 use_frameworks!
 

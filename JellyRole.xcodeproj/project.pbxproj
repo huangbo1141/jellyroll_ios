@@ -13,6 +13,7 @@
 		D1282F581F763C620064ED2C /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F571F763C620064ED2C /* MapVC.m */; };
 		D12B80561F99E26000EA52B7 /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D12B80551F99E26000EA52B7 /* GameCell.m */; };
 		D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12C70451F70F48900285B6B /* FeedbackVC.m */; };
+		D140EEE01FA9B675000B94DE /* MapVCBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = D140EEDF1FA9B675000B94DE /* MapVCBackup.m */; };
 		D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB21F73290200B67244 /* FriendsVC.m */; };
 		D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB51F73500200B67244 /* ProfileVC.m */; };
 		D15B22C71F6FB40C007EF10F /* SplashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22C61F6FB40C007EF10F /* SplashVC.m */; };
@@ -64,7 +65,7 @@
 		D1DB99681F790F55001CC21C /* NotificationRequetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99671F790F55001CC21C /* NotificationRequetVC.m */; };
 		D1E951521F737B310017A818 /* StatsScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951511F737B310017A818 /* StatsScrollView.m */; };
 		D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951541F739BF90017A818 /* StatsRankingView.m */; };
-		D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1E951571F73C1AF0017A818 /* LocationStateVC.m */; };
+		D1F314B81FA0AFBA00581C1D /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F314B71FA0AFBA00581C1D /* Social.framework */; };
 		D1F56EB51F736FED00E270A8 /* StatsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F56EB41F736FED00E270A8 /* StatsVC.m */; };
 		D1F699091F82A7BC005F37BA /* QuickPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F699081F82A7BC005F37BA /* QuickPlayVC.m */; };
 		D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */; };
@@ -84,6 +85,8 @@
 		D12B80551F99E26000EA52B7 /* GameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCell.m; sourceTree = "<group>"; };
 		D12C70441F70F48900285B6B /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		D12C70451F70F48900285B6B /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		D140EEDE1FA9B675000B94DE /* MapVCBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVCBackup.h; sourceTree = "<group>"; };
+		D140EEDF1FA9B675000B94DE /* MapVCBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVCBackup.m; sourceTree = "<group>"; };
 		D14C8DB11F73290200B67244 /* FriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsVC.h; sourceTree = "<group>"; };
 		D14C8DB21F73290200B67244 /* FriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsVC.m; sourceTree = "<group>"; };
 		D14C8DB41F73500200B67244 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
@@ -170,8 +173,7 @@
 		D1E951511F737B310017A818 /* StatsScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsScrollView.m; sourceTree = "<group>"; };
 		D1E951531F739BF90017A818 /* StatsRankingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsRankingView.h; sourceTree = "<group>"; };
 		D1E951541F739BF90017A818 /* StatsRankingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsRankingView.m; sourceTree = "<group>"; };
-		D1E951561F73C1AF0017A818 /* LocationStateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationStateVC.h; sourceTree = "<group>"; };
-		D1E951571F73C1AF0017A818 /* LocationStateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationStateVC.m; sourceTree = "<group>"; };
+		D1F314B71FA0AFBA00581C1D /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D1F56EB31F736FED00E270A8 /* StatsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsVC.h; sourceTree = "<group>"; };
 		D1F56EB41F736FED00E270A8 /* StatsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsVC.m; sourceTree = "<group>"; };
 		D1F699071F82A7BC005F37BA /* QuickPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickPlayVC.h; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F314B81FA0AFBA00581C1D /* Social.framework in Frameworks */,
 				D17D51EA1F6275FD00AACDDC /* MapKit.framework in Frameworks */,
 				0E905A43837784435CB5040C /* Pods_JellyRole.framework in Frameworks */,
 			);
@@ -208,6 +211,8 @@
 		D15B22C41F6FB3EF007EF10F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				D140EEDE1FA9B675000B94DE /* MapVCBackup.h */,
+				D140EEDF1FA9B675000B94DE /* MapVCBackup.m */,
 				D15B22C51F6FB40C007EF10F /* SplashVC.h */,
 				D15B22C61F6FB40C007EF10F /* SplashVC.m */,
 				D15B22C81F6FB722007EF10F /* LoginVC.h */,
@@ -220,8 +225,6 @@
 				D15B22E71F700695007EF10F /* HomeVC.m */,
 				D1282F561F763C620064ED2C /* MapVC.h */,
 				D1282F571F763C620064ED2C /* MapVC.m */,
-				D1E951561F73C1AF0017A818 /* LocationStateVC.h */,
-				D1E951571F73C1AF0017A818 /* LocationStateVC.m */,
 				D1DB99631F79005B001CC21C /* NotificationVC.h */,
 				D1DB99641F79005B001CC21C /* NotificationVC.m */,
 				D12C70441F70F48900285B6B /* FeedbackVC.h */,
@@ -418,6 +421,7 @@
 		D17D51E81F6275FC00AACDDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1F314B71FA0AFBA00581C1D /* Social.framework */,
 				D17D51E91F6275FD00AACDDC /* MapKit.framework */,
 				B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */,
 			);
@@ -590,7 +594,6 @@
 				D15B22C71F6FB40C007EF10F /* SplashVC.m in Sources */,
 				D17D51DC1F6221F500AACDDC /* UILabel+Font.m in Sources */,
 				D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */,
-				D1E951581F73C1AF0017A818 /* LocationStateVC.m in Sources */,
 				D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */,
 				D12B80561F99E26000EA52B7 /* GameCell.m in Sources */,
 				D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */,
@@ -611,6 +614,7 @@
 				D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */,
 				D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */,
 				D17D51D21F62019000AACDDC /* LeaderboardView.m in Sources */,
+				D140EEE01FA9B675000B94DE /* MapVCBackup.m in Sources */,
 				D170E5041F86746500118C03 /* FriendsView.m in Sources */,
 				D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */,
 				D15B22D91F6FC722007EF10F /* DataManager.m in Sources */,

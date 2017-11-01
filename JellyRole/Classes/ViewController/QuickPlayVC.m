@@ -13,6 +13,7 @@
 #import "FriendsView.h"
 #import <MapKit/MapKit.h>
 #import "GooglePlaceResult.h"
+#import <Social/Social.h>
 
 typedef enum
 {
@@ -524,6 +525,52 @@ typedef enum
 
 }
 
+-(void)shareOnFacebook {
+    NSString* text = [NSString stringWithFormat:kSHAREFACEBOOKTEXT2, _data[@"username"], _data[@"location_name"]];
+    
+    NSLog(text);
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController* fbSLComposeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        
+        NSString* text = [NSString stringWithFormat:kSHAREFACEBOOKTEXT2, _data[@"username"], _data[@"location_name"]];
+        [fbSLComposeViewController setInitialText:text];
+        
+        if (![Utils isIphone]) {
+            fbSLComposeViewController.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:fbSLComposeViewController animated:YES completion:nil];
+        
+        fbSLComposeViewController.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                case SLComposeViewControllerResultCancelled:
+                    NSLog(@"facebook: CANCELLED");
+                    break;
+                case SLComposeViewControllerResultDone:
+                    NSLog(@"facebook: SHARED");
+                    break;
+            }
+            
+            [self.navigationController popViewControllerAnimated:true];
+        };
+    }
+    else {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook Unavailable" message:@"Sorry, we're unable to find a Facebook account on your device.\nPlease setup an account in your devices settings and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self.navigationController popViewControllerAnimated:true];
+        }]];
+        
+        if (![Utils isIphone]) {
+            alert.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+}
+
 
 //MARK: API's
 - (void)getLocationData:(NSString *)placeID {
@@ -622,6 +669,25 @@ typedef enum
     });
 }
 
+- (void)addFriendsData:(NSString *)userID {
+    
+    NSString* API = [NSString stringWithFormat:kAPI_ADDFRIEND2, _gAppPrefData.userID, userID];
+    
+    NSLog(@"...kAPI_ADDFRIEND2......%@", API);
+    [_gAppData sendGETRequest:API completion:^(id result) {
+        
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"....%@",dict1);
+            NSLog(@"kAPI_ADDFRIEND2 Success");
+        }
+    } failure:^(id result) {
+        
+        NSLog(@"kAPI_ADDFRIEND2 Failed");
+    }];
+}
+
 - (void)getWinLossData:(int)type
 {
     NSString* params = [NSString stringWithFormat:kAPI_WinLossParams, _gAppPrefData.userID, _data[@"user_id"], _selectedBar[@"bar_id"], (type == 0) ? @"win" : @"loss"];
@@ -637,20 +703,27 @@ typedef enum
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
+                [self addFriendsData:_data[@"user_id"]];
                 
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
-                
-                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                if (type == 0) {
                     
-                    [self.navigationController popViewControllerAnimated:true];
-                }]];
+                    [self shareOnFacebook];
+                } else {
                 
-                if (![Utils isIphone]) {
-                    alert.popoverPresentationController.sourceView = self.view;
+                    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+                    
+                    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                        
+                        [self.navigationController popViewControllerAnimated:true];
+                    }]];
+                    
+                    if (![Utils isIphone]) {
+                        alert.popoverPresentationController.sourceView = self.view;
+                    }
+                    
+                    [self presentViewController:alert animated:true completion:nil];
+
                 }
-                
-                [self presentViewController:alert animated:true completion:nil];
-                
             } else {
                 
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"message"]];

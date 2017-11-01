@@ -7,18 +7,19 @@
 //
 
 #import "HomeVC.h"
-#import "LocationStateVC.h"
 #import "MapVC.h"
 #import "NotificationVC.h"
 #import "QuickPlayVC.h"
+#import <Social/Social.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-@interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate>
+
+@interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
     UINavigationController* _mainVC;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *notifyImage;
-@property (weak, nonatomic) IBOutlet UIButton *notifyButton;
 @property (strong, nonatomic) IBOutlet UILabel *topTitle;
 
 @end
@@ -39,7 +40,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self getAllNotifyData];
+    //[self getAllNotifyData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -97,7 +98,7 @@
         if (result != nil) {
             
             NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
-            NSLog(@"post function tag  ==%@",dict1);
+            //NSLog(@"post function tag  ==%@",dict1);
             
             
             if(dict1[@"bellcount"] != nil) {
@@ -107,6 +108,7 @@
                 int confirm_cnt = [c intValue];
                 int pending_cnt = [p intValue];
                 
+                [[UIApplication sharedApplication] setApplicationIconBadgeNumber:confirm_cnt];
                 confirm_cnt = confirm_cnt + pending_cnt;
                 if (confirm_cnt > 0) {
                 
@@ -132,6 +134,106 @@
     }];
 }
 
+-(void)shareOnFacebook {
+    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+        SLComposeViewController* fbSLComposeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
+        [fbSLComposeViewController setInitialText:kSHAREFACEBOOKTEXT];
+        
+        if (![Utils isIphone]) {
+            fbSLComposeViewController.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:fbSLComposeViewController animated:YES completion:nil];
+        
+        fbSLComposeViewController.completionHandler = ^(SLComposeViewControllerResult result) {
+            switch(result) {
+                case SLComposeViewControllerResultCancelled:
+                    NSLog(@"facebook: CANCELLED");
+                    break;
+                case SLComposeViewControllerResultDone:
+                    NSLog(@"facebook: SHARED");
+                    break;
+            }
+        };
+    }
+    else {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook Unavailable" message:@"Sorry, we're unable to find a Facebook account on your device.\nPlease setup an account in your devices settings and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        if (![Utils isIphone]) {
+            alert.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+}
+
+- (void)mailToUser
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        mailController.mailComposeDelegate = self;
+        
+        [mailController setSubject:kSHAREMAILSUBJECTTEXT];
+        NSString* str = [NSString stringWithFormat:kSHAREMAILTEXT, _gAppPrefData.userName];
+        
+        [mailController setMessageBody:str isHTML:NO];
+        if (![Utils isIphone]) {
+            mailController.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:mailController animated:true completion:nil];
+    }
+    else {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Mail Unavailable" message:@"Sorry, we're unable to find a mail account on your device.\nPlease setup an account in your devices settings and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        if (![Utils isIphone]) {
+            alert.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+}
+
+- (void)sendSMS
+{
+    if ([MFMessageComposeViewController canSendText])
+    {
+        NSString* str = [NSString stringWithFormat:kSHAREMAILTEXT, _gAppPrefData.userName];
+        MFMessageComposeViewController* vc = [[MFMessageComposeViewController alloc] init];
+        [vc setDelegate:self];
+        [vc setBody:str];
+        if (![Utils isIphone]) {
+            vc.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:vc animated:true completion:nil];
+    }
+    else {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Message Unavailable" message:@"Sorry, Text message is not available on this device." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        if (![Utils isIphone]) {
+            alert.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+}
 
 #pragma mark
 #pragma mark Public Methods
@@ -158,19 +260,37 @@
         
     } else if(row == 4) {
         
-        NSMutableArray *sharingItems = [NSMutableArray array];
-        NSURL *shareURL = [NSURL URLWithString:@"http://jellyrollpool.com"];
-        [sharingItems addObject:kSHARETEXT];
-        [sharingItems addObject:shareURL];
         
-
-        UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:sharingItems applicationActivities:nil];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"SHARE" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Mail" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self mailToUser];
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Message" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           
+            [self sendSMS];
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Facebook" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self shareOnFacebook];
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Copy" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [UIPasteboard generalPasteboard].string = kSHARECOPYTEXT;
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
         if (![Utils isIphone]) {
-            activityController.popoverPresentationController.sourceView = self.view;
+            alert.popoverPresentationController.sourceView = self.view;
         }
         
-        [self presentViewController:activityController animated:YES completion:nil];
-        
+        [self presentViewController:alert animated:true completion:nil];
         
     } else if(row == 5) {
         
@@ -362,6 +482,36 @@
     }
     
     return nil;
+}
+
+#pragma mark
+#pragma mark Mail ComposerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult)result
+{
+    switch (result)
+    {
+        case MessageComposeResultCancelled:
+        {
+            break;
+        }
+        case MessageComposeResultFailed:
+        {
+            break;
+        }
+        case MessageComposeResultSent:
+        {
+            break;
+        }
+        default:
+            break;
+    }
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 
