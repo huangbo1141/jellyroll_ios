@@ -128,20 +128,59 @@
                 NSMutableArray* temp = [dict1 valueForKey:@"data"];
                 if(temp != nil) {
                     
-                    temp = [NSMutableArray arrayWithArray:[temp sortedArrayUsingComparator:^NSComparisonResult(NSMutableDictionary* a, NSMutableDictionary* b) {
-                        double first = [a[@"percent"] doubleValue];
-                        double second = [b[@"percent"] doubleValue];
-                        return first<second;
+                    
+                    /*NSArray* sortedFriends = [NSMutableArray arrayWithArray:[dict1[@"friends"] sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                        
+                        return [[a[@"username"] lowercaseString] compare:[b[@"username"] lowercaseString]];
                     }]];
                     
-                    for (int i=0; i<[temp count]; i++) {
+                    NSArray* sortedRecent = [NSMutableArray arrayWithArray:[dict1[@"recent"] sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                        
+                        
+                        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                        NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+                        
+                        [formatter setTimeZone:timeZone];
+                        [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+                        NSDate *dateTime1 = [formatter dateFromString:a[@"date"]];
+                        if (dateTime1 == nil) {
+                            
+                            dateTime1 = [NSDate date];
+                        }
+                        
+                        NSDate *dateTime2 = [formatter dateFromString:b[@"date"]];
+                        if (dateTime2 == nil) {
+                            
+                            dateTime2 = [NSDate date];
+                        }
+                        
+                        return [dateTime2 compare:dateTime1];
+                    }]];
+                    
+                    NSDictionary* lDict = [NSDictionary dictionaryWithObjectsAndKeys:sortedFriends, @"friends", sortedRecent, @"recent", dict1[@"all"], @"all", nil];
+                    [_allFriendsData addEntriesFromDictionary:lDict];
+                    
+                    */
+                    
+                    
+                    
+                    
+                    
+                    temp = [NSMutableArray arrayWithArray:[temp sortedArrayUsingComparator:^NSComparisonResult(NSMutableDictionary* a, NSMutableDictionary* b) {
+                        //double first = [a[@"percent"] doubleValue];
+                        //double second = [b[@"percent"] doubleValue];
+                        //return first<second;
+                        return [[a[@"username"] lowercaseString] compare:[b[@"username"] lowercaseString]];
+                    }]];
+                    
+                    /*for (int i=0; i<[temp count]; i++) {
                         NSMutableDictionary*dict = temp[i];
                         double p = [dict[@"percent"] doubleValue];
                         if (p<50) {
                             //dict[@"mark"] = @"1";
                             break;
                         }
-                    }
+                    }*/
                     
                     [_list addObjectsFromArray:temp];
                     [_listTemp addObjectsFromArray:temp];
@@ -214,6 +253,12 @@
 
 #pragma mark
 #pragma mark UIButton Action's
+- (IBAction)menuAction:(UIButton *)sender {
+    
+    KYDrawerController* drawer = (KYDrawerController *)self.navigationController.parentViewController;
+    [drawer setDrawerState:DrawerStateOpened animated:true];
+}
+
 - (IBAction)backAction:(id)sender {
     
     [self.navigationController popViewControllerAnimated:true];
@@ -221,10 +266,10 @@
 
 - (IBAction)invitewAction:(id)sender {
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Invite Friend" message:@"Enter friend's email id here" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Invite Friend" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
-        textField.placeholder = @"Enter friend's email id here";
+        textField.placeholder = @"Enter friend's email here";
     }];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Invite" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -300,6 +345,8 @@
         UIImageView* imageView = [cell viewWithTag:101];
         imageView.layer.cornerRadius = 20;
         imageView.layer.masksToBounds = true;
+        imageView.layer.borderWidth = 1.0;
+        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         
         __weak typeof(UIImageView) *weakSelf = imageView;
         [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholdernew"] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
@@ -315,10 +362,10 @@
         }];
         
         UILabel* userName = [cell viewWithTag:102];
-        userName.text = dict[@"username"];
+        userName.text = [dict[@"username"] capitalizedString];
         
         UILabel* name = [cell viewWithTag:103];
-        name.text = dict[@"name"];
+        name.text = [dict[@"name"] capitalizedString];
         
         UILabel* address = [cell viewWithTag:104];
         address.text = dict[@"address"];

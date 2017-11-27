@@ -12,8 +12,11 @@
 @interface FriendsView()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray* _list;
+    NSString* _myRank;
     BOOL _isSearch;
 }
+
+
 @end
 
 @implementation FriendsView
@@ -26,10 +29,11 @@
     _list = [[NSArray alloc] init];
 }
 
-- (void)updateData:(NSArray *)array isSearch:(BOOL)search {
+- (void)updateData:(NSArray *)array isSearch:(BOOL)search myRank:(NSString *)myrank{
     
     _list = array;
     _isSearch = search;
+    _myRank = myrank;
     [self reloadData];
 }
 
@@ -81,6 +85,8 @@
         UIImageView* imageView = [cell viewWithTag:101];
         imageView.layer.cornerRadius = 20;
         imageView.layer.masksToBounds = true;
+        imageView.layer.borderWidth = 1.0;
+        imageView.layer.borderColor = [UIColor whiteColor].CGColor;
         
         __weak typeof(UIImageView) *weakSelf = imageView;
         [imageView setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"image"]]] placeholderImage:[UIImage imageNamed:@"placeholdernew"] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
@@ -96,17 +102,24 @@
         }];
         
         UILabel* userName = [cell viewWithTag:102];
-        userName.text = dict[@"username"];
+        userName.text = [dict[@"username"] capitalizedString];
         
         UILabel* name = [cell viewWithTag:103];
-        name.text = dict[@"name"];
+        name.text = [dict[@"name"] capitalizedString];
         
         UILabel* address = [cell viewWithTag:104];
         address.text = dict[@"address"];
     
         UILabel* barRank = [cell viewWithTag:106];
-        barRank.text = [NSString stringWithFormat:@"%d", [dict[@"barRank"] intValue]];
-    
+        
+        if ([dict[@"bar_rank"] intValue] == 0) {
+            
+            barRank.text = @"";
+        } else {
+            barRank.text = [NSString stringWithFormat:@"#%d", [dict[@"bar_rank"] intValue]];
+        }
+        
+        //barRank.text = [_myRank stringByReplacingOccurrencesOfString:@"My Ranking " withString:@""];
         return cell;
     }
 }

@@ -74,6 +74,12 @@
 
 #pragma mark
 #pragma mark UIButton Action's
+- (IBAction)menuAction:(UIButton *)sender {
+    
+    KYDrawerController* drawer = (KYDrawerController *)self.navigationController.parentViewController;
+    [drawer setDrawerState:DrawerStateOpened animated:true];
+}
+
 - (IBAction)removeKeyboardAction:(UIControl *)sender {
     
     [self.view endEditing:true];

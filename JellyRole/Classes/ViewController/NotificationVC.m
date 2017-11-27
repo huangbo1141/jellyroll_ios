@@ -8,7 +8,6 @@
 
 #import "NotificationVC.h"
 #import "NotificationRequetVC.h"
-
 @interface NotificationVC ()
 {
 
@@ -21,7 +20,12 @@
 @property (weak, nonatomic) IBOutlet NotificationRequetVC *pendingRequest;
 @property (weak, nonatomic) IBOutlet UIView *confirmationView;
 @property (weak, nonatomic) IBOutlet UIView *pendingView;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *confirmViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *pendingViewHeight;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *centerConstraint;
+@property (weak, nonatomic) IBOutlet UILabel *confirmLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pendingLabel;
 @end
 
 @implementation NotificationVC
@@ -67,6 +71,11 @@
     
     [self.navigationController setNavigationBarHidden:true];
     
+    _confirmViewHeight.constant = 0.0;
+    _pendingViewHeight.constant = 0.0;
+    _confirmLabel.hidden = true;
+    _pendingLabel.hidden = true;
+    
     _mapImageView.image = _mapView;
     
     _allConfirmRequest = [[NSMutableArray alloc] init];
@@ -75,6 +84,7 @@
     [_confirmRequest setView:false];
     [_pendingRequest setView:true];
     [_pendingRequest setDelegates:self];
+    [_confirmRequest setDelegates:self];
     
     
     UISwipeGestureRecognizer *leftSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(confirmLeftGesture:)];
@@ -83,13 +93,80 @@
     UISwipeGestureRecognizer * rightSwipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(confirmRightGesture:)];
     rightSwipe.direction = UISwipeGestureRecognizerDirectionRight;
     
-    [_confirmRequest addGestureRecognizer:rightSwipe];
-    [_confirmRequest addGestureRecognizer:leftSwipe];
+    //[_confirmRequest addGestureRecognizer:rightSwipe];
+    //[_confirmRequest addGestureRecognizer:leftSwipe];
     
     [Utils dropShadow:_confirmationView];
     [Utils dropShadow:_pendingView];
     
 }
+
+-(void)updateBottomConstraint {
+
+    NSLog(@"....%f", [UIScreen mainScreen].bounds.size.height);
+    NSLog(@"....%f", self.view.bounds.size.height);
+    NSLog(@"....%f", self.view.frame.size.height);
+    NSLog(@"....%f", _pendingView.frame.origin.y);
+    
+    if (_allPendingRequest.count > 0) {
+        
+        if (_allConfirmRequest.count > 0) {
+            
+            if ([Utils isIphone]) {
+                
+                if ([Utils isIphone5]) {
+                    
+                    if (_allConfirmRequest.count > 1) {
+                        
+                        _centerConstraint.constant = 28;
+                    } else if (_allConfirmRequest.count == 1) {
+                        
+                        _centerConstraint.constant = -48;
+                    }
+                } else if ([Utils isIphone6]) {
+                    
+                    if (_allConfirmRequest.count > 2) {
+                        
+                        _centerConstraint.constant = 52;
+                    } else if (_allConfirmRequest.count == 2) {
+                        
+                        _centerConstraint.constant = -22;
+                    } else {
+                       _centerConstraint.constant = -(75+22);
+                    }
+                    
+                } else if ([Utils isIphone6Plus]) {
+                 
+                    if (_allConfirmRequest.count > 3) {
+                        
+                        _centerConstraint.constant = 93;
+                    } else if (_allConfirmRequest.count == 3) {
+                        
+                        _centerConstraint.constant = 18;
+                    } else {
+                        
+                        if (_allConfirmRequest.count == 2) {
+                         
+                         _centerConstraint.constant = -(1*57);
+                         } else if(_allConfirmRequest.count == 1) {
+                         
+                         _centerConstraint.constant = -((2*57)+18);
+                         }
+                    }
+                }
+            } else {
+                
+            }
+        } else {
+            
+            _centerConstraint.constant = -((self.view.frame.size.height/2) - 50);
+        }
+        
+    } else {
+        _centerConstraint.constant = (self.view.frame.size.height/2) + 20;
+    }
+}
+
 
 - (void)getAllPendingData {
     
@@ -107,23 +184,51 @@
             NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
             NSLog(@"post function tag  ==%@",dict1);
             
-            
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 [_allConfirmRequest addObjectsFromArray:[dict1 objectForKey:@"data"]];
                 [_allPendingRequest addObjectsFromArray:[dict1 objectForKey:@"data2"]];
                 
+                
                 [_confirmRequest updateData:_allConfirmRequest];
                 [_pendingRequest updateData:_allPendingRequest];
                 
+                if (_allConfirmRequest.count > 0) {
+                    
+                    _confirmLabel.hidden = false;
+                    _confirmViewHeight.constant = 50.0;
+                } else {
+                    _confirmLabel.hidden = true;
+                    _confirmViewHeight.constant = 0.0;
+                }
+                
+                if (_allPendingRequest.count > 0) {
+                    
+                    _pendingLabel.hidden = false;
+                    _pendingViewHeight.constant = 50.0;
+                } else {
+                    
+                    _pendingLabel.hidden = true;
+                    _pendingViewHeight.constant = 0.0;
+                }
+                
+                [self updateBottomConstraint];
             } else {
                 
+                _confirmLabel.hidden = true;
+                _pendingLabel.hidden = true;
+                _confirmViewHeight.constant = 0.0;
+                _pendingViewHeight.constant = 0.0;
                 [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
             }
             
         }
     } failure:^(id result) {
         
+        _confirmLabel.hidden = true;
+        _pendingLabel.hidden = true;
+        _confirmViewHeight.constant = 0.0;
+        _pendingViewHeight.constant = 0.0;
         [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
@@ -188,7 +293,7 @@
 
 - (void)showAcceptDialog:(NSDictionary *)dict {
 
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you Sure Confirm?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure you want to confirm?" preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -210,7 +315,7 @@
 
 - (void)showCancelDialog:(NSDictionary *)dict {
     
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you Sure Decline?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure you want to decline?" preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -284,5 +389,16 @@
     
     [self updateStatusDataPendingrequest:dict[@"game_id"]];
 }
+
+- (void)selectedConfirmDict:(NSDictionary *)dict {
+ 
+    [self showAcceptDialog:dict];
+}
+
+- (void)selectedDeclineDict:(NSDictionary *)dict {
+    
+    [self showCancelDialog:dict];
+}
+
 
 @end

@@ -14,6 +14,7 @@
 #import <MapKit/MapKit.h>
 #import "GooglePlaceResult.h"
 #import <Social/Social.h>
+#import <MessageUI/MessageUI.h>
 
 typedef enum
 {
@@ -24,7 +25,7 @@ typedef enum
 }PICKER_TYPE;
 
 
-@interface QuickPlayVC () <FriendsViewDelegates, UITextViewDelegate>
+@interface QuickPlayVC () <FriendsViewDelegates, UITextViewDelegate, MFMailComposeViewControllerDelegate>
 {
     
     PICKER_TYPE _pickerType;
@@ -116,6 +117,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIButton *chooseOpponentBtn;
 @property (weak, nonatomic) IBOutlet UIButton *inviteButton;
 @property (weak, nonatomic) IBOutlet UIButton *userUpDownButton;
+@property (weak, nonatomic) IBOutlet UIButton *reportButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *myRank;
 @property (weak, nonatomic) IBOutlet UILabel *myMile;
@@ -127,6 +129,8 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIView *locationShadowView;
 @property (weak, nonatomic) IBOutlet UIView *topShadowView;
 @property (weak, nonatomic) IBOutlet UIView *oppoShadowView;
+
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel;
 
 @end
 
@@ -152,11 +156,12 @@ typedef enum
         [self getRecentGameData];
     } else {
         
-        _barLabel.text = _selectedBar[@"location_name"];
+        [self getRecentGameDataforUser];
+        _barLabel.text = [_selectedBar[@"location_name"] capitalizedString];
 //        _userLabel.text = data[@"username"];
   //      [_otherUserLabel setText:data[@"username"]];
         
-        [self getGooglePlaces];
+//        [self getGooglePlaces];
         //[self getUserGameData];
     }
     
@@ -186,11 +191,16 @@ typedef enum
     [self.navigationController setNavigationBarHidden:true];
     _mapImageView.image = _mapView;
     
-    
+    _noRecordLabel.hidden = true;
     if (!_isLocation) {
         
         _selectedBar = [[NSMutableDictionary alloc] init];
     }
+    
+    //_reportButton.layer.cornerRadius = 15;
+    //_reportButton.layer.masksToBounds = true;
+    //_reportButton.layer.borderColor = [UIColor redColor].CGColor;
+    //_reportButton.layer.borderWidth = 1.5;
     
     _myOpenClose.layer.cornerRadius = 6;
     _myOpenClose.layer.masksToBounds = true;
@@ -208,8 +218,10 @@ typedef enum
     _pickerType = PICKER_TYPE_NONE;
     [self userView:false];
     [self opponentView:false];
-    [self locationView:_isLocation];
-    _chooseOpponentBtn.selected = _isLocation;
+//    [self locationView:_isLocation];
+//    _chooseOpponentBtn.selected = _isLocation;
+    [self locationView:false];
+    _chooseOpponentBtn.selected = false;
     
     [_gameTableView setView];
     [_gameLocationTableView setView];
@@ -303,8 +315,9 @@ typedef enum
     } else {
         
         [_locationSuperView removeFromSuperview];
-        if (_isLocation) {
-            
+//        if (_isLocation) {
+        if (false) {
+        
             [self opponentView:true];
         } else {
         
@@ -357,7 +370,7 @@ typedef enum
     
     if (games != nil) {
         
-        [_gameTableView updateData:games isRecent:false];
+        [_gameTableView updateData:games isRecent:false isState:false];
     }
     
     float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0;
@@ -571,8 +584,89 @@ typedef enum
     }
 }
 
+- (void)showReportBarDialog {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Report" message:@"Please let us know if there’s no pool table here, or if the bar is out of business." preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Submit" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self reporBarData];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil]];
+    
+    if (![Utils isIphone]) {
+        alert.popoverPresentationController.sourceView = self.view;
+    }
+    
+    [self presentViewController:alert animated:true completion:nil];
+}
+
+- (void)mailToUser
+{
+    if ([MFMailComposeViewController canSendMail])
+    {
+        MFMailComposeViewController *mailController = [[MFMailComposeViewController alloc] init];
+        mailController.mailComposeDelegate = self;
+        [mailController setSubject:@"No pool table or bar out of business"];
+        
+        NSString* str = [NSString stringWithFormat:@"%@\n%@\n%@", _selectedBar[@"location_name"], _selectedBar[@"address"], _gAppPrefData.userName];
+        
+        NSLog(@"....%@", str);
+        [mailController setMessageBody:str isHTML:NO];
+        if (![Utils isIphone]) {
+            mailController.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:mailController animated:true completion:nil];
+    }
+    else {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Mail Unavailable" message:@"Sorry, we're unable to find a mail account on your device.\nPlease setup an account in your devices settings and try again." preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        if (![Utils isIphone]) {
+            alert.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:alert animated:true completion:nil];
+    }
+}
 
 //MARK: API's
+- (void)reporBarData {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    NSString* API = [NSString stringWithFormat:kAPI_REPORTBAR, _gAppPrefData.userID, _selectedBar[@"bar_id"]];
+    
+    [_gAppData sendGETRequest:API completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            [self mailToUser];
+            
+            /*if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+            } else {
+                
+                [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+            }*/
+            
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
 - (void)getLocationData:(NSString *)placeID {
 
     NSString *path = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/details/json?placeid=%@&key=%@&language=en",placeID,GoogleDirectionAPI];
@@ -601,7 +695,18 @@ typedef enum
                 DebugLog(@".......%d", gresult.result.isOpen);
                 DebugLog(@".......%@", gresult.result.weekday_text);
              
-                _myAddress.text = gresult.result.formatted_address;
+                if (gresult.result.formatted_address.length > 0) {
+                
+                    NSString* location = [gresult.result.formatted_address lowercaseString];
+                    location = [location stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[location substringToIndex:1] uppercaseString]];
+                    //_myAddress.text = location;
+                    _myAddress.text = gresult.result.formatted_address;
+                } else {
+                    
+                    _myAddress.text = gresult.result.formatted_address;
+                }
+                
+                
                 
                 [_myTime setText:@"9:00 AM - 10:00 PM"];
                 if (gresult.result.weekday_text != nil) {
@@ -705,7 +810,20 @@ typedef enum
                 
                 [self addFriendsData:_data[@"user_id"]];
                 
-                if (type == 0) {
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:@"Game recorded" preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    [self.navigationController popViewControllerAnimated:true];
+                }]];
+                
+                if (![Utils isIphone]) {
+                    alert.popoverPresentationController.sourceView = self.view;
+                }
+                
+                [self presentViewController:alert animated:true completion:nil];
+                
+                /*if (type == 0) {
                     
                     [self shareOnFacebook];
                 } else {
@@ -723,7 +841,7 @@ typedef enum
                     
                     [self presentViewController:alert animated:true completion:nil];
 
-                }
+                }*/
             } else {
                 
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"message"]];
@@ -736,6 +854,59 @@ typedef enum
         [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
+
+- (void)getRecentGameDataforUser {
+    
+    _userLabel.text = @"";
+    _otherUserLabel.text = @"";
+    [_data removeAllObjects];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    
+    NSString* url = [NSString stringWithFormat:kAPI_RECENTGAMES, _gAppPrefData.userID];
+    
+    [_gAppData sendGETRequest:url completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            NSDictionary* data = [dict1 valueForKey:@"data"];
+            [_data addEntriesFromDictionary:data];
+            
+            
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                _userLabel.text = [data[@"username"] capitalizedString];
+                [_otherUserLabel setText:[data[@"username"] capitalizedString]];
+                
+                for (NSDictionary* bar in dict1[@"bars"]) {
+                    
+                    if ([bar[@"bar_id"] isEqualToString:data[@"bar_id"]]) {
+                        
+                        [_selectedBar addEntriesFromDictionary:bar];
+                        DebugLog(@"...%@", _selectedBar);
+                        [self getUserGameData];
+                        [self getGooglePlaces];
+                        break;
+                    }
+                }
+            } else {
+                
+                
+                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"message"]];
+            }
+            
+        }
+        
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
 
 - (void)getRecentGameData {
     
@@ -763,9 +934,9 @@ typedef enum
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
-                _barLabel.text = data[@"location_name"];
-                _userLabel.text = data[@"username"];
-                [_otherUserLabel setText:data[@"username"]];
+                _barLabel.text = [data[@"location_name"] capitalizedString];
+                _userLabel.text = [data[@"username"] capitalizedString];
+                [_otherUserLabel setText:[data[@"username"] capitalizedString]];
                 
                 for (NSDictionary* bar in dict1[@"bars"]) {
                     
@@ -815,6 +986,7 @@ typedef enum
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
+                _noRecordLabel.hidden = true;
                 NSArray* list = dict1[@"leaderboard"];
                 if (list != nil && list.count > 0) {
                 
@@ -824,7 +996,7 @@ typedef enum
                 [_allGames addObjectsFromArray:dict1[@"all"]];
                 [_recentGames addObjectsFromArray:dict1[@"recent_game"]];
                 
-                [_gameLocationTableView updateData:_recentGames isRecent:false];
+                [_gameLocationTableView updateData:_recentGames isRecent:false isState:false];
                 [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
             } else {
@@ -832,14 +1004,17 @@ typedef enum
                 
                 [_leaderboardView updateData:nil];
                 
-                [_gameLocationTableView updateData:nil isRecent:false];
+                [_gameLocationTableView updateData:nil isRecent:false isState:false];
                 [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
-                NSString *strMESSAGE;
+                _noRecordLabel.hidden = false;
+                
+                /*NSString *strMESSAGE;
                 NSRange range = [[dict1 objectForKey:@"msg"] rangeOfString:@"No game found"];
                 
                 if (range.location != NSNotFound)//@"No game found!!!!!"
                 {
+                    _noRecordLabel.hidden = false;
                     strMESSAGE=[NSString stringWithFormat:@"No previous game found for this bar"];
                 }
                 
@@ -854,7 +1029,7 @@ typedef enum
                     alert.popoverPresentationController.sourceView = self.view;
                 }
                 
-                [self presentViewController:alert animated:true completion:nil];
+                [self presentViewController:alert animated:true completion:nil];*/
 
             }
             
@@ -901,7 +1076,7 @@ typedef enum
             } else {
                 
             
-                [_gameTableView updateData:nil isRecent:false];
+                [_gameTableView updateData:nil isRecent:false isState:false];
                 [_comparisionVC updateData:nil];
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
             }
@@ -931,9 +1106,41 @@ typedef enum
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
-                [_allFriendsData addEntriesFromDictionary:dict1];
+                //[_allFriendsData addEntriesFromDictionary:dict1];
                 
-                [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false];
+                
+                
+                NSArray* sortedFriends = [NSMutableArray arrayWithArray:[dict1[@"friends"] sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                    
+                    return [[a[@"username"] lowercaseString] compare:[b[@"username"] lowercaseString]];
+                }]];
+                
+                NSArray* sortedRecent = [NSMutableArray arrayWithArray:[dict1[@"recent"] sortedArrayUsingComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                    
+                    
+                    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+                    
+                    [formatter setTimeZone:timeZone];
+                    [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+                    NSDate *dateTime1 = [formatter dateFromString:a[@"date"]];
+                    if (dateTime1 == nil) {
+                        
+                        dateTime1 = [NSDate date];
+                    }
+                    
+                    NSDate *dateTime2 = [formatter dateFromString:b[@"date"]];
+                    if (dateTime2 == nil) {
+                        
+                        dateTime2 = [NSDate date];
+                    }
+                    
+                    return [dateTime2 compare:dateTime1];
+                }]];
+                
+                NSDictionary* lDict = [NSDictionary dictionaryWithObjectsAndKeys:sortedFriends, @"friends", sortedRecent, @"recent", dict1[@"all"], @"all", nil];
+                [_allFriendsData addEntriesFromDictionary:lDict];
+                [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false myRank:_myRank.text];
             } else {
                 
                 
@@ -1072,7 +1279,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_allRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_recentGames isRecent:false];
+    [_gameLocationTableView updateData:_recentGames isRecent:false isState:false];
 }
 
 - (IBAction)allGameAction:(UIButton *)sender {
@@ -1087,7 +1294,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_myRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_allGames isRecent:true];
+    [_gameLocationTableView updateData:_allGames isRecent:true isState:false];
 }
 
 - (IBAction)recentFriendsAction:(UIButton *)sender {
@@ -1103,7 +1310,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_myFriendsBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false];
+    [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false myRank:_myRank.text];
 }
 
 - (IBAction)myFriendsAction:(UIButton *)sender {
@@ -1119,7 +1326,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_recentFriendsBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_friendsView updateData:_allFriendsData[@"friends"] isSearch:false];
+    [_friendsView updateData:_allFriendsData[@"friends"] isSearch:false myRank:_myRank.text];
 }
 
 - (IBAction)inviteFriendAction:(UIButton *)sender {
@@ -1159,6 +1366,12 @@ typedef enum
     
 }
 
+- (IBAction)reportButtonAction:(UIButton *)sender {
+    
+    [self showReportBarDialog];
+}
+
+
 #pragma mark
 #pragma mark FriendsView Delegates
 - (void)selectedUser:(NSDictionary *)selctedUser {
@@ -1168,8 +1381,8 @@ typedef enum
     
     [_data addEntriesFromDictionary:selctedUser];
     
-    _userLabel.text = _data[@"username"];
-    [_otherUserLabel setText:_data[@"username"]];
+    _userLabel.text = [_data[@"username"] capitalizedString];
+    [_otherUserLabel setText:[_data[@"username"] capitalizedString] ];
     
     [self opponentView:false];
     
@@ -1257,7 +1470,7 @@ typedef enum
     
     if (searchBar.text.length == 0) {
         
-        [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false];
+        [_friendsView updateData:_allFriendsData[@"recent"] isSearch:false myRank:_myRank.text];
         
     } else {
        
@@ -1266,19 +1479,21 @@ typedef enum
             
             
             NSString* name = [dict[@"username"] lowercaseString];
+            NSString* aname = [dict[@"name"] lowercaseString];
+            
 //            NSString* email = [dict[@"email"] lowercaseString];
  //           NSLog(@"...%@....%@", email, _gAppPrefData.userEmail);
   //          if([email isEqualToString:[_gAppPrefData.userEmail lowercaseString]]){
     //            continue;
       //      }
-            if ([name hasPrefix:[searchText lowercaseString]])
+            if ([name hasPrefix:[searchText lowercaseString]] || [aname hasPrefix:[searchText lowercaseString]])
             {
                 [list addObject:dict];
             }
             
         }
         
-        [_friendsView updateData:list isSearch:true];
+        [_friendsView updateData:list isSearch:true myRank:_myRank.text];
        
     }
 }
@@ -1292,6 +1507,14 @@ typedef enum
     
     [searchBar resignFirstResponder];
     
+}
+
+#pragma mark
+#pragma mark Mail ComposerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

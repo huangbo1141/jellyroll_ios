@@ -26,5 +26,6 @@
 
 - (void)hideDialogPublic;
 - (UIImage*)captureViewS;
+- (NSMutableArray *)getAllArtPiece;
 
 @end

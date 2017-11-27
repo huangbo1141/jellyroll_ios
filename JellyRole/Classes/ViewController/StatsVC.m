@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *rivalName;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
 
+
 @end
 
 @implementation StatsVC
@@ -83,7 +84,13 @@
         
         if ([Utils isIphone5]) {
             
-//            _constraint.constant = 30;
+            _constraint.constant = 30;
+        } else if ([Utils isIphone6]) {
+            
+            _constraint.constant = 5;
+        } else if ([Utils isIphone6Plus]) {
+            
+            _constraint.constant = -30;
         }
     }
 }
@@ -96,7 +103,7 @@
     
     if (games != nil) {
     
-        [_gameTableView updateData:games isRecent:false];
+        [_gameTableView updateData:games isRecent:false isState:true];
     }
     
     int win = [dict[@"overall_win"] intValue];
@@ -162,6 +169,13 @@
     
     [self.navigationController popViewControllerAnimated:true];
 }
+
+- (IBAction)menuAction:(UIButton *)sender {
+    
+    KYDrawerController* drawer = (KYDrawerController *)self.navigationController.parentViewController;
+    [drawer setDrawerState:DrawerStateOpened animated:true];
+}
+
 
 #pragma mark
 #pragma mark UITableView DataSource

@@ -17,7 +17,7 @@
 @interface MapVC () <CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate, UIGestureRecognizerDelegate, FBClusteringManagerDelegate>
 {
     
-    NSMutableArray *_allLocation, *_allArtPiece, *_allDialogList;
+    NSMutableArray *_allLocation, *_allArtPiece, *_allDialogList, *_allRecentList, *_allRecentArtPiece;
     CLLocationManager* _locationManager;
     FBClusteringManager* _clusteringManager;
     
@@ -138,6 +138,8 @@
     _allLocation = [[NSMutableArray alloc] init];
     _allArtPiece = [[NSMutableArray alloc] init];
     _allDialogList = [[NSMutableArray alloc] init];
+    _allRecentList = [[NSMutableArray alloc] init];
+    _allRecentArtPiece = [[NSMutableArray alloc] init];
     
     _clusteringManager = [[FBClusteringManager alloc] init];
     _clusteringManager.delegate = self;
@@ -159,27 +161,39 @@
     }
     
     [self getAllBarData];
+    [self getAllRecentBarData];
     
     [self hideDialog:true];
     _view_SearchOpponent.hidden = true;
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
     
-
-    for (UIView* subView in _searchBar.subviews) {
+    _saveLocationButton.userInteractionEnabled = false;
+    _saveLocationButton.alpha = 0.5;
     
-        DebugLog(@".....%@", subView);
-        if ([subView isKindOfClass:[UITextField class]]) {
-            
-            UITextField* textFiled = (UITextField *)subView;
-            
-            [textFiled setBackgroundColor:[UIColor yellowColor]];
-        }
-    }
-    
+    [Utils dropShadow:_rectImage];
+    [Utils dropShadow:_myLocationButon];
+    [Utils dropShadow:_addLocationButton];
     [Utils dropShadow:_searchView];
     [Utils dropShadow:_saveLocatioView];
     [Utils dropShadow:_dialogView];
+    
+    /*for (UIView *view in _searchBar.subviews){
+        
+        NSLog(@".........%@", view);
+        for (UIView *views in view.subviews){
+            
+            NSLog(@".........%@", views);
+            if ([views isKindOfClass:[UITextField class]]) {
+                
+                UITextField* field = (UITextField *)views;
+                [field setText:@"sssssss"];
+                [field setBackgroundColor:[UIColor yellowColor]];
+                [field setAlpha:1.0];
+            }
+        }
+    }*/
+    
 }
 
 - (void)hideDialog:(BOOL)isHide {
@@ -316,13 +330,21 @@
         /*ArtPiece *piece = [_allArtPiece lastObject];
         
         [self showSearchedLocation:piece.data[@"lat"] :piece.data[@"long"]];*/
+        
+        [[NSOperationQueue new] addOperationWithBlock:^{
+            double scale = _MAP_VIEW.bounds.size.width / _MAP_VIEW.visibleMapRect.size.width;
+            NSArray *annotations = [_clusteringManager clusteredAnnotationsWithinMapRect:_MAP_VIEW.visibleMapRect withZoomScale:scale];
+            
+            [_clusteringManager displayAnnotations:annotations onMapView:_MAP_VIEW];
+        }];
     }
 }
 
 - (UIImage*)captureView:(UIView *)view
 {
     CGRect rect = view.frame;
-    UIGraphicsBeginImageContext(rect.size);
+    //UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [view.layer renderInContext:context];
     UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
@@ -340,29 +362,55 @@
     [_allDialogList removeAllObjects];
     
     CLLocation *locA = [[CLLocation alloc] initWithLatitude:_mylatitude longitude:_myLongitude];
-    for (int i=0; i< _allArtPiece.count; i++) {
-       
-        ArtPiece* piece = _allArtPiece[i];
-        CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
-        CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
-        CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
-        
-        CLLocationDistance distance = [locA distanceFromLocation:locB];
-        piece.distance = [NSNumber numberWithDouble:distance];
-    }
-    
     if (isSort) {
-    
-        NSArray* sorted = [NSMutableArray arrayWithArray:[_allArtPiece sortedArrayUsingComparator:^NSComparisonResult(ArtPiece* a, ArtPiece* b) {
+
+        NSMutableArray* list = [NSMutableArray array];
+        
+        for (int i=0; i< _allArtPiece.count; i++) {
+            
+            ArtPiece* piece = _allArtPiece[i];
+            CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
+            CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
+            CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+            
+            CLLocationDistance distance = [locA distanceFromLocation:locB];
+            piece.distance = [NSNumber numberWithDouble:distance];
+            
+            [list addObject:piece];
+        }
+        
+        NSArray* sorted = [NSMutableArray arrayWithArray:[list sortedArrayUsingComparator:^NSComparisonResult(ArtPiece* a, ArtPiece* b) {
             double first = [a.distance doubleValue];
             double second = [b.distance doubleValue];
             return first>second;
         }]];
         
-        [_allDialogList addObjectsFromArray:sorted];
+        if (sorted.count > 20) {
+        
+            [_allDialogList addObjectsFromArray:[sorted subarrayWithRange:NSMakeRange(0, 20)]];
+        } else {
+            [_allDialogList addObjectsFromArray:sorted];
+        }
     } else {
         
-        [_allDialogList addObjectsFromArray:_allArtPiece];
+        NSMutableArray* list = [NSMutableArray array];
+        for (int i=0; i< _allRecentArtPiece.count; i++) {
+            
+            ArtPiece* piece = _allRecentArtPiece[i];
+            CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
+            CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
+            CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+            
+            CLLocationDistance distance = [locA distanceFromLocation:locB];
+            piece.distance = [NSNumber numberWithDouble:distance];
+            
+            [list addObject:piece];
+            if (i == 19) {
+                break;
+            }
+        }
+        
+        [_allDialogList addObjectsFromArray:list];
     }
     
     [_tableView reloadData];
@@ -547,7 +595,6 @@
     }
 }
 
-
 - (void)getAllBarData {
     
     [_allLocation removeAllObjects];
@@ -583,11 +630,69 @@
     }];
 }
 
+- (void)getAllRecentBarData {
+    
+    [_allRecentList removeAllObjects];
+    
+    NSString* API = [NSString stringWithFormat:kAPI_ALLRECENTBARS, _gAppPrefData.userID];
+    
+    [_gAppData sendGETRequest:API completion:^(id result) {
+        
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                [_allRecentList addObjectsFromArray:dict1[@"bars"]];
+                
+                
+                for (int i =0 ; i<_allRecentList.count; i++)
+                {
+                    NSDictionary* dict = [_allRecentList objectAtIndex:i];
+                    
+                    
+                    CGFloat latitude = [dict[@"lat"] floatValue];
+                    CGFloat Longitude = [dict[@"long"] floatValue];
+                    
+                    
+                    CLLocationCoordinate2D center2 = CLLocationCoordinate2DMake(latitude,Longitude);
+                    
+                    ArtPiece *point12 = [[ArtPiece alloc] init];
+                    point12.coordinate = center2;
+                    point12.data = dict;
+                    
+                    point12.title = [NSString stringWithFormat:@"%@", dict[@"bar_id"]];
+                    point12.subtitle = [NSString stringWithFormat:@"%@",dict[@"location_name"]];//,placemark.postalCode];
+                    
+                    if ([point12.subtitle isEqualToString:@"(null)"])
+                    {
+                        point12.subtitle = [NSString stringWithFormat:@"Address2" ];//,locatedAt];
+                    }
+                    
+                    
+                    point12.imgname = [Utils selectRandomBallImageName:dict[@"bar_id"]];
+                    [_allRecentArtPiece addObject:point12];
+                }
+                
+            } else {
+                
+             //   [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+            }
+            
+        }
+    } failure:^(id result) {
+        
+    }];
+}
+
 - (void)getSaveLocationData {
     
     //#define kAPI_AddLocationParams @"location_name=%@&address=%@&city=%@&state=%@&zip=%@&lat=%@&long=%@&user_id=%@&bar_status=%@&place_id=%@"
     
-    NSString* city=@"", *zip=@"", *state=@"";
+    NSString* city=@"", *zip=@"", *state=@"", *country=@"";
     for (EftGoogleAddressComponent*component in _gresult.result.address_components) {
         int pos = [component.types indexOfObject:@"postal_code"];
         if(pos != NSNotFound && pos>=0){
@@ -603,11 +708,16 @@
         if(pos != NSNotFound && pos>=0){
             city = component.long_name;
         }
+        
+        pos = [component.types indexOfObject:@"country"];
+        if(pos != NSNotFound && pos>=0){
+            country = component.long_name;
+        }
     }
 
     
     
-    NSString* params = [NSString stringWithFormat:kAPI_AddLocationParams, _gresult.result.name, _gresult.result.formatted_address, city, state, zip, _gresult.result.lat, _gresult.result.lon, _gAppPrefData.userID, _gresult.result.place_id];
+    NSString* params = [NSString stringWithFormat:kAPI_AddLocationParams, _gresult.result.name, _gresult.result.formatted_address, city, state, zip, _gresult.result.lat, _gresult.result.lon, _gAppPrefData.userID, _gresult.result.place_id, country, country];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     [_gAppData sendPostRequest:kAPI_ADDLOCATION params:params completion:^(id result) {
@@ -657,6 +767,7 @@
     if (_saveLocatioView.hidden == false) {
     
         [self getAllBarData];
+        [self getAllRecentBarData];
     }
     
     if (_dMainViewHeight.constant > 0) {
@@ -670,6 +781,9 @@
     
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
+    
+    _saveLocationButton.userInteractionEnabled = false;
+    _saveLocationButton.alpha = 0.5;
     
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
@@ -686,6 +800,11 @@
 - (UIImage*)captureViewS {
     
     return [self captureView:_MAP_VIEW];
+}
+
+- (NSMutableArray *)getAllArtPiece {
+    
+    return _allArtPiece;
 }
 
 #pragma mark
@@ -721,6 +840,8 @@
     _saveLocatioView.hidden = false;
     _saveLocationButton.hidden = false;
     
+    _saveLocationButton.userInteractionEnabled = false;
+    _saveLocationButton.alpha = 0.5;
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
         constr.constant = 0;
@@ -733,6 +854,7 @@
     _myLocationButon.hidden = true;
 
     [_allLocation removeAllObjects];
+    [_clusteringManager displayAnnotations:nil onMapView:_MAP_VIEW];
     [self replaceMarkers];
     [_delegate updateTitle:@"Add Location"];
 }
@@ -957,10 +1079,13 @@
             
             if (_gresult!=nil) {
                 
+                _saveLocationButton.userInteractionEnabled = true;
+                _saveLocationButton.alpha = 1.0;
+                
                 [_allLocation removeAllObjects];
                 
                 
-                NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys: _gresult.result.name, @"location_name", _gresult.result.lat, @"lat", _gresult.result.lon, @"long", _gresult.result.place_id, @"place_id", @"8", @"bar_id", nil];
+                NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys: _gresult.result.name, @"location_name", _gresult.result.lat, @"lat", _gresult.result.lon, @"long", _gresult.result.place_id, @"place_id", @"8", @"bar_id", _gresult.result.formatted_address, @"formattedAddress", nil];
                 [_allLocation addObject:dict];
                 [self replaceMarkers];
                 
@@ -1048,8 +1173,13 @@
     imageView.image = [UIImage imageNamed:data.imgname];
     
     
+    NSString* location = data.data[@"location_name"];
+    location = [location lowercaseString];
+    location = [location stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[location substringToIndex:1] uppercaseString]];
+    
     UILabel* userName = [cell viewWithTag:102];
-    userName.text = data.data[@"location_name"];
+    userName.text = location;
+    
     
     UILabel* name = [cell viewWithTag:103];
     name.text = [NSString stringWithFormat:@"%.2f mile",[data.distance doubleValue]/1609.344];
@@ -1067,7 +1197,6 @@
     
     [self hideDialogPublic];
     ArtPiece* piece = _allDialogList[indexPath.row];
-    
     [self showSearchedLocation:piece.data[@"lat"] :piece.data[@"long"]];
 }
 
@@ -1228,15 +1357,15 @@
 #pragma mark UISearchBar Delegates
 -(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
     NSLog(@"regionDidChangeAnimated ,%.6f",_MAP_VIEW.region.span.latitudeDelta);
-    /*float curdelta = _MAP_VIEW.region.span.latitudeDelta;
+    float curdelta = _MAP_VIEW.region.span.latitudeDelta;
     if (curdelta <= _zoom_delta_t && _zoom_delta_t < _zoom_delta) {
         _zoom_delta = curdelta;
-        [self replaceMarkers];
+        //[self replaceMarkers];
     }else if (curdelta > _zoom_delta_t && _zoom_delta_t > _zoom_delta) {
         _zoom_delta = curdelta;
-        [self replaceMarkers];
+        //[self replaceMarkers];
     }
-    _zoom_delta = curdelta;*/
+    _zoom_delta = curdelta;
     
     [[NSOperationQueue new] addOperationWithBlock:^{
         double scale = _MAP_VIEW.bounds.size.width / _MAP_VIEW.visibleMapRect.size.width;
@@ -1368,11 +1497,16 @@
         ArtPiece * piece = (ArtPiece *)annotation;
         static NSString *reuseId = @"myPin_com.yd.jelly.custom";
         MKAnnotationView *av = av = [mapView dequeueReusableAnnotationViewWithIdentifier:reuseId];
+        
         UILabel*lbl;
+        UILabel*lbl2;
+        UIImageView*imageView;
+        UIView* view;
+        
         if (av == nil) {
             av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-            lbl = [[UILabel alloc] initWithFrame:CGRectMake(-62, 35, 160, 17)];
-            //lbl.font = [UIFont fontWithName:@"Avenir-Next-Regular" size:12];
+            
+            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 17)];
             [lbl setFont:[UIFont boldSystemFontOfSize:12.0]];
             lbl.adjustsFontSizeToFitWidth = YES;
             [lbl setMinimumScaleFactor:8.0/[UIFont labelFontSize]];
@@ -1382,21 +1516,73 @@
             lbl.textAlignment = NSTextAlignmentCenter;
             lbl.alpha = 1.0;
             lbl.tag = 42;
+            
+            
+            lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(30, 32, 160, 20)];
+            [lbl2 setFont:[UIFont boldSystemFontOfSize:12.0]];
+            lbl2.adjustsFontSizeToFitWidth = YES;
+            [lbl2 setMinimumScaleFactor:8.0/[UIFont labelFontSize]];
+            lbl2.numberOfLines = 0;
+            lbl2.textColor = [UIColor whiteColor];
+            lbl2.textAlignment = NSTextAlignmentCenter;
+            lbl2.alpha = 0.5;
+            lbl2.tag = 43;
             av.image = [UIImage imageNamed:piece.imgname];
-            [av addSubview:lbl];
+            
+            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 15, 20)];
+            imageView.tag = 44;
+            
+            UIView* view = [[UIView alloc] initWithFrame:CGRectMake(-82, 35, 200, 35)];
+            [view setTag:142];
+            
+            [view addSubview:lbl];
+            [view addSubview:lbl2];
+            [view addSubview:imageView];
+            [av addSubview:view];
+            
         }else{
-            lbl = [av viewWithTag:42];
+            
+            view = [av viewWithTag:142];
+            lbl = [view viewWithTag:42];
+            lbl2 = [view viewWithTag:43];
+            imageView = [view viewWithTag:44];
+            
             av.image = [UIImage imageNamed:piece.imgname];
         }
         
-        if (_zoom_delta>_zoom_delta_t) {
+        /*if (_zoom_delta>_zoom_delta_t) {
             lbl.text = @"";
         }else{
-            lbl.text = [annotation subtitle];
-        }
+            lbl.text = [piece subtitle];
+        }*/
+        lbl.text = [piece subtitle];
+        
         lbl.backgroundColor = [UIColor clearColor];
         av.canShowCallout = NO;
         
+        if (_saveLocatioView.hidden == true) {
+            
+            view.frame = CGRectMake(-82, 35, 200, 17);
+            view.backgroundColor = [UIColor clearColor];
+            lbl.textColor = [UIColor blackColor];
+            lbl.frame = CGRectMake(0, 0, 200, 17);
+            [lbl setFont:[UIFont boldSystemFontOfSize:12.0]];
+            imageView.image = nil;
+            lbl2.text = @"";
+        } else {
+            
+            view.frame = CGRectMake(-82, 35, 200, 60);
+            view.backgroundColor = kAppThemeColor;
+            lbl.textColor = [UIColor whiteColor];
+            lbl.frame = CGRectMake(0, 10, 200, 17);
+            [lbl setFont:[UIFont boldSystemFontOfSize:16.0]];
+            
+            [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
+            lbl2.text = piece.data[@"formattedAddress"];
+            [imageView setImage:[UIImage imageNamed:@"location"]];
+            
+            NSLog(@"..........%@", piece.data);
+        }
         return av;
     }
     else

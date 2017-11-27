@@ -11,6 +11,6 @@
 @interface GameView : UITableView
 
 - (void)setView;
-- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent;
+- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent isState:(BOOL)isState;
 
 @end

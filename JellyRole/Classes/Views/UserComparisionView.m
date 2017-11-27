@@ -78,7 +78,7 @@
     
     label5.attributedText = attString2;
     
-    [label1 setText:[NSString stringWithFormat:@"%@",dict[@"location"]]];
+    [label1 setText:[NSString stringWithFormat:@"%@",[dict[@"location"] capitalizedString]]];
     [label2 setText:[NSString stringWithFormat:@"#%@", dict[@"my_rank"]]];
     [label3 setText:[NSString stringWithFormat:@"#%@", dict[@"other_rank"]]];
     [label6 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent"]]];

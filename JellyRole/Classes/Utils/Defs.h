@@ -48,9 +48,11 @@
 #define kAPI_VERIFIYCODE [kHostURL stringByAppendingString:@"webservice/verification.php?email=%@&guid=%@"]
 
 #define kAPI_ALLBARS [kHostURL stringByAppendingString:@"webservice/get_all_bar.php?user_id=%@"]
+#define kAPI_ALLRECENTBARS [kHostURL stringByAppendingString:@"webservice/get_recent_bars_byuser.php?user_id=%@"]
+
 
 #define kAPI_ADDLOCATION [kHostURL stringByAppendingString:@"webservice/create_bar.php"]
-#define kAPI_AddLocationParams @"location_name=%@&address=%@&city=%@&state=%@&zip=%@&lat=%@&long=%@&user_id=%@&bar_status=yes&place_id=%@"
+#define kAPI_AddLocationParams @"location_name=%@&address=%@&city=%@&state=%@&zip=%@&lat=%@&long=%@&user_id=%@&bar_status=yes&place_id=%@&county=%@&country=%@"
 
 #define kAPI_ALLPENDINGGAMES [kHostURL stringByAppendingString:@"webservice/get_all_bar_pending.php?user_id=%@"]
 
@@ -79,6 +81,7 @@
 #define kAPI_CHANGEPASSWORD [kHostURL stringByAppendingString:@"webservice/change_password.php"]
 #define kAPI_CHANGEPASSWORDParams @"user_id=%@&password=%@&oldpassword=%@"
 
+#define kAPI_REPORTBAR [kHostURL stringByAppendingString:@"webservice/report_bar.php?user_id=%@&bar_id=%@"]
 
 
 
@@ -122,6 +125,8 @@
 #define kRedColor [UIColor colorWithRed:219.0/255.0 green:59.0/255.0 blue:50.0/255.0 alpha:1.0]
 #define kFroColor [UIColor colorWithRed:88.0/255.0 green:177.0/255.0 blue:204.0/255.0 alpha:1.0]
 #define kGreenColor [UIColor colorWithRed:153.0/255.0 green:196.0/255.0 blue:85.0/255.0 alpha:1.0]
+
+#define kAppThemeColor [UIColor colorWithRed:15.0/255.0 green:9.0/255.0 blue:27.0/255.0 alpha:1.0]
 
 // Device Specific
 #define kScreenHeight             [[UIScreen mainScreen] bounds].size.height

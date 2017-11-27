@@ -13,6 +13,8 @@
 @optional
 
 - (void)selectedDeleteDict:(NSDictionary *)dict;
+- (void)selectedConfirmDict:(NSDictionary *)dict;
+- (void)selectedDeclineDict:(NSDictionary *)dict;
 
 @end
 

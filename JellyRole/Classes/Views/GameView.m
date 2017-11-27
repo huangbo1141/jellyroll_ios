@@ -13,6 +13,7 @@
 {
     NSArray* _list;
     BOOL _isRecent;
+    BOOL _isState;
 }
 
 
@@ -37,10 +38,11 @@
     [self flashScrollIndicators];
 }
 
-- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent {
+- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent isState:(BOOL)isState {
 
     _list = array;
     _isRecent = isRecent;
+    _isState = isState;
     [self reloadData];
 }
 
@@ -103,20 +105,20 @@
         [label1 setTextColor:[UIColor colorWithRed:15.0/255.0 green:248.0/255.0 blue:15.0/255.0 alpha:1.0]];
         if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
             
-            [label1 setText:dict[@"player1"]];
-            [label2 setText:dict[@"player2"]];
+            [label1 setText:[dict[@"player1"] capitalizedString]];
+            [label2 setText:[dict[@"player2"] capitalizedString]];
             
         } else {
             
-            [label1 setText:dict[@"player2"]];
-            [label2 setText:dict[@"player1"]];
+            [label1 setText:[dict[@"player2"] capitalizedString]];
+            [label2 setText:[dict[@"player1"] capitalizedString]];
         }
     } else {
 
         [label1 setTextColor:[UIColor whiteColor]];
         if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player1"] lowercaseString]]) {
             
-            [label2 setText:dict[@"player2"]];
+            [label2 setText:[dict[@"player2"] capitalizedString]];
             
             if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
                 
@@ -129,7 +131,7 @@
             }
             
         } else {
-            [label2 setText:dict[@"player1"]];
+            [label2 setText:[dict[@"player1"] capitalizedString]];
             
             if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
                 
@@ -143,7 +145,12 @@
         }
     }
     
-    [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
+    if (_isState) {
+        [label3 setText:dict[@"location_name"]];
+    } else {
+        
+        [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
+    }
     [label4 setText:[Utils stringToDate:dict[@"insertime"]]];
     
     return cell;

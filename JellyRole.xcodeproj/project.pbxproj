@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0E905A43837784435CB5040C /* Pods_JellyRole.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */; };
+		D11813C71FB1AABE002F13D7 /* MGSwipeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D11813C41FB1AABE002F13D7 /* MGSwipeButton.m */; };
+		D11813C81FB1AABE002F13D7 /* MGSwipeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D11813C61FB1AABE002F13D7 /* MGSwipeTableCell.m */; };
 		D1282F4F1F74F4B30064ED2C /* ArtPiece.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F4E1F74F4B30064ED2C /* ArtPiece.m */; };
 		D1282F521F7520C80064ED2C /* testing.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F511F7520C80064ED2C /* testing.m */; };
 		D1282F581F763C620064ED2C /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F571F763C620064ED2C /* MapVC.m */; };
@@ -75,6 +77,11 @@
 /* Begin PBXFileReference section */
 		86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JellyRole.release.xcconfig"; path = "Pods/Target Support Files/Pods-JellyRole/Pods-JellyRole.release.xcconfig"; sourceTree = "<group>"; };
 		B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JellyRole.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D1037D241FB1A938006BA1D4 /* MGSwipeTableCell.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MGSwipeTableCell.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D11813C31FB1AABE002F13D7 /* MGSwipeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeButton.h; sourceTree = "<group>"; };
+		D11813C41FB1AABE002F13D7 /* MGSwipeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeButton.m; sourceTree = "<group>"; };
+		D11813C51FB1AABE002F13D7 /* MGSwipeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGSwipeTableCell.h; sourceTree = "<group>"; };
+		D11813C61FB1AABE002F13D7 /* MGSwipeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGSwipeTableCell.m; sourceTree = "<group>"; };
 		D1282F4D1F74F4B30064ED2C /* ArtPiece.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArtPiece.h; sourceTree = "<group>"; };
 		D1282F4E1F74F4B30064ED2C /* ArtPiece.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArtPiece.m; sourceTree = "<group>"; };
 		D1282F501F7520C70064ED2C /* testing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = testing.h; sourceTree = "<group>"; };
@@ -115,7 +122,7 @@
 		D163A0401F73D8290047325C /* VerifiyEmailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiyEmailVC.m; sourceTree = "<group>"; };
 		D170E5021F86746500118C03 /* FriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsView.h; sourceTree = "<group>"; };
 		D170E5031F86746500118C03 /* FriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsView.m; sourceTree = "<group>"; };
-		D17D51911F61E1BE00AACDDC /* JellyRole.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JellyRole.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D17D51911F61E1BE00AACDDC /* Jellyroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jellyroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D51951F61E1BE00AACDDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D17D519E1F61E1BE00AACDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D17D51A01F61E1BE00AACDDC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -208,6 +215,25 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		D11813C11FB1AABE002F13D7 /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				D11813C21FB1AABE002F13D7 /* MGSwipeTableCell */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		D11813C21FB1AABE002F13D7 /* MGSwipeTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				D11813C31FB1AABE002F13D7 /* MGSwipeButton.h */,
+				D11813C41FB1AABE002F13D7 /* MGSwipeButton.m */,
+				D11813C51FB1AABE002F13D7 /* MGSwipeTableCell.h */,
+				D11813C61FB1AABE002F13D7 /* MGSwipeTableCell.m */,
+			);
+			path = MGSwipeTableCell;
+			sourceTree = "<group>";
+		};
 		D15B22C41F6FB3EF007EF10F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +310,7 @@
 		D17D51921F61E1BE00AACDDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D17D51911F61E1BE00AACDDC /* JellyRole.app */,
+				D17D51911F61E1BE00AACDDC /* Jellyroll.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,6 +342,7 @@
 		D17D51AB1F61E44400AACDDC /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D11813C11FB1AABE002F13D7 /* Others */,
 				D15B22CD1F6FC722007EF10F /* DataManager */,
 				D15B22C41F6FB3EF007EF10F /* ViewController */,
 				D17D51DD1F6223A100AACDDC /* Utils */,
@@ -421,6 +448,7 @@
 		D17D51E81F6275FC00AACDDC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1037D241FB1A938006BA1D4 /* MGSwipeTableCell.framework */,
 				D1F314B71FA0AFBA00581C1D /* Social.framework */,
 				D17D51E91F6275FD00AACDDC /* MapKit.framework */,
 				B8B5F79AB1844DF112A323B8 /* Pods_JellyRole.framework */,
@@ -463,7 +491,7 @@
 			);
 			name = JellyRole;
 			productName = JellyRole;
-			productReference = D17D51911F61E1BE00AACDDC /* JellyRole.app */;
+			productReference = D17D51911F61E1BE00AACDDC /* Jellyroll.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -606,6 +634,8 @@
 				D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */,
 				D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */,
 				D15B22D71F6FC722007EF10F /* AppPrefData.m in Sources */,
+				D11813C81FB1AABE002F13D7 /* MGSwipeTableCell.m in Sources */,
+				D11813C71FB1AABE002F13D7 /* MGSwipeButton.m in Sources */,
 				D163A03E1F73D29A0047325C /* ForgetPassVC.m in Sources */,
 				D15B22DE1F6FDF50007EF10F /* ViewMessage.m in Sources */,
 				D1DB99621F78D6F8001CC21C /* EftGoogleAddressComponent.m in Sources */,
@@ -759,7 +789,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Jellyroll;
 				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
 				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
@@ -778,7 +808,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Jellyroll;
 				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
 				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};

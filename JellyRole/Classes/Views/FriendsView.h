@@ -20,6 +20,6 @@
 @property(nonatomic, weak) id <FriendsViewDelegates> delegates;
 
 - (void)setView;
-- (void)updateData:(NSArray *)array isSearch:(BOOL)search;
+- (void)updateData:(NSArray *)array isSearch:(BOOL)search myRank:(NSString *)myrank;
 
 @end

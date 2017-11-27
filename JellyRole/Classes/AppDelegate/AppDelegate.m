@@ -38,6 +38,7 @@
 {
     // Override point for customization after application launch.
     
+    NSLog(@".....%f", [UIScreen mainScreen].bounds.size.height);
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
         

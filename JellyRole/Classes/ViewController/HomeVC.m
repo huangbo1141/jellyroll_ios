@@ -10,10 +10,11 @@
 #import "MapVC.h"
 #import "NotificationVC.h"
 #import "QuickPlayVC.h"
+#import "ArtPiece.h"
 #import <Social/Social.h>
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
-
+#import <CoreLocation/CoreLocation.h>
 
 @interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 {
@@ -396,12 +397,41 @@
         
         MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
         
+        NSMutableArray* allArtPiece = [mapVC getAllArtPiece];
+        
+        NSMutableArray* list = [NSMutableArray array];
+        
+        CLLocation *locA = [[CLLocation alloc] initWithLatitude:mapVC->_mylatitude longitude:mapVC->_myLongitude];
+        for (int i=0; i< allArtPiece.count; i++) {
+            
+            ArtPiece* piece = allArtPiece[i];
+            CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
+            CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
+            CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+            
+            CLLocationDistance distance = [locA distanceFromLocation:locB];
+            piece.distance = [NSNumber numberWithDouble:distance];
+            
+            [list addObject:piece];
+        }
+        
+        NSArray* sorted = [NSMutableArray arrayWithArray:[list sortedArrayUsingComparator:^NSComparisonResult(ArtPiece* a, ArtPiece* b) {
+            double first = [a.distance doubleValue];
+            double second = [b.distance doubleValue];
+            return first>second;
+        }]];
+        
+        ArtPiece* piece = [sorted objectAtIndex:0];
+        
         UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
         QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
         vc->_mylatitude = mapVC->_mylatitude;
         vc->_myLongitude = mapVC->_myLongitude;
         
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
+        vc->_isLocation = true;
+        vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:piece.data];
+        
         [_mainVC pushViewController:vc animated:true];
     }
     

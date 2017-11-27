@@ -131,6 +131,12 @@
     [self.navigationController popViewControllerAnimated:true];
 }
 
+- (IBAction)menuAction:(UIButton *)sender {
+    
+    KYDrawerController* drawer = (KYDrawerController *)self.navigationController.parentViewController;
+    [drawer setDrawerState:DrawerStateOpened animated:true];
+}
+
 - (IBAction)barRuleAction:(id)sender {
     
     if (_barButton.selected) {
