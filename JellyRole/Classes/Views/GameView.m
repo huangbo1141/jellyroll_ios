@@ -14,6 +14,7 @@
     NSArray* _list;
     BOOL _isRecent;
     BOOL _isState;
+    BOOL _isSession;
 }
 
 
@@ -38,11 +39,12 @@
     [self flashScrollIndicators];
 }
 
-- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent isState:(BOOL)isState {
+- (void)updateData:(NSArray *)array isRecent:(BOOL)isRecent isState:(BOOL)isState isSession:(BOOL)isSession {
 
     _list = array;
     _isRecent = isRecent;
     _isState = isState;
+    _isSession = isSession;
     [self reloadData];
 }
 
@@ -60,7 +62,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    GameCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    GameCell *cell = [tableView dequeueReusableCellWithIdentifier:_isSession ? @"cell2" : @"cell" forIndexPath:indexPath];
     
     NSDictionary* dict = [_list objectAtIndex:indexPath.row];
     
@@ -152,7 +154,31 @@
         [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
     }
     [label4 setText:[Utils stringToDate:dict[@"insertime"]]];
-    
+ 
+    if (_isSession) {
+        
+        int totalGames = [dict[@"totalGame"] intValue];
+        int winGames = [dict[@"status"] intValue];
+        int winPercentage = (winGames * 100) / totalGames;
+        
+        
+        UIColor *normalColor = [UIColor whiteColor];
+        UIColor *highlightColor = (winPercentage >= 50 ) ? kGreenColor : kRedColor;
+        UIFont *font = [UIFont fontWithName:@"Open Sans" size:8];
+        NSDictionary *normalAttributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:normalColor};
+        NSDictionary *highlightAttributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:highlightColor};
+        
+        NSAttributedString *normalText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"/%d", totalGames] attributes:normalAttributes];
+        NSAttributedString *highlightedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", totalGames] attributes:highlightAttributes];
+        
+        NSMutableAttributedString *finalAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:highlightedText];
+        [finalAttributedString appendAttributedString:normalText];
+        [label3 setAttributedText:finalAttributedString];
+        
+        [imageView setImage:(winPercentage >= 50 ) ? [UIImage imageNamed:@"thumb1"] : [UIImage imageNamed:@"thumb2"]];
+        [label1 setText:(winPercentage >= 50 ) ? @"Win" : @"Loss"];
+        
+    }
     return cell;
 }
 

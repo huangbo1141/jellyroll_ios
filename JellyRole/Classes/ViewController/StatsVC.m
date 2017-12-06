@@ -103,7 +103,7 @@
     
     if (games != nil) {
     
-        [_gameTableView updateData:games isRecent:false isState:true];
+        [_gameTableView updateData:games isRecent:false isState:true isSession:false];
     }
     
     int win = [dict[@"overall_win"] intValue];

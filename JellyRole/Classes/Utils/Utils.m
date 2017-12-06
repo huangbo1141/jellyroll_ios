@@ -229,6 +229,23 @@
     return strTimeStamp;//[NSString stringWithFormat:@"%.0f", [[NSDate date] timeIntervalSince1970]];
 }
 
++(NSDate *)stringToDate2:(NSString *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    NSTimeZone *timeZone = [NSTimeZone timeZoneWithName:@"UTC"];
+    
+    
+    [formatter setTimeZone:timeZone];
+    [formatter setDateFormat : @"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateTime = [formatter dateFromString:date];
+    if (dateTime == nil) {
+        
+        dateTime = [NSDate date];
+    }
+    
+    return dateTime;
+}
+
 +(NSString *)stringToDate:(NSString *)date
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

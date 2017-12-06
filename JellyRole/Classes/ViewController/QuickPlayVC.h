@@ -13,6 +13,7 @@
 @public
     UIImage* _mapView;
     BOOL _isLocation;
+    BOOL _isFromMap;
     
     NSMutableDictionary* _selectedBar;
     

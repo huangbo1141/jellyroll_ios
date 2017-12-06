@@ -474,6 +474,7 @@
         QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         vc->_isLocation = true;
+        vc->_isFromMap = true;
         vc->_mylatitude = mapVC->_mylatitude;
         vc->_myLongitude = mapVC->_myLongitude;
         

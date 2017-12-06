@@ -38,7 +38,8 @@
 {
     // Override point for customization after application launch.
     
-    NSLog(@".....%f", [UIScreen mainScreen].bounds.size.height);
+    
+    NSLog(@".....%@", [UIFont familyNames]);
     
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
         
@@ -176,10 +177,13 @@
                         if (confirm_cnt > 0) {
                             
                             
+                            [mainVC.notifyButton setEnabled:true];
                             [mainVC.notifyButton setTitle:[NSString stringWithFormat:@"%d", confirm_cnt] forState:UIControlStateNormal];
                             [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification1"]];
                         } else {
                             
+                            [mainVC.notifyButton setEnabled:false]
+                            ;
                             [mainVC.notifyButton setTitle:@"" forState:UIControlStateNormal];
                             [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification"]];
                         }

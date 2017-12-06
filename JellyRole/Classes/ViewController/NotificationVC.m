@@ -186,6 +186,7 @@
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
+                BOOL isDataAvail = false;
                 [_allConfirmRequest addObjectsFromArray:[dict1 objectForKey:@"data"]];
                 [_allPendingRequest addObjectsFromArray:[dict1 objectForKey:@"data2"]];
                 
@@ -195,6 +196,7 @@
                 
                 if (_allConfirmRequest.count > 0) {
                     
+                    isDataAvail = true;
                     _confirmLabel.hidden = false;
                     _confirmViewHeight.constant = 50.0;
                 } else {
@@ -204,6 +206,7 @@
                 
                 if (_allPendingRequest.count > 0) {
                     
+                    isDataAvail = true;
                     _pendingLabel.hidden = false;
                     _pendingViewHeight.constant = 50.0;
                 } else {
@@ -213,6 +216,11 @@
                 }
                 
                 [self updateBottomConstraint];
+                
+                if (!isDataAvail) {
+                    
+                    [self.navigationController popViewControllerAnimated:true];
+                }
             } else {
                 
                 _confirmLabel.hidden = true;

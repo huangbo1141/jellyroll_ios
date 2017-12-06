@@ -1465,9 +1465,9 @@
         UILabel*lbl;
         if (av == nil) {
             av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 32, 32)];
+            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 33, 20)];
             //lbl.font = [UIFont fontWithName:@"Avenir-Next-Regular" size:12];
-            [lbl setFont:[UIFont systemFontOfSize:8]];
+            [lbl setFont:[UIFont systemFontOfSize:6]];
             lbl.adjustsFontSizeToFitWidth = YES;
 //            lbl.layer.cornerRadius = 15.0;
             lbl.layer.masksToBounds = true;

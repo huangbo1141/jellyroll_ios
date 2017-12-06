@@ -119,6 +119,7 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIButton *userUpDownButton;
 @property (weak, nonatomic) IBOutlet UIButton *reportButton;
 
+
 @property (weak, nonatomic) IBOutlet UILabel *myRank;
 @property (weak, nonatomic) IBOutlet UILabel *myMile;
 @property (weak, nonatomic) IBOutlet UILabel *myAddress;
@@ -361,7 +362,7 @@ typedef enum
 
 
 
-- (void)updateView:(NSDictionary *)dict games:(NSArray *)games {
+- (void)updateView:(NSDictionary *)dict games:(NSArray *)games session:(BOOL)session {
     
     if (_userGamesData.count <= 0) {
         
@@ -370,7 +371,7 @@ typedef enum
     
     if (games != nil) {
         
-        [_gameTableView updateData:games isRecent:false isState:false];
+        [_gameTableView updateData:games isRecent:false isState:false isSession:session];
     }
     
     float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0;
@@ -876,7 +877,6 @@ typedef enum
             NSDictionary* data = [dict1 valueForKey:@"data"];
             [_data addEntriesFromDictionary:data];
             
-            
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 _userLabel.text = [data[@"username"] capitalizedString];
@@ -886,7 +886,7 @@ typedef enum
                     
                     if ([bar[@"bar_id"] isEqualToString:data[@"bar_id"]]) {
                         
-                        [_selectedBar addEntriesFromDictionary:bar];
+                        //[_selectedBar addEntriesFromDictionary:bar];
                         DebugLog(@"...%@", _selectedBar);
                         [self getUserGameData];
                         [self getGooglePlaces];
@@ -898,7 +898,6 @@ typedef enum
                 
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"message"]];
             }
-            
         }
         
     } failure:^(id result) {
@@ -996,7 +995,7 @@ typedef enum
                 [_allGames addObjectsFromArray:dict1[@"all"]];
                 [_recentGames addObjectsFromArray:dict1[@"recent_game"]];
                 
-                [_gameLocationTableView updateData:_recentGames isRecent:false isState:false];
+                [_gameLocationTableView updateData:_recentGames isRecent:false isState:false isSession:false];
                 [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
             } else {
@@ -1004,7 +1003,7 @@ typedef enum
                 
                 [_leaderboardView updateData:nil];
                 
-                [_gameLocationTableView updateData:nil isRecent:false isState:false];
+                [_gameLocationTableView updateData:nil isRecent:false isState:false isSession:false];
                 [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
                 _noRecordLabel.hidden = false;
@@ -1072,20 +1071,32 @@ typedef enum
                 
                 [_userGamesData addEntriesFromDictionary:dict1];
                 //[_list addObjectsFromArray:_locData];
-                [self updateView:dict1 games:dict1[@"recent_game"]];
+                [self updateView:dict1 games:dict1[@"recent_game"] session:false];
             } else {
                 
             
-                [_gameTableView updateData:nil isRecent:false isState:false];
+                [_gameTableView updateData:nil isRecent:false isState:false isSession:false];
                 [_comparisionVC updateData:nil];
                 [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
             }
             
+            if (_isFromMap) {
+                
+                _isFromMap = false;
+                _chooseOpponentBtn.selected = true;
+                [self locationView:true];
+            }
         }
         
     } failure:^(id result) {
         
         [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (_isFromMap) {
+            
+            _isFromMap = false;
+            _chooseOpponentBtn.selected = true;
+            [self locationView:true];
+        }
     }];
 }
 
@@ -1243,7 +1254,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_userSessionBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [self updateView:_userGamesData games:_userGamesData[@"recent_game"]];
+    [self updateView:_userGamesData games:_userGamesData[@"recent_game"] session:false];
 }
 
 - (IBAction)userSessionAction:(UIButton *)sender {
@@ -1264,7 +1275,91 @@ typedef enum
     
     //[self getUserGameData];
     
-    [self updateView:_userGamesData games:_userGamesData[@"recent_game"]];
+    NSMutableArray* list = [NSMutableArray array];
+    int totalGames = 0;
+    int totalWin = 0;
+    int sessionDiff = 0;
+    int index = 0 ;
+    NSString* lastSession = @"0";
+    for (NSDictionary* dict in _userGamesData[@"recent_game"]) {
+        
+        
+        if ([lastSession isEqualToString:@"0"]) {
+            
+            lastSession = dict[@"insertime"];
+        } else {
+            
+            NSDate* currentSession = [Utils stringToDate2:dict[@"insertime"]];
+            NSDate* lSession = [Utils stringToDate2:lastSession];
+            
+            NSTimeInterval distanceBetweenDates = [lSession timeIntervalSinceDate:currentSession];
+            double secondsInAnHour = 3600;
+            NSInteger hoursBetweenDates = distanceBetweenDates / secondsInAnHour;
+            
+            NSLog(@"hoursBetweenDates: %ld", (long)hoursBetweenDates);
+            sessionDiff = hoursBetweenDates;
+        }
+        
+        
+        if (sessionDiff <= 3) {
+            
+            totalGames = totalGames + 1;
+            if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player1"] lowercaseString]]) {
+                if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                    
+                    totalWin = totalWin + 1;
+                } else {
+                    
+                }
+            } else {
+                if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                    
+                    totalWin = totalWin + 1;
+                } else {
+                }
+            }
+            
+            
+            if (index == [_userGamesData[@"recent_game"] count]-1) {
+                
+                NSDictionary *lDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d", totalGames], @"totalGame", [NSString stringWithFormat:@"%d", totalWin], @"status", dict[@"player1"], @"player1", dict[@"player2"], @"player2", lastSession, @"insertime", nil];
+                
+                [list addObject:lDict];
+            }
+            
+        } else {
+            
+            NSDictionary *lDict = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%d", totalGames], @"totalGame", [NSString stringWithFormat:@"%d", totalWin], @"status", dict[@"player1"], @"player1", dict[@"player2"], @"player2", lastSession, @"insertime", nil];
+            
+            [list addObject:lDict];
+            //Session Record Ended
+            
+            // New Session Started
+            totalGames = 1;
+            sessionDiff = 0;
+            lastSession = dict[@"insertime"];
+            if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player1"] lowercaseString]]) {
+                if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                    
+                    totalWin = 1;
+                } else {
+                    
+                }
+            } else {
+                if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                    
+                    totalWin = 1;
+                } else {
+                }
+            }
+            
+        }
+        
+        index++;
+        
+    }
+    
+    [self updateView:_userGamesData games:list session:true];
     
 }
 
@@ -1279,7 +1374,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_allRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_recentGames isRecent:false isState:false];
+    [_gameLocationTableView updateData:_recentGames isRecent:false isState:false isSession:false];
 }
 
 - (IBAction)allGameAction:(UIButton *)sender {
@@ -1294,7 +1389,7 @@ typedef enum
     [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [_myRecentBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
-    [_gameLocationTableView updateData:_allGames isRecent:true isState:false];
+    [_gameLocationTableView updateData:_allGames isRecent:true isState:false isSession:false];
 }
 
 - (IBAction)recentFriendsAction:(UIButton *)sender {
