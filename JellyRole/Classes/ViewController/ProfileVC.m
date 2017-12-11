@@ -9,6 +9,8 @@
 
 #import "ProfileVC.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
+#import "B_Nav_VC.h"
+#import "HomeVC.h"
 
 @interface ProfileVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -282,6 +284,7 @@
     
     [self.navigationController popViewControllerAnimated:true];
 }
+
 - (IBAction)cameraAction:(UIButton *)sender {
     
     [self showCameraDialog];
@@ -290,6 +293,12 @@
 - (IBAction)setHomeAction:(id)sender {
     
     [self.navigationController popViewControllerAnimated:true];
+    KYDrawerController* elDrawer = (KYDrawerController *)self.navigationController.parentViewController;
+    
+    B_Nav_VC* navVC =  (B_Nav_VC *)elDrawer.mainViewController;
+    HomeVC* mainVC = (HomeVC *)navVC.visibleViewController;
+    
+    [mainVC setHomeLocationAction];
 }
 - (IBAction)changePasswordAction:(id)sender {
     

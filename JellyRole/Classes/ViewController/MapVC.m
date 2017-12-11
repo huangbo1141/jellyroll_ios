@@ -24,6 +24,8 @@
     NSTimer* _timer;
     GooglePlaceResult* _gresult;
     
+    NSString* _selectedBar;
+    
     float _zoom_delta;
     float _zoom_delta_t;
     int _currentKeyboardHeight;
@@ -66,6 +68,9 @@
 
 @property (weak, nonatomic) IBOutlet UIView *saveLocatioView;
 @property (weak, nonatomic) IBOutlet UIButton *saveLocationButton;
+
+@property (weak, nonatomic) IBOutlet UIView *saveHomeLocatioView;
+@property (weak, nonatomic) IBOutlet UIButton *saveHomeLocationButton;
 
 
 @end
@@ -167,6 +172,12 @@
     _view_SearchOpponent.hidden = true;
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
+    
+    _saveHomeLocatioView.hidden = true;
+    _saveHomeLocationButton.hidden = true;
+    
+    _saveHomeLocationButton.userInteractionEnabled = false;
+    _saveHomeLocationButton.alpha = 0.5;
     
     _saveLocationButton.userInteractionEnabled = false;
     _saveLocationButton.alpha = 0.5;
@@ -455,6 +466,7 @@
             [btn setTitle:[tempArray objectAtIndex:j][ @"location_name"] forState:UIControlStateNormal];
             btn.accessibilityHint = [tempArray objectAtIndex:j][ @"lat"];
             [btn setAccessibilityLabel:[tempArray objectAtIndex:j][ @"long"]];
+            [btn setAccessibilityValue:[tempArray objectAtIndex:j][ @"bar_id"]];
             
             if (_saveLocatioView.hidden) {
                 
@@ -499,8 +511,8 @@
     region.center.latitude = [strLAT_1 floatValue];
     region.center.longitude = [strLONG_1 floatValue];
     
-    region.span.longitudeDelta = 0.01f;
-    region.span.latitudeDelta = 0.01f;
+    region.span.longitudeDelta = 0.001f;
+    region.span.latitudeDelta = 0.001f;
     
     
     [_MAP_VIEW setRegion:region animated:YES];
@@ -717,7 +729,7 @@
 
     
     
-    NSString* params = [NSString stringWithFormat:kAPI_AddLocationParams, _gresult.result.name, _gresult.result.formatted_address, city, state, zip, _gresult.result.lat, _gresult.result.lon, _gAppPrefData.userID, _gresult.result.place_id, country, country];
+    NSString* params = [NSString stringWithFormat:kAPI_AddLocationParams, _gresult.result.name, _gresult.result.formatted_address, city, state, zip, _gresult.result.lat, _gresult.result.lon, _gAppPrefData.userID, _gresult.result.place_id, city, country];
     
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     [_gAppData sendPostRequest:kAPI_ADDLOCATION params:params completion:^(id result) {
@@ -759,6 +771,53 @@
     }];
 }
 
+- (void)getSaveHomeLocationData {
+    
+    NSString* params = [NSString stringWithFormat:kAPI_AddHomeLocationParams, _gAppPrefData.userID, _selectedBar];
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    [_gAppData sendPostRequest:kAPI_ADDHOMELOCATION params:params completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:kAppName message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+                
+                [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    
+                    _selectedBar = @"";
+                    _saveHomeLocatioView.hidden = true;
+                    _saveHomeLocationButton.hidden = true;
+                    _saveLocationButton.userInteractionEnabled = false;
+                    _saveLocationButton.alpha = 0.5;
+                    
+                    [self hideDialogPublic];
+                }]];
+                
+                if (![Utils isIphone]) {
+                    alert.popoverPresentationController.sourceView = self.view;
+                }
+                
+                [self presentViewController:alert animated:true completion:nil];
+                
+            } else {
+                
+                [_gAppDelegate showAlertDilog:@"Error" message:dict1[@"msg"]];
+                
+            }
+            
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
 
 #pragma mark
 #pragma mark Public Methods
@@ -774,6 +833,7 @@
         
         [self hideDialog:true];
     }
+    [_delegate updateTitle:@"Map"];
     _searchBar.text = @"";
     [_searchBar resignFirstResponder];
     [self resetScrollwithArray:nil];
@@ -781,6 +841,11 @@
     
     _saveLocatioView.hidden = true;
     _saveLocationButton.hidden = true;
+    _saveHomeLocatioView.hidden = true;
+    _saveHomeLocationButton.hidden = true;
+    
+    _saveHomeLocationButton.userInteractionEnabled = false;
+    _saveHomeLocationButton.alpha = 0.5;
     
     _saveLocationButton.userInteractionEnabled = false;
     _saveLocationButton.alpha = 0.5;
@@ -805,6 +870,30 @@
 - (NSMutableArray *)getAllArtPiece {
     
     return _allArtPiece;
+}
+
+- (void)createHomeLocation {
+
+    [self hideDialogPublic];
+    
+    _saveHomeLocatioView.hidden = false;
+    _saveHomeLocationButton.hidden = false;
+    
+    _saveHomeLocationButton.userInteractionEnabled = false;
+    _saveHomeLocationButton.alpha = 0.5;
+    for (NSLayoutConstraint* constr in _searchButton.constraints) {
+        
+        constr.constant = 0;
+    }
+    
+    _zoomInBtn.hidden = true;
+    _zoomOutButton.hidden = true;
+    _rectImage.hidden = true;
+    _addLocationButton.hidden = true;
+    _myLocationButon.hidden = true;
+    
+    [_delegate updateTitle:@"Add Home Location"];
+    [_searchBar becomeFirstResponder];
 }
 
 #pragma mark
@@ -840,8 +929,6 @@
     _saveLocatioView.hidden = false;
     _saveLocationButton.hidden = false;
     
-    _saveLocationButton.userInteractionEnabled = false;
-    _saveLocationButton.alpha = 0.5;
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
         constr.constant = 0;
@@ -858,9 +945,6 @@
     [self replaceMarkers];
     [_delegate updateTitle:@"Add Location"];
 }
-
-
-
 
 - (IBAction)zoomOutAction:(id)sender {
     
@@ -1022,7 +1106,7 @@
 
 -(void)searchSelectionAction:(UIButton *)sender {
 
-    if (_saveLocatioView.hidden) {
+    if (_saveLocatioView.hidden && _saveHomeLocatioView.hidden) {
     
         [self hideDialogPublic];
     } else {
@@ -1035,6 +1119,13 @@
         [_searchBar resignFirstResponder];
         [self resetScrollwithArray:nil];
         [_view_SearchOpponent setHidden:true];
+    }
+    
+    if (_saveHomeLocatioView.hidden == false) {
+    
+        _selectedBar = sender.accessibilityValue;
+        _saveHomeLocationButton.userInteractionEnabled = true;
+        _saveHomeLocationButton.alpha = 1.0;
     }
     
     
@@ -1150,6 +1241,17 @@
     
 }
 
+- (IBAction)saveHomeLocationAction:(id)sender {
+    
+    if (_selectedBar != nil && _selectedBar.length > 0) {
+        
+        [self getSaveHomeLocationData];
+    } else {
+        [_gAppDelegate showAlertDilog:@"Info" message:@"Please select a location"];
+    }
+    
+}
+
 #pragma mark
 #pragma mark UITableView DataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -1205,7 +1307,7 @@
 #pragma mark UISearchBar Delegates
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     
-    if (_saveLocatioView.hidden) {
+    if (_saveLocatioView.hidden && _saveHomeLocatioView.hidden) {
     
         [self hideDialogPublic];
     }
@@ -1345,7 +1447,7 @@
     
     [_searchBar resignFirstResponder];
     
-    if (_saveLocatioView.hidden) {
+    if (_saveLocatioView.hidden && _saveHomeLocatioView.hidden) {
         
         [self hideDialogPublic];
     }
@@ -1627,7 +1729,7 @@
                 }
             }
         }
-        else
+        else if(_saveHomeLocatioView.hidden)
         {
             if ([myAnnot isKindOfClass:[ArtPiece class]]) {
                 ArtPiece*piece = (ArtPiece*)myAnnot;

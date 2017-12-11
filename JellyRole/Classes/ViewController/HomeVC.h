@@ -14,6 +14,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *notifyButton;
 
 - (void)performIndexAction:(int)row;
-
+- (void)setHomeLocationAction;
 @end
 

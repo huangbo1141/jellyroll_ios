@@ -304,6 +304,18 @@
 }
 
 
+- (void)setHomeLocationAction {
+    
+    if (![_mainVC.visibleViewController isKindOfClass:[MapVC class]]) {
+     
+        [_mainVC popViewControllerAnimated:false];
+
+    }
+ 
+    MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
+    [mapVC createHomeLocation];
+}
+
 #pragma mark
 #pragma mark UIButton Action Methods
 - (IBAction)menuAction:(UIButton *)sender {

@@ -141,13 +141,14 @@
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 NSArray* mainArray = dict1[@"data"];
-                NSArray*_locData = [NSMutableArray arrayWithArray:[mainArray sortedArrayUsingComparator:^NSComparisonResult(NSMutableDictionary* a, NSMutableDictionary* b) {
+                /*NSArray*_locData = [NSMutableArray arrayWithArray:[mainArray sortedArrayUsingComparator:^NSComparisonResult(NSMutableDictionary* a, NSMutableDictionary* b) {
                     double first = [a[@"total"] doubleValue];
                     double second = [b[@"total"] doubleValue];
                     return first<second;
                 }]];
                 
-                [_list addObjectsFromArray:_locData];
+                [_list addObjectsFromArray:_locData];*/
+                [_list addObjectsFromArray:mainArray];
                 [self updateView:dict1 games:dict1[@"games"]];
                 
             } else {

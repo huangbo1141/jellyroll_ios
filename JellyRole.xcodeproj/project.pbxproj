@@ -15,6 +15,7 @@
 		D1282F581F763C620064ED2C /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1282F571F763C620064ED2C /* MapVC.m */; };
 		D12B80561F99E26000EA52B7 /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D12B80551F99E26000EA52B7 /* GameCell.m */; };
 		D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12C70451F70F48900285B6B /* FeedbackVC.m */; };
+		D134EC611FDA6BA900208596 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = D134EC601FDA6BA900208596 /* Readme.md */; };
 		D140EEE01FA9B675000B94DE /* MapVCBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = D140EEDF1FA9B675000B94DE /* MapVCBackup.m */; };
 		D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB21F73290200B67244 /* FriendsVC.m */; };
 		D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB51F73500200B67244 /* ProfileVC.m */; };
@@ -92,6 +93,7 @@
 		D12B80551F99E26000EA52B7 /* GameCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameCell.m; sourceTree = "<group>"; };
 		D12C70441F70F48900285B6B /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		D12C70451F70F48900285B6B /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
+		D134EC601FDA6BA900208596 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		D140EEDE1FA9B675000B94DE /* MapVCBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVCBackup.h; sourceTree = "<group>"; };
 		D140EEDF1FA9B675000B94DE /* MapVCBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVCBackup.m; sourceTree = "<group>"; };
 		D14C8DB11F73290200B67244 /* FriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsVC.h; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				D17D51A51F61E1BE00AACDDC /* Info.plist */,
 				D17D51941F61E1BE00AACDDC /* Supporting Files */,
 				D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */,
+				D134EC601FDA6BA900208596 /* Readme.md */,
 			);
 			path = JellyRole;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				D15B22DF1F6FDF50007EF10F /* ViewMessage.xib in Resources */,
 				D17D51C81F61FB1000AACDDC /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				D17D51CC1F61FB1000AACDDC /* OpenSans-Regular.ttf in Resources */,
+				D134EC611FDA6BA900208596 /* Readme.md in Resources */,
 				D17D51C61F61FB1000AACDDC /* OpenSans-BoldItalic.ttf in Resources */,
 				D17D51CB1F61FB1000AACDDC /* OpenSans-LightItalic.ttf in Resources */,
 				D17D51BA1F61E7FE00AACDDC /* OpenSans-Bold_0.ttf in Resources */,

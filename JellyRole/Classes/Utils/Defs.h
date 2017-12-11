@@ -54,6 +54,10 @@
 #define kAPI_ADDLOCATION [kHostURL stringByAppendingString:@"webservice/create_bar.php"]
 #define kAPI_AddLocationParams @"location_name=%@&address=%@&city=%@&state=%@&zip=%@&lat=%@&long=%@&user_id=%@&bar_status=yes&place_id=%@&county=%@&country=%@"
 
+#define kAPI_ADDHOMELOCATION [kHostURL stringByAppendingString:@"webservice/update_home_location.php"]
+#define kAPI_AddHomeLocationParams @"user_id=%@&location_bar_id=%@"
+
+
 #define kAPI_ALLPENDINGGAMES [kHostURL stringByAppendingString:@"webservice/get_all_bar_pending.php?user_id=%@"]
 
 #define kAPI_CONFIRMGAME [kHostURL stringByAppendingString:@"webservice/confirm.php?game_id=%@&status=%@"]

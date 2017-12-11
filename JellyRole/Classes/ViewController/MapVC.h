@@ -13,6 +13,7 @@
 - (void)loadLocationStateVC:(UIImage *)image data:(NSDictionary *)data;
 - (void)updateTitle:(NSString *)title;
 
+
 @end
 
 @interface MapVC : UIViewController
@@ -27,5 +28,5 @@
 - (void)hideDialogPublic;
 - (UIImage*)captureViewS;
 - (NSMutableArray *)getAllArtPiece;
-
+- (void)createHomeLocation;
 @end
