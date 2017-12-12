@@ -896,7 +896,14 @@ typedef enum
             } else {
                 
                 
-                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"message"]];
+                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
+                [self getGooglePlaces];
+                if (_isFromMap) {
+                    
+                    _isFromMap = false;
+                    _chooseOpponentBtn.selected = true;
+                    [self locationView:true];
+                }
             }
         }
         
@@ -1213,12 +1220,19 @@ typedef enum
 
 - (IBAction)winAction:(id)sender {
     
-    [self showWinLossDialog:0];
+    if ([_data count] > 0) {
+    
+        [self showWinLossDialog:0];
+    }
+    
 }
 
 - (IBAction)lossAction:(id)sender {
     
-    [self showWinLossDialog:1];
+    if ([_data count] > 0) {
+        
+        [self showWinLossDialog:1];
+    }
 }
 
 - (IBAction)userViewAction:(UIButton *)sender {

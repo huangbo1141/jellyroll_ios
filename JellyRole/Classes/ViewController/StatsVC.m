@@ -45,8 +45,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:animated];
-    [self getStatsData];
-    
     [_scrollView updateView];
 }
 
@@ -93,6 +91,7 @@
             _constraint.constant = -30;
         }
     }
+    [self getStatsData];
 }
 
 - (void)updateView:(NSDictionary *)dict games:(NSArray *)games {
