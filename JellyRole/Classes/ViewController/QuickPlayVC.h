@@ -20,4 +20,6 @@
     float _mylatitude, _myLongitude;
 }
 
+- (BOOL)removeOpponetFromView;
+- (IBAction)backAction:(id)sender;
 @end

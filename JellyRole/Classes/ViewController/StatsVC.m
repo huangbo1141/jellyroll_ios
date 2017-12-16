@@ -26,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *rivalName;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraint;
 
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel1;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel2;
 
 @end
 
@@ -92,6 +94,9 @@
         }
     }
     [self getStatsData];
+    
+    _noRecordLabel1.hidden = true;
+    _noRecordLabel2.hidden = true;
 }
 
 - (void)updateView:(NSDictionary *)dict games:(NSArray *)games {
@@ -103,25 +108,35 @@
     if (games != nil) {
     
         [_gameTableView updateData:games isRecent:false isState:true isSession:false];
-    }
-    
-    int win = [dict[@"overall_win"] intValue];
-    int losss = [dict[@"overall_loss"] intValue];
-    losss += win;
-    
-    NSMutableDictionary* lDict = [NSMutableDictionary dictionary];
-    [lDict setValue:dict[@"my_rank_overall"] forKey:@"rank"];
-    [lDict setValue:@"Overall" forKey:@"location_name"];
-    [lDict setValue:dict[@"overall_win"] forKey:@"win"];
-    [lDict setValue:[NSString stringWithFormat:@"%d", losss] forKey:@"total"];
-    
-    [_list addObject:lDict];
-    if (_list.count > 0) {
+        _noRecordLabel1.hidden = true;
+    } else {
         
-        [_rankTableView updateData:_list];
+        _noRecordLabel1.hidden = false;
     }
     
-    
+    if (games != nil && games.count > 4) {
+
+        int win = [dict[@"overall_win"] intValue];
+        int losss = [dict[@"overall_loss"] intValue];
+        losss += win;
+        
+        NSMutableDictionary* lDict = [NSMutableDictionary dictionary];
+        [lDict setValue:dict[@"my_rank_overall"] forKey:@"rank"];
+        [lDict setValue:@"Overall" forKey:@"location_name"];
+        [lDict setValue:dict[@"overall_win"] forKey:@"win"];
+        [lDict setValue:[NSString stringWithFormat:@"%d", losss] forKey:@"total"];
+        
+        [_list addObject:lDict];
+        if (_list.count > 0) {
+            
+            [_rankTableView updateData:_list];
+        }
+        
+        _noRecordLabel2.hidden = true;
+    } else {
+        
+        _noRecordLabel2.hidden = false;
+    }
 }
 
 - (void)getStatsData {
@@ -151,14 +166,19 @@
                 [self updateView:dict1 games:dict1[@"games"]];
                 
             } else {
-                
-                [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+             
+                _noRecordLabel1.hidden = false;
+                _noRecordLabel2.hidden = false;
+                //[_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
             }
             
         }
     } failure:^(id result) {
         
         [MBProgressHUD hideHUDForView:self.view animated:true];
+        
+        _noRecordLabel1.hidden = false;
+        _noRecordLabel2.hidden = false;
     }];
 }
 

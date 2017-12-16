@@ -58,6 +58,7 @@
 		D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E31F62254800AACDDC /* CustomeButton.m */; };
 		D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E61F62258900AACDDC /* UIButton+Font.m */; };
 		D17D51EA1F6275FD00AACDDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17D51E91F6275FD00AACDDC /* MapKit.framework */; };
+		D1CEE0971FE3D3BE00A9F6FF /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */; };
 		D1DAB9891F83189B00F3BFB1 /* UserComparisionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */; };
 		D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */; };
 		D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DB99121F78D6A8001CC21C /* BaseModel.m */; };
@@ -163,6 +164,8 @@
 		D17D51E51F62258900AACDDC /* UIButton+Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Font.h"; sourceTree = "<group>"; };
 		D17D51E61F62258900AACDDC /* UIButton+Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Font.m"; sourceTree = "<group>"; };
 		D17D51E91F6275FD00AACDDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D1CEE0951FE3D3BE00A9F6FF /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
+		D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D1DAB9871F83189B00F3BFB1 /* UserComparisionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserComparisionView.h; sourceTree = "<group>"; };
 		D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserComparisionView.m; sourceTree = "<group>"; };
 		D1DB99001F7674D2001CC21C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View_SearchMAP.xib; sourceTree = "<group>"; };
@@ -434,6 +437,8 @@
 				D17D51E31F62254800AACDDC /* CustomeButton.m */,
 				D17D51E51F62258900AACDDC /* UIButton+Font.h */,
 				D17D51E61F62258900AACDDC /* UIButton+Font.m */,
+				D1CEE0951FE3D3BE00A9F6FF /* UIImage+fixOrientation.h */,
+				D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -628,6 +633,7 @@
 				D1E951551F739BF90017A818 /* StatsRankingView.m in Sources */,
 				D1DB994B1F78D6A8001CC21C /* GooglePlace.m in Sources */,
 				D12B80561F99E26000EA52B7 /* GameCell.m in Sources */,
+				D1CEE0971FE3D3BE00A9F6FF /* UIImage+fixOrientation.m in Sources */,
 				D1DB99481F78D6A8001CC21C /* BaseModel.m in Sources */,
 				D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */,
 				D17D51D51F62196500AACDDC /* GameView.m in Sources */,
@@ -785,7 +791,7 @@
 			baseConfigurationReference = FADABCACF4B3361F19DF6828 /* Pods-JellyRole.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -794,8 +800,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
-				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
+				PROVISIONING_PROFILE = "1481146e-b52e-414b-8d82-6ff485f76993";
+				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
 			};
 			name = Debug;
 		};
@@ -804,7 +810,7 @@
 			baseConfigurationReference = 86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -813,8 +819,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
-				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
+				PROVISIONING_PROFILE = "1481146e-b52e-414b-8d82-6ff485f76993";
+				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
 			};
 			name = Release;
 		};

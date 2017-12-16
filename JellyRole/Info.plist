@@ -55,6 +55,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>AltraCore app access your Camera to upload your photo and Share with other users. </string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>JellyRoll app access your location for map.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

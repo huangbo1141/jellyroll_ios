@@ -87,7 +87,7 @@
 
 #define kAPI_REPORTBAR [kHostURL stringByAppendingString:@"webservice/report_bar.php?user_id=%@&bar_id=%@"]
 
-
+#define kAPI_IMAGEUPLOAD [kHostURL stringByAppendingString:@"webservice/user_image_upload.php"]
 
 #define GoogleDirectionAPI @"AIzaSyCmvC_H5S08MvkO-ixoQTpJQGXdu5qyVWg"
 

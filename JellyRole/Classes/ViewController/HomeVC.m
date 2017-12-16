@@ -341,6 +341,13 @@
         [mapVC hideDialogPublic];
         
         [_topTitle setText:@"Map"];
+    } else if ([_mainVC.visibleViewController isKindOfClass:[QuickPlayVC class]]) {
+        
+        QuickPlayVC* mapVC = (QuickPlayVC *)_mainVC.visibleViewController;
+        if ([mapVC removeOpponetFromView]) {
+            
+            return;
+        }
     }
 
     [_mainVC popViewControllerAnimated:true];

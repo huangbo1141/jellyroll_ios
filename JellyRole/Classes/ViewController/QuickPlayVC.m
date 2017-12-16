@@ -166,6 +166,11 @@ typedef enum
         //[self getUserGameData];
     }
     
+    if (_isFromMap) {
+        
+        _chooseOpponentBtn.selected = true;
+        [self locationView:true];
+    }
     
 }
 
@@ -311,8 +316,11 @@ typedef enum
             
             [_opponentSuperView removeFromSuperview];
         }
-        [self getAllRecentGameData];
-        _pickerType = PICKER_TYPE_LOCATION;
+        
+        if (!_isFromMap) {
+            [self getAllRecentGameData];
+            _pickerType = PICKER_TYPE_LOCATION;
+        }
     } else {
         
         [_locationSuperView removeFromSuperview];
@@ -815,7 +823,11 @@ typedef enum
                 
                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
-                    [self.navigationController popViewControllerAnimated:true];
+                    if (!_chooseOpponentBtn.selected) {
+                     
+                      //  [self locationViewAction:_chooseOpponentBtn];
+                    }
+                    //[self.navigationController popViewControllerAnimated:true];
                 }]];
                 
                 if (![Utils isIphone]) {
@@ -896,7 +908,7 @@ typedef enum
             } else {
                 
                 
-                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
+              //  [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
                 [self getGooglePlaces];
                 if (_isFromMap) {
                     
@@ -1084,7 +1096,7 @@ typedef enum
             
                 [_gameTableView updateData:nil isRecent:false isState:false isSession:false];
                 [_comparisionVC updateData:nil];
-                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
+               // [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
             }
             
             if (_isFromMap) {
@@ -1162,7 +1174,7 @@ typedef enum
             } else {
                 
                 
-                [_gAppDelegate showAlertDilog:@"Error!" message:dict1[@"msg"]];
+                [_gAppDelegate showAlertDilog:@"No contacts!" message:@"Add some friends using the Friends screen from the menu"];
             }
             
         }
@@ -1209,13 +1221,34 @@ typedef enum
 
 #pragma mark
 #pragma mark Public Methods
+- (BOOL)removeOpponetFromView {
+    
+    if (_pickerType == PICKER_TYPE_OPPONENT) {
+        
+        [self locationViewAction:_chooseOpponentBtn];
+        return true;
+    }
+    
+    if (_pickerType == PICKER_TYPE_USER && _winView.superview != nil) {
+        [self chooseOpponent:nil];
+        return true;
+    }
+    
+    return false;
+}
 
 
 #pragma mark
 #pragma mark UIButton Action Methods
 - (IBAction)backAction:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:true];
+    if (_pickerType == PICKER_TYPE_USER && _winView.superview != nil) {
+    
+        [self chooseOpponent:nil];
+    } else {
+    
+        [self.navigationController popViewControllerAnimated:true];
+    }
 }
 
 - (IBAction)winAction:(id)sender {

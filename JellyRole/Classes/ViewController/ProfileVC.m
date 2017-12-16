@@ -11,6 +11,7 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "B_Nav_VC.h"
 #import "HomeVC.h"
+#import "UIImage+fixOrientation.h"
 
 @interface ProfileVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -270,7 +271,35 @@
     [self presentViewController:alert animated:true completion:nil];
 }
 
-
+- (void)uploadProfileImage:(NSData *)data {
+ 
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    
+    [_gAppData uploadPost:@"kapil.jpg" data:data userID:_gAppPrefData.userID url:kAPI_IMAGEUPLOAD completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
+                
+                [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
+                AppPrefData* pref = _gAppPrefData;
+                [pref setImageURL:dict1[@"picture"]];
+                [pref saveAllData];
+            } else {
+                
+                [_gAppDelegate showAlertDilog:@"Error" message:dict1[@"msg"]];
+            }
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
 
 #pragma mark
 #pragma mark UIButton Action's
@@ -314,8 +343,12 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     
     UIImage* image = info[UIImagePickerControllerOriginalImage];
-    _imageView.image = image;
-    [picker dismissViewControllerAnimated:true completion:nil];
+    image = [image fixOrientation];
+    [picker dismissViewControllerAnimated:true completion:^{
+    
+        _imageView.image = image;
+        [self uploadProfileImage:UIImageJPEGRepresentation(image, 0.4)];
+    }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
