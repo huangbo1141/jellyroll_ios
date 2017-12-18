@@ -1069,7 +1069,7 @@ typedef enum
     [_userGamesData removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self.view animated:true];
     
-    NSString* url = [NSString stringWithFormat:kAPI_USERGAMESCORE, _gAppPrefData.userID, (_data != nil) ? _data[@"user_id"] : _gAppPrefData.userID];
+    NSString* url = [NSString stringWithFormat:kAPI_USERGAMESCORE, _gAppPrefData.userID, (_data != nil) ? _data[@"user_id"] : _gAppPrefData.userID, _selectedBar[@"bar_id"]];
     
     [_gAppData sendGETRequest:url completion:^(id result) {
         
@@ -1120,8 +1120,7 @@ typedef enum
 }
 
 - (void)getOpponentData {
-    
-   
+       
     [_allFriendsData removeAllObjects];
     [MBProgressHUD showHUDAddedTo:self.view animated:true];    
     NSString* url = [NSString stringWithFormat:kAPI_OPPONENTDATA, _gAppPrefData.userID, _selectedBar[@"bar_id"]];

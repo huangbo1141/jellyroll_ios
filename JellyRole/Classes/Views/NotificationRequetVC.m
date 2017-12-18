@@ -87,31 +87,60 @@
         
     }];
     
-    
-    if ([[[_gAppPrefData userID] lowercaseString] isEqualToString:[dict[@"by_user_id"] lowercaseString]]) {
-        
-        if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+    if (_isPending) {
+      
+        if ([[[_gAppPrefData userID] lowercaseString] isEqualToString:[dict[@"by_user_id"] lowercaseString]]) {
             
-            [winImage setImage:[UIImage imageNamed:@"thumb1"]];
-            [winLabel setText:@"Win"];
+            if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb1"]];
+                [winLabel setText:@"Win"];
+            } else {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb2"]];
+                [winLabel setText:@"Loss"];
+            }
+            
         } else {
             
-            [winImage setImage:[UIImage imageNamed:@"thumb2"]];
-            [winLabel setText:@"Loss"];
+            if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb2"]];
+                [winLabel setText:@"Loss"];
+            } else {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb1"]];
+                [winLabel setText:@"Win"];
+            }
         }
-        
     } else {
         
-        if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+        if ([[[_gAppPrefData userID] lowercaseString] isEqualToString:[dict[@"by_user_id"] lowercaseString]]) {
             
-            [winImage setImage:[UIImage imageNamed:@"thumb2"]];
-            [winLabel setText:@"Loss"];
+            if ([[dict[@"by_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb1"]];
+                [winLabel setText:@"Win"];
+            } else {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb2"]];
+                [winLabel setText:@"Loss"];
+            }
+            
         } else {
             
-            [winImage setImage:[UIImage imageNamed:@"thumb1"]];
-            [winLabel setText:@"Win"];
+            if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"] && [[[_gAppPrefData userID] lowercaseString] isEqualToString:[dict[@"other_user_id"] lowercaseString]]) {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb1"]];
+                [winLabel setText:@"Win"];
+            } else {
+                
+                [winImage setImage:[UIImage imageNamed:@"thumb2"]];
+                [winLabel setText:@"Loss"];
+            }
         }
     }
+    
     
     /*if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
         
