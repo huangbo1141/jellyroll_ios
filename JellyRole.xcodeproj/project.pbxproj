@@ -791,7 +791,7 @@
 			baseConfigurationReference = FADABCACF4B3361F19DF6828 /* Pods-JellyRole.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -800,8 +800,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "1481146e-b52e-414b-8d82-6ff485f76993";
-				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
+				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
+				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Debug;
 		};
@@ -810,7 +810,7 @@
 			baseConfigurationReference = 86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Kapil Kumar (ZXQ928F77U)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
 				DEVELOPMENT_TEAM = HB4KR743HR;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -819,8 +819,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "1481146e-b52e-414b-8d82-6ff485f76993";
-				PROVISIONING_PROFILE_SPECIFIER = SK_Testing_DEV;
+				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
+				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
 			};
 			name = Release;
 		};

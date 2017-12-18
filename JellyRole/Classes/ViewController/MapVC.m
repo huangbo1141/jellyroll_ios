@@ -1735,6 +1735,23 @@
                 ArtPiece*piece = (ArtPiece*)myAnnot;
                 [self goToDetail:piece.data];
             }
+        } else {
+            
+            if ([myAnnot isKindOfClass:[ArtPiece class]]) {
+                ArtPiece*piece = (ArtPiece*)myAnnot;
+                
+                _selectedBar = piece.data[@"bar_id"];
+                
+                
+                
+                NSString* lat = piece.data[@"lat"];
+                NSString* lng = piece.data[@"long"];
+                
+                
+                [self showSearchedLocation:lat :lng];
+
+            }
+            
         }
     } else {
         
