@@ -169,7 +169,7 @@
         NSDictionary *highlightAttributes = @{NSFontAttributeName:font, NSForegroundColorAttributeName:highlightColor};
         
         NSAttributedString *normalText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"/%d", totalGames] attributes:normalAttributes];
-        NSAttributedString *highlightedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", totalGames] attributes:highlightAttributes];
+        NSAttributedString *highlightedText = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", winGames] attributes:highlightAttributes];
         
         NSMutableAttributedString *finalAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:highlightedText];
         [finalAttributedString appendAttributedString:normalText];

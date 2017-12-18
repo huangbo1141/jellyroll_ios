@@ -1358,10 +1358,14 @@ typedef enum
                     
                 }
             } else {
-                if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player2"] lowercaseString]]) {
                     
-                    totalWin = totalWin + 1;
-                } else {
+                    if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                        
+                        totalWin = totalWin + 1;
+                    } else {
+                        
+                    }
                 }
             }
             
@@ -1392,11 +1396,16 @@ typedef enum
                     
                 }
             } else {
-                if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                if ([[[_gAppPrefData userName] lowercaseString] isEqualToString:[dict[@"player2"] lowercaseString]]) {
                     
-                    totalWin = 1;
-                } else {
+                    if ([[dict[@"other_win_or_lost"] lowercaseString] isEqualToString:@"win"]) {
+                        
+                        totalWin = totalWin + 1;
+                    } else {
+                        
+                    }
                 }
+                
             }
             
         }
