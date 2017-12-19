@@ -823,7 +823,7 @@
 #pragma mark Public Methods
 - (void)hideDialogPublic {
  
-    if (_saveLocatioView.hidden == false) {
+    if (_saveLocatioView.hidden == false || _saveHomeLocatioView.hidden == false) {
     
         [self getAllBarData];
         [self getAllRecentBarData];
@@ -894,6 +894,9 @@
     
     [_delegate updateTitle:@"Add Home Location"];
     [_searchBar becomeFirstResponder];
+    
+    [self getAllBarData];
+    [self getAllRecentBarData];
 }
 
 #pragma mark
@@ -1530,7 +1533,7 @@
     MKPinAnnotationView *pin = (MKPinAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier: @"myPin_com.yd.jelly"];
     if (pin == nil)
     {
-        pin = [[MKPinAnnotationView alloc] initWithAnnotation: annotation reuseIdentifier: @"myPin"] ;
+        pin = [[MKPinAnnotationView alloc] initWithAnnotation: annotation reuseIdentifier: @"myPin_com.yd.jelly"] ;
         //        NSLog(@"annssss");
     }
     else
@@ -1662,7 +1665,7 @@
         lbl.backgroundColor = [UIColor clearColor];
         av.canShowCallout = NO;
         
-        if (_saveLocatioView.hidden == true) {
+        if (_saveLocatioView.hidden == true && _saveHomeLocatioView.hidden == true) {
             
             view.frame = CGRectMake(-82, 35, 200, 17);
             view.backgroundColor = [UIColor clearColor];
@@ -1680,7 +1683,14 @@
             [lbl setFont:[UIFont boldSystemFontOfSize:16.0]];
             
             [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
-            lbl2.text = piece.data[@"formattedAddress"];
+            
+            if (_saveHomeLocatioView.hidden == false) {
+                
+                lbl2.text = piece.data[@"address"] ;
+            } else {
+            
+                lbl2.text = piece.data[@"formattedAddress"] ;
+            }
             [imageView setImage:[UIImage imageNamed:@"location"]];
             
             NSLog(@"..........%@", piece.data);
