@@ -69,6 +69,8 @@
     
     _imageView.layer.cornerRadius = 30;
     _imageView.layer.masksToBounds = true;
+    _imageView.layer.borderWidth = 1.5;
+    _imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
     [self updateView:@"" emailID:@""];
     [self getProfileData];
