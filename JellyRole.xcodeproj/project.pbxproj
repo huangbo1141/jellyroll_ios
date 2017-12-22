@@ -166,6 +166,7 @@
 		D17D51E91F6275FD00AACDDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D1CEE0951FE3D3BE00A9F6FF /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
+		D1D51F791FECE3AD006F8CFC /* Jellyroll.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jellyroll.entitlements; sourceTree = "<group>"; };
 		D1DAB9871F83189B00F3BFB1 /* UserComparisionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserComparisionView.h; sourceTree = "<group>"; };
 		D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserComparisionView.m; sourceTree = "<group>"; };
 		D1DB99001F7674D2001CC21C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/View_SearchMAP.xib; sourceTree = "<group>"; };
@@ -323,6 +324,7 @@
 		D17D51931F61E1BE00AACDDC /* JellyRole */ = {
 			isa = PBXGroup;
 			children = (
+				D1D51F791FECE3AD006F8CFC /* Jellyroll.entitlements */,
 				D17D51B31F61E7FE00AACDDC /* Resources */,
 				D17D51AB1F61E44400AACDDC /* Classes */,
 				D17D519D1F61E1BE00AACDDC /* Main.storyboard */,
@@ -513,8 +515,13 @@
 				TargetAttributes = {
 					D17D51901F61E1BE00AACDDC = {
 						CreatedOnToolsVersion = 8.3.3;
-						DevelopmentTeam = HB4KR743HR;
+						DevelopmentTeam = 298D6TZ9B2;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -791,17 +798,18 @@
 			baseConfigurationReference = FADABCACF4B3361F19DF6828 /* Pods-JellyRole.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
-				DEVELOPMENT_TEAM = HB4KR743HR;
+				CODE_SIGN_ENTITLEMENTS = JellyRole/Jellyroll.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TEN2ONE LLC (298D6TZ9B2)";
+				DEVELOPMENT_TEAM = 298D6TZ9B2;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
 				INFOPLIST_FILE = JellyRole/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zac.jellyroll;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
-				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
+				PROVISIONING_PROFILE = "86cfddfc-fa7e-4e45-92b0-f93fd602eec4";
+				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
 			};
 			name = Debug;
 		};
@@ -810,17 +818,18 @@
 			baseConfigurationReference = 86085FF102F2BA98A24D301A /* Pods-JellyRole.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Kapil Kumar (HB4KR743HR)";
-				DEVELOPMENT_TEAM = HB4KR743HR;
+				CODE_SIGN_ENTITLEMENTS = JellyRole/Jellyroll.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: TEN2ONE LLC (298D6TZ9B2)";
+				DEVELOPMENT_TEAM = 298D6TZ9B2;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
 				INFOPLIST_FILE = JellyRole/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.skassociates.jellytole;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zac.jellyroll;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "77797edb-ef60-4be9-88ce-75573981db15";
-				PROVISIONING_PROFILE_SPECIFIER = SKAssociate_Adhoc;
+				PROVISIONING_PROFILE = "86cfddfc-fa7e-4e45-92b0-f93fd602eec4";
+				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
 			};
 			name = Release;
 		};

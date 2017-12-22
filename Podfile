@@ -13,7 +13,7 @@ pod “FBSDKCoreKit“
 pod “FBSDKLoginKit“
 pod “FBSDKShareKit“
 pod "FBAnnotationClustering"
-
+pod 'TOCropViewController'
 use_frameworks!
 
 end

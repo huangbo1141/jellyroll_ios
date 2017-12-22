@@ -516,6 +516,11 @@
     
     
     [_MAP_VIEW setRegion:region animated:YES];
+    
+    if (_selectedBar != nil) {
+        
+        [self getMethod];
+    }
 }
 
 - (void)fetchedData:(NSData *)responseData {
@@ -786,11 +791,11 @@
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:kAppName message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"" message:dict1[@"msg"] preferredStyle:UIAlertControllerStyleAlert];
                 
                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
-                    _selectedBar = @"";
+                    _selectedBar = nil;
                     _saveHomeLocatioView.hidden = true;
                     _saveHomeLocationButton.hidden = true;
                     _saveLocationButton.userInteractionEnabled = false;
@@ -823,6 +828,7 @@
 #pragma mark Public Methods
 - (void)hideDialogPublic {
  
+    _selectedBar = nil;
     if (_saveLocatioView.hidden == false || _saveHomeLocatioView.hidden == false) {
     
         [self getAllBarData];
@@ -860,6 +866,7 @@
     _rectImage.hidden = false;
     _addLocationButton.hidden = false;
     _myLocationButon.hidden = false;
+    
 }
 
 - (UIImage*)captureViewS {
@@ -1637,7 +1644,7 @@
             imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 15, 20)];
             imageView.tag = 44;
             
-            UIView* view = [[UIView alloc] initWithFrame:CGRectMake(-82, 35, 200, 35)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(-82, 35, 200, 35)];
             [view setTag:142];
             
             [view addSubview:lbl];
@@ -1665,7 +1672,7 @@
         lbl.backgroundColor = [UIColor clearColor];
         av.canShowCallout = NO;
         
-        if (_saveLocatioView.hidden == true && _saveHomeLocatioView.hidden == true) {
+        if (_saveLocatioView.hidden == true && _selectedBar == nil) {
             
             view.frame = CGRectMake(-82, 35, 200, 17);
             view.backgroundColor = [UIColor clearColor];
@@ -1675,24 +1682,41 @@
             imageView.image = nil;
             lbl2.text = @"";
         } else {
-            
-            view.frame = CGRectMake(-82, 35, 200, 60);
-            view.backgroundColor = kAppThemeColor;
-            lbl.textColor = [UIColor whiteColor];
-            lbl.frame = CGRectMake(0, 10, 200, 17);
-            [lbl setFont:[UIFont boldSystemFontOfSize:16.0]];
-            
-            [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
-            
-            if (_saveHomeLocatioView.hidden == false) {
+         
+            if (_saveLocatioView.hidden == false) {
+                view.frame = CGRectMake(-82, 35, 200, 60);
+                view.backgroundColor = kAppThemeColor;
+                lbl.textColor = [UIColor whiteColor];
+                lbl.frame = CGRectMake(0, 10, 200, 17);
+                [lbl setFont:[UIFont boldSystemFontOfSize:16.0]];
                 
-                lbl2.text = piece.data[@"address"] ;
+                [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
+                lbl2.text = piece.data[@"formattedAddress"];
+                [imageView setImage:[UIImage imageNamed:@"location"]];
             } else {
-            
-                lbl2.text = piece.data[@"formattedAddress"] ;
+                
+                if (_selectedBar != nil && [_selectedBar isEqualToString:piece.data[@"bar_id"]]) {
+                    view.frame = CGRectMake(-82, 35, 200, 60);
+                    view.backgroundColor = kAppThemeColor;
+                    lbl.textColor = [UIColor whiteColor];
+                    lbl.frame = CGRectMake(0, 10, 200, 17);
+                    [lbl setFont:[UIFont boldSystemFontOfSize:16.0]];
+                    
+                    [lbl2 setFont:[UIFont systemFontOfSize:12.0]];
+                    lbl2.text = piece.data[@"address"] ;
+                    
+                    [imageView setImage:[UIImage imageNamed:@"location"]];
+                } else {
+                    
+                    view.frame = CGRectMake(-82, 35, 200, 17);
+                    view.backgroundColor = [UIColor clearColor];
+                    lbl.textColor = [UIColor blackColor];
+                    lbl.frame = CGRectMake(0, 0, 200, 17);
+                    [lbl setFont:[UIFont boldSystemFontOfSize:12.0]];
+                    imageView.image = nil;
+                    lbl2.text = @"";
+                }
             }
-            [imageView setImage:[UIImage imageNamed:@"location"]];
-            
             NSLog(@"..........%@", piece.data);
         }
         return av;
@@ -1750,8 +1774,12 @@
             if ([myAnnot isKindOfClass:[ArtPiece class]]) {
                 ArtPiece*piece = (ArtPiece*)myAnnot;
                 
-                _selectedBar = piece.data[@"bar_id"];
-                
+                if (_saveHomeLocatioView.hidden == false) {
+                    
+                    _selectedBar = piece.data[@"bar_id"];
+                    _saveHomeLocationButton.userInteractionEnabled = true;
+                    _saveHomeLocationButton.alpha = 1.0;
+                }
                 
                 
                 NSString* lat = piece.data[@"lat"];

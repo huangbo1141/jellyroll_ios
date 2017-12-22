@@ -11,6 +11,7 @@
 @interface StatsRankingView ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSArray* _list;
+    CGFloat mainWidth;
 }
 @end
 
@@ -20,6 +21,8 @@
 #pragma mark -
 #pragma mark - Public Methods
 - (void)setView {
+    
+    mainWidth = self.frame.size.width;
     
     [self setDataSource:self];
     [self setDelegate:self];
@@ -75,17 +78,21 @@
     int total = [dict[@"total"] intValue];
     int win = [dict[@"win"] intValue];
     
-    win = (win*100)/total;
+    if (win != 0) {
+    
+        win = (win*100)/total;
+    }
+    
     
     for (NSLayoutConstraint* consts in label7.constraints) {
         
-        NSLog(@"....%f", view.frame.size.width);
+        NSLog(@"....%f", mainWidth);
         if (win == 0) {            
             //consts.constant = 20;
             //[label7 setText:@"0%  "];
             consts.constant = 0;
         } else {
-            consts.constant = (view.frame.size.width*win)/100;
+            consts.constant = (mainWidth*win)/100;
             
             [label7 setText:[NSString stringWithFormat:@"%d%%", win]];
         }

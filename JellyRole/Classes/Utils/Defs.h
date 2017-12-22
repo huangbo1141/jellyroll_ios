@@ -20,10 +20,10 @@
 
 #define kHostURL @"http://jellyrollpool.com/"
 #define kAPI_LOGIN [kHostURL stringByAppendingString:@"webservice/login.php"]
-#define kAPI_LoginParams @"username=%@&password=%@&flag=app&login_flag=%@"
+#define kAPI_LoginParams @"username=%@&password=%@&flag=app&login_flag=%@&device_token=%@"
 
 #define kAPI_SIGNUP [kHostURL stringByAppendingString:@"webservice/signup.php"]
-#define kAPI_SignupParams @"username=%@&email=%@&password=%@&flag=app&firstname=%@&lastname=%@"
+#define kAPI_SignupParams @"username=%@&email=%@&password=%@&flag=app&firstname=%@&lastname=%@&device_token=%@"
 
 #define kAPI_FEEDBACK [kHostURL stringByAppendingString:@"webservice/feedback.php?user_id=%@&feedback=%@"]
 

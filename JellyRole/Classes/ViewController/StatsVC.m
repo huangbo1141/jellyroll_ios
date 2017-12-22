@@ -14,6 +14,7 @@
 @interface StatsVC ()
 {
     NSMutableArray *_list;
+    
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -97,6 +98,8 @@
     
     _noRecordLabel1.hidden = true;
     _noRecordLabel2.hidden = true;
+    
+    
 }
 
 - (void)updateView:(NSDictionary *)dict games:(NSArray *)games {

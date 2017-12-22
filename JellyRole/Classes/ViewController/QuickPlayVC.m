@@ -382,7 +382,7 @@ typedef enum
         [_gameTableView updateData:games isRecent:false isState:false isSession:session];
     }
     
-    float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0;
+    float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0, percent=0, percent_o=0;
     
     
     for (NSDictionary* myDict in dict[@"data"]) {
@@ -394,7 +394,21 @@ typedef enum
         overOppLoss += [myDict[@"loss_o"] intValue];
     }
     
+    if (overMyWin == 0) {
+        
+        
+    } else {
+        
+        percent = ((overMyWin/(overMyLoss+overMyWin))*100);
+    }
     
+    if (overOppWin == 0) {
+        
+        
+    } else {
+        
+        percent_o = ((overOppWin/(overOppLoss+overOppWin))*100);
+    }
     
     NSMutableDictionary* lDict = [NSMutableDictionary dictionary];
     [lDict setValue:dict[@"my_rank_overall"] forKey:@"my_rank"];
@@ -406,8 +420,8 @@ typedef enum
     [lDict setValue:[NSString stringWithFormat:@"%.0f", overOppWin] forKey:@"win_o"];
     [lDict setValue:[NSString stringWithFormat:@"%.0f", overOppLoss] forKey:@"loss_o"];
     
-    [lDict setValue:[NSString stringWithFormat:@"%.0f",((overMyWin/(overMyLoss+overMyWin))*100)] forKey:@"percent"];
-    [lDict setValue:[NSString stringWithFormat:@"%.0f",((overOppWin/(overOppLoss+overOppWin))*100)] forKey:@"percent_o"];
+    [lDict setValue:[NSString stringWithFormat:@"%.0f",percent] forKey:@"percent"];
+    [lDict setValue:[NSString stringWithFormat:@"%.0f",percent_o] forKey:@"percent_o"];
     
     
     NSMutableArray* mainArray = [NSMutableArray arrayWithArray:dict[@"data"]];

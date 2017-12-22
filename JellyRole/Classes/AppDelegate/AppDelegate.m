@@ -39,9 +39,9 @@
     // Override point for customization after application launch.
     
     
-    NSLog(@".....%@", [UIFont familyNames]);
+    //NSLog(@".....%@", [UIFont familyNames]);
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
+    /*if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
         
         UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
         [center requestAuthorizationWithOptions:(UNAuthorizationOptionBadge | UNAuthorizationOptionSound | UNAuthorizationOptionAlert)
@@ -53,10 +53,12 @@
         
     } else {
         
-        [[UIApplication sharedApplication] registerUserNotificationSettings:  [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil]];
         
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
+    }*/
+    
+    [[UIApplication sharedApplication] registerUserNotificationSettings:  [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound) categories:nil]];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
     
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
@@ -133,6 +135,12 @@
     _newToken = newToken;
     
     [self updateData:_newToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+
+    NSLog(@"My token is: %@", error.localizedDescription);
+    
 }
 
 -(void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions options))completionHandler{
@@ -367,6 +375,15 @@
 
 #pragma mark -
 #pragma mark Public Methods
+- (NSString *)deviceToken {
+    
+    if (_newToken == nil) {
+        
+        _newToken = @"NULL";
+    }
+    return _newToken;
+}
+
 - (void)loginSucessful {
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -489,7 +506,7 @@
             
         } else {
             
-            NSString* params = [NSString stringWithFormat:@"%@&username=%@&password=%@", paramss, text1, text2];
+            NSString* params = [NSString stringWithFormat:@"%@&username=%@&password=%@&device_token=%@", paramss, text1, text2, [_gAppDelegate deviceToken]];
             
             [self loginFBLogin:params];
         }
@@ -525,10 +542,10 @@
                 
                 NSDictionary* row = dict1[@"row"];
                 
-                NSString* params = [NSString stringWithFormat:@"username=%@&password=%@&image=%@&action=signfb", row[@"username"], row[@"password"], row[@"image"]];
+                NSString* params = [NSString stringWithFormat:@"username=%@&password=%@&image=%@&action=signfb&device_token=%@", row[@"username"], row[@"password"], row[@"image"], [_gAppDelegate deviceToken]];
                 
                 [self loginFBLogin:params];
-                
+                //
             } else {
                 
                 [self showFBLoginDialog:paramss userName:userName];

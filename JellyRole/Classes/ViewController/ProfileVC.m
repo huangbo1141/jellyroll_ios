@@ -12,8 +12,8 @@
 #import "B_Nav_VC.h"
 #import "HomeVC.h"
 #import "UIImage+fixOrientation.h"
-
-@interface ProfileVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+#import <TOCropViewController/TOCropViewController.h>
+@interface ProfileVC ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate, TOCropViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *label1;
 @property (weak, nonatomic) IBOutlet UILabel *label2;
@@ -344,16 +344,39 @@
     
     UIImage* image = info[UIImagePickerControllerOriginalImage];
     image = [image fixOrientation];
+    
+    TOCropViewController *cropViewController = [[TOCropViewController alloc] initWithCroppingStyle:TOCropViewCroppingStyleCircular image:image];
+    cropViewController.delegate = self;
+    
     [picker dismissViewControllerAnimated:true completion:^{
     
         _imageView.image = image;
-        [self uploadProfileImage:UIImageJPEGRepresentation(image, 0.4)];
+        if (![Utils isIphone]) {
+            cropViewController.popoverPresentationController.sourceView = self.view;
+        }
+        
+        [self presentViewController:cropViewController animated:true completion:nil];
     }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     
     [picker dismissViewControllerAnimated:true completion:nil];
+}
+
+- (void)cropViewController:(TOCropViewController *)cropViewController didCropToCircularImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
+{
+    // 'image' is the newly cropped, circular version of the original image
+    [cropViewController dismissViewControllerAnimated:true completion:^{
+ 
+        _imageView.image = image;
+        [self uploadProfileImage:UIImageJPEGRepresentation(image, 0.4)];
+    }];
+}
+
+- (void)cropViewController:(nonnull TOCropViewController *)cropViewController didFinishCancelled:(BOOL)cancelled {
+    
+    [cropViewController dismissViewControllerAnimated:true completion:nil];
 }
 
 @end

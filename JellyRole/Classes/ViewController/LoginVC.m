@@ -158,7 +158,7 @@
             strEmailOrUsername = @"email";
         }
         
-        NSString* params = [NSString stringWithFormat:kAPI_LoginParams, _txt_username.text, _txt_password.text, strEmailOrUsername];
+        NSString* params = [NSString stringWithFormat:kAPI_LoginParams, _txt_username.text, _txt_password.text, strEmailOrUsername, [_gAppDelegate deviceToken]];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:true];
         [_gAppData sendPostRequest:kAPI_LOGIN params:params completion:^(id result) {

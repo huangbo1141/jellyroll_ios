@@ -29,6 +29,7 @@ PODS:
     - FBSDKCoreKit
   - KYDrawerController (2.0.1)
   - MBProgressHUD (1.0.0)
+  - TOCropViewController (2.0.12)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - FBSDKShareKit
   - KYDrawerController
   - MBProgressHUD (~> 1.0.0)
+  - TOCropViewController
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
@@ -48,7 +50,8 @@ SPEC CHECKSUMS:
   FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
   KYDrawerController: b716cfa5730dc2133a67efcfc28b3b5a2cff6101
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  TOCropViewController: e6e31b38d785a901e5651a1e7fff71bcda6c5214
 
-PODFILE CHECKSUM: d563318fdd17e61b6cdb6bf8d0c154756deec2ec
+PODFILE CHECKSUM: 3437b879f18af66d08bfe716b88ce74038393820
 
 COCOAPODS: 1.2.1

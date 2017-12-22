@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "928C30D2EB0232DEE1739C936CE9109B"
+               BlueprintIdentifier = "590CC3DF127156C12B16EFD394570E9C"
                BuildableName = "Pods_JellyRole.framework"
                BlueprintName = "Pods-JellyRole"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -47,7 +47,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "928C30D2EB0232DEE1739C936CE9109B"
+            BlueprintIdentifier = "590CC3DF127156C12B16EFD394570E9C"
             BuildableName = "Pods_JellyRole.framework"
             BlueprintName = "Pods-JellyRole"
             ReferencedContainer = "container:Pods.xcodeproj">

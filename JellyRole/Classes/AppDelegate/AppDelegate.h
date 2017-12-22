@@ -18,6 +18,7 @@
 - (void)loginSucessful;
 - (void)logoutSucessful;
 - (void)checkFBLogin:(NSString *)email username:(NSString *)userName params:(NSString *)paramss;
+- (NSString *)deviceToken;
 
 @end
 

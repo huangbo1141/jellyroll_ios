@@ -167,7 +167,7 @@
         
     } else {
         
-        NSString* params = [NSString stringWithFormat:kAPI_SignupParams, _txt_username.text, _txt_email.text, _txt_password.text, _txt_firstname.text, _txt_lastname.text];
+        NSString* params = [NSString stringWithFormat:kAPI_SignupParams, _txt_username.text, _txt_email.text, _txt_password.text, _txt_firstname.text, _txt_lastname.text, [_gAppDelegate deviceToken]];
         
         [MBProgressHUD showHUDAddedTo:self.view animated:true];
         [_gAppData sendPostRequest:kAPI_SIGNUP params:params completion:^(id result) {
