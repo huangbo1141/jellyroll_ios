@@ -16,7 +16,6 @@
 		D12B80561F99E26000EA52B7 /* GameCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D12B80551F99E26000EA52B7 /* GameCell.m */; };
 		D12C70461F70F48900285B6B /* FeedbackVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D12C70451F70F48900285B6B /* FeedbackVC.m */; };
 		D134EC611FDA6BA900208596 /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = D134EC601FDA6BA900208596 /* Readme.md */; };
-		D140EEE01FA9B675000B94DE /* MapVCBackup.m in Sources */ = {isa = PBXBuildFile; fileRef = D140EEDF1FA9B675000B94DE /* MapVCBackup.m */; };
 		D14C8DB31F73290200B67244 /* FriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB21F73290200B67244 /* FriendsVC.m */; };
 		D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D14C8DB51F73500200B67244 /* ProfileVC.m */; };
 		D15B22C71F6FB40C007EF10F /* SplashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D15B22C61F6FB40C007EF10F /* SplashVC.m */; };
@@ -95,8 +94,6 @@
 		D12C70441F70F48900285B6B /* FeedbackVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackVC.h; sourceTree = "<group>"; };
 		D12C70451F70F48900285B6B /* FeedbackVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackVC.m; sourceTree = "<group>"; };
 		D134EC601FDA6BA900208596 /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
-		D140EEDE1FA9B675000B94DE /* MapVCBackup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVCBackup.h; sourceTree = "<group>"; };
-		D140EEDF1FA9B675000B94DE /* MapVCBackup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVCBackup.m; sourceTree = "<group>"; };
 		D14C8DB11F73290200B67244 /* FriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsVC.h; sourceTree = "<group>"; };
 		D14C8DB21F73290200B67244 /* FriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsVC.m; sourceTree = "<group>"; };
 		D14C8DB41F73500200B67244 /* ProfileVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileVC.h; sourceTree = "<group>"; };
@@ -243,8 +240,6 @@
 		D15B22C41F6FB3EF007EF10F /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				D140EEDE1FA9B675000B94DE /* MapVCBackup.h */,
-				D140EEDF1FA9B675000B94DE /* MapVCBackup.m */,
 				D15B22C51F6FB40C007EF10F /* SplashVC.h */,
 				D15B22C61F6FB40C007EF10F /* SplashVC.m */,
 				D15B22C81F6FB722007EF10F /* LoginVC.h */,
@@ -661,7 +656,6 @@
 				D14C8DB61F73500200B67244 /* ProfileVC.m in Sources */,
 				D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */,
 				D17D51D21F62019000AACDDC /* LeaderboardView.m in Sources */,
-				D140EEE01FA9B675000B94DE /* MapVCBackup.m in Sources */,
 				D170E5041F86746500118C03 /* FriendsView.m in Sources */,
 				D15B22E21F6FE732007EF10F /* SignupVC.m in Sources */,
 				D15B22D91F6FC722007EF10F /* DataManager.m in Sources */,

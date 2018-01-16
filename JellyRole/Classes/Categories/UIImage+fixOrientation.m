@@ -90,4 +90,41 @@
     return img;
 }
 
+- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)newSize {
+   
+    CGSize si = CGSizeMake(newSize.width, ceil(newSize.width/self.size.width * self.size.height));
+    
+    
+    UIGraphicsBeginImageContextWithOptions(si, false, self.scale);
+    [image drawInRect:CGRectMake(0, 0, si.width, si.height)];
+    UIImage *destImage = UIGraphicsGetImageFromCurrentImageContext();    
+    UIGraphicsEndImageContext();
+    return destImage;
+}
+
+/*- (UIImage *)imageWithImage:(UIImage *)image convertToSize:(CGSize)size
+{
+    CGFloat scale = MAX(size.width/image.size.width, size.height/image.size.height);
+    CGFloat width = image.size.width * scale;
+    CGFloat height = image.size.height * scale;
+    CGRect imageRect = CGRectMake((size.width - width)/2.0f,
+                                  (size.height - height)/2.0f,
+                                  width,
+                                  height);
+    
+    UIGraphicsBeginImageContextWithOptions(size, NO, 0);
+    [image drawInRect:imageRect];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}*/
+
+/*    CGSize canvasSize = CGSizeMake(width, ceil(width/self.size.width * self.size.height));
+    UIGraphicsBeginImageContextWithOptions(canvasSize, false, self.scale)
+    defer { UIGraphicsEndImageContext() }
+    draw(in: CGRect(origin: .zero, size: canvasSize))
+    return UIGraphicsGetImageFromCurrentImageContext()*/
+    
+
+
 @end

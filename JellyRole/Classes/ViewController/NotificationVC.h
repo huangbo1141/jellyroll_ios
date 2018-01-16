@@ -8,12 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol NotificationVCDelegates <NSObject>
+
+- (void)updateTitleNotification:(NSString *)title;
+
+
+@end
+
 @interface NotificationVC : UIViewController
 {
 @public
     UIImage* _mapView;
 }
 
-
+@property(nonatomic, weak) id <NotificationVCDelegates> delegate;
 
 @end

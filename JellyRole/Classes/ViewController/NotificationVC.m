@@ -45,6 +45,8 @@
     
     [super viewWillAppear:animated];
     
+    [_delegate updateTitleNotification:@"Notifications"];
+    
     [self getAllPendingData];
 }
 
@@ -159,7 +161,9 @@
             }
         } else {
             
-            _centerConstraint.constant = -((self.view.frame.size.height/2) - 50);
+            //_centerConstraint.constant = -((self.view.frame.size.height/2) - 60);
+            _centerConstraint.constant = -(_pendingView.frame.origin.y-25);
+            NSLog(@"....%f", _centerConstraint.constant);
         }
         
     } else {

@@ -100,6 +100,11 @@
     return ([UIScreen mainScreen].bounds.size.height == 736);
 }
 
++ (BOOL)isIphoneX {
+ 
+    return ([UIScreen mainScreen].bounds.size.height == 812);
+}
+
 + (NSString *)getLocalResourceWithName:(NSString *)name
 {
 	return [[NSBundle mainBundle] pathForResource:name ofType:nil];

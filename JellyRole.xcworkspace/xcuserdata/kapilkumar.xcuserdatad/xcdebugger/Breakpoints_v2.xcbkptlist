@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/HomeVC.m"
-            timestampString = "535469320.424189"
+            timestampString = "537793042.43542"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "569"
-            endingLineNumber = "569">
+            startingLineNumber = "587"
+            endingLineNumber = "587">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -184,7 +184,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.276369"
+            timestampString = "535999233.729607"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "464"
@@ -200,7 +200,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.280363"
+            timestampString = "535999233.744687"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "469"
@@ -216,7 +216,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.280947"
+            timestampString = "535999233.745767"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "414"
@@ -232,7 +232,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.281501"
+            timestampString = "535999233.746751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "417"
@@ -248,7 +248,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.282021"
+            timestampString = "535999233.747776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "421"
@@ -264,7 +264,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.282608"
+            timestampString = "535999233.748745"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "427"
@@ -280,7 +280,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.283157"
+            timestampString = "535999233.749839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "432"
@@ -296,11 +296,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "534243735.120829"
+            timestampString = "537786208.0560091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-updateStatusDataConfirmrequest:status:"
             landmarkType = "7">
          </BreakpointContent>
@@ -312,11 +312,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.433896"
+            timestampString = "537793042.436609"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1599"
-            endingLineNumber = "1599"
+            startingLineNumber = "1651"
+            endingLineNumber = "1651"
             landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
             landmarkType = "7">
          </BreakpointContent>
@@ -328,11 +328,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.434041"
+            timestampString = "537793042.439577"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "718"
-            endingLineNumber = "718"
+            startingLineNumber = "759"
+            endingLineNumber = "759"
             landmarkName = "-getLocationData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -344,11 +344,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.30493"
+            timestampString = "536019302.918457"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-updateData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -376,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.30694"
+            timestampString = "536019302.918971"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "552"
-            endingLineNumber = "552"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
             landmarkName = "-checkFBLogin:username:params:"
             landmarkType = "7">
          </BreakpointContent>
@@ -392,7 +392,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/ProfileVC.m"
-            timestampString = "535626616.307354"
+            timestampString = "537210614.250833"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
@@ -408,12 +408,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/ProfileVC.m"
-                  timestampString = "535619903.562858"
+                  timestampString = "537793176.84769"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "194">
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "143">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -423,12 +423,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/ProfileVC.m"
-                  timestampString = "535619903.566048"
+                  timestampString = "537793176.8502949"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "156"
+                  endingLineNumber = "156"
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -440,7 +440,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/ProfileVC.m"
-            timestampString = "535626616.315067"
+            timestampString = "537210614.250909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "159"
@@ -456,7 +456,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/ProfileVC.m"
-            timestampString = "535626616.316073"
+            timestampString = "537210614.250978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "348"
@@ -472,7 +472,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/Views/GameView.m"
-            timestampString = "535313384.137461"
+            timestampString = "537210614.251047"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "39"
@@ -488,11 +488,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.434332"
+            timestampString = "537793042.441062"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "804"
-            endingLineNumber = "804"
+            startingLineNumber = "845"
+            endingLineNumber = "845"
             landmarkName = "-addFriendsData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,11 +504,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.434459"
+            timestampString = "537793042.442696"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "807"
-            endingLineNumber = "807"
+            startingLineNumber = "848"
+            endingLineNumber = "848"
             landmarkName = "-addFriendsData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -520,11 +520,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.434552"
+            timestampString = "537793042.4438649"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "815"
-            endingLineNumber = "815"
+            startingLineNumber = "856"
+            endingLineNumber = "856"
             landmarkName = "-addFriendsData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -536,11 +536,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.434636"
+            timestampString = "537793042.444749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
+            startingLineNumber = "608"
+            endingLineNumber = "608"
             landmarkName = "-shareOnFacebook"
             landmarkType = "7">
          </BreakpointContent>
@@ -568,11 +568,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "534243735.146996"
+            timestampString = "537786208.129944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "407"
+            endingLineNumber = "407"
             landmarkName = "-selectedConfirmDict:"
             landmarkType = "7">
          </BreakpointContent>
@@ -584,11 +584,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "534243735.147347"
+            timestampString = "537786208.130924"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
+            startingLineNumber = "400"
+            endingLineNumber = "400"
             landmarkName = "-selectedDeleteDict:"
             landmarkType = "7">
          </BreakpointContent>
@@ -600,11 +600,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/Views/NotificationRequetVC.m"
-            timestampString = "535277203.329372"
+            timestampString = "537776714.2586221"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-swipeTableCell:swipeButtonsForDirection:swipeSettings:expansionSettings:"
             landmarkType = "7">
          </BreakpointContent>
@@ -616,11 +616,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/Views/NotificationRequetVC.m"
-            timestampString = "535277203.329993"
+            timestampString = "537776714.2591929"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "208"
-            endingLineNumber = "208"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "-swipeTableCell:swipeButtonsForDirection:swipeSettings:expansionSettings:"
             landmarkType = "7">
          </BreakpointContent>
@@ -632,11 +632,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.31789"
+            timestampString = "537793042.4459521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1027"
-            endingLineNumber = "1027"
+            startingLineNumber = "1036"
+            endingLineNumber = "1036"
             landmarkName = "-handleLongPress:"
             landmarkType = "7">
          </BreakpointContent>
@@ -648,11 +648,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.32008"
+            timestampString = "537793042.447624"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1045"
-            endingLineNumber = "1045"
+            startingLineNumber = "1054"
+            endingLineNumber = "1054"
             landmarkName = "-buttonKeepPressing:"
             landmarkType = "7">
          </BreakpointContent>
@@ -664,11 +664,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.32172"
+            timestampString = "537793042.448416"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1062"
-            endingLineNumber = "1062"
+            startingLineNumber = "1071"
+            endingLineNumber = "1071"
             landmarkName = "-buttonKeepPressing:"
             landmarkType = "7">
          </BreakpointContent>
@@ -680,11 +680,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.440605"
+            timestampString = "537793042.449024"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "668"
-            endingLineNumber = "668"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
             landmarkName = "-reporBarData"
             landmarkType = "7">
             <Locations>
@@ -696,12 +696,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/QuickPlayVC.m"
-                  timestampString = "535619903.658071"
+                  timestampString = "537793177.608726"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "668"
-                  endingLineNumber = "668"
-                  offsetFromSymbolStart = "526">
+                  startingLineNumber = "709"
+                  endingLineNumber = "709"
+                  offsetFromSymbolStart = "438">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -711,12 +711,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/QuickPlayVC.m"
-                  timestampString = "535619903.660205"
+                  timestampString = "537793177.6124851"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "668"
-                  endingLineNumber = "668"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "709"
+                  endingLineNumber = "709"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -728,7 +728,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.287659"
+            timestampString = "535999233.758515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "116"
@@ -744,12 +744,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/FriendsVC.m"
-                  timestampString = "535619903.671819"
+                  timestampString = "537793177.642417"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "116"
                   endingLineNumber = "116"
-                  offsetFromSymbolStart = "574">
+                  offsetFromSymbolStart = "482">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -759,12 +759,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/FriendsVC.m"
-                  timestampString = "535619903.674573"
+                  timestampString = "537793177.645638"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "116"
                   endingLineNumber = "116"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -776,7 +776,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.288324"
+            timestampString = "535999233.759882"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
@@ -792,7 +792,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/FriendsVC.m"
-            timestampString = "535314816.288939"
+            timestampString = "535999233.761495"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
@@ -808,7 +808,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/HomeVC.m"
-            timestampString = "535469320.440786"
+            timestampString = "537793042.449978"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "291"
@@ -824,11 +824,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.441282"
+            timestampString = "537793042.450134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "955"
-            endingLineNumber = "955"
+            startingLineNumber = "996"
+            endingLineNumber = "996"
             landmarkName = "-getRecentGameData"
             landmarkType = "7">
             <Locations>
@@ -840,12 +840,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/QuickPlayVC.m"
-                  timestampString = "535619903.697167"
+                  timestampString = "537793177.732216"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "955"
-                  endingLineNumber = "955"
-                  offsetFromSymbolStart = "776">
+                  startingLineNumber = "996"
+                  endingLineNumber = "996"
+                  offsetFromSymbolStart = "657">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -855,12 +855,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/QuickPlayVC.m"
-                  timestampString = "535619903.700616"
+                  timestampString = "537793177.7347029"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "955"
-                  endingLineNumber = "955"
-                  offsetFromSymbolStart = "52">
+                  startingLineNumber = "996"
+                  endingLineNumber = "996"
+                  offsetFromSymbolStart = "39">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -871,60 +871,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.441382"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1473"
-            endingLineNumber = "1473"
-            landmarkName = "-recentFriendsAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.441463"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1487"
-            endingLineNumber = "1487"
-            landmarkName = "-myFriendsAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.441581"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1431"
-            endingLineNumber = "1431"
-            landmarkName = "-userSessionAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.323845"
+            timestampString = "537793042.450861"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1308"
-            endingLineNumber = "1308"
+            startingLineNumber = "1319"
+            endingLineNumber = "1319"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -936,43 +888,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.325297"
+            timestampString = "537793042.451462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "782"
-            endingLineNumber = "782"
-            landmarkName = "-getSaveHomeLocationData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.328864"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "787"
-            endingLineNumber = "787"
-            landmarkName = "-getSaveHomeLocationData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.330425"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1102"
-            endingLineNumber = "1102"
+            startingLineNumber = "1111"
+            endingLineNumber = "1111"
             landmarkName = "-recetAction:"
             landmarkType = "7">
          </BreakpointContent>
@@ -983,76 +903,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/HomeVC.m"
-            timestampString = "535469320.443862"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "338"
-            endingLineNumber = "338"
-            landmarkName = "-backButtonAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "535268056.443196"
+            timestampString = "537786208.166169"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
-            landmarkName = "-getAllPendingData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[NotificationVC getAllPendingData]"
-                  moduleName = "Jellyroll"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/NotificationVC.m"
-                  timestampString = "535619903.78684"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "524">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__35-[NotificationVC getAllPendingData]_block_invoke"
-                  moduleName = "Jellyroll"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/NotificationVC.m"
-                  timestampString = "535619903.789876"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "179"
-                  endingLineNumber = "179"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "535305572.123604"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "251"
-            endingLineNumber = "251"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
             landmarkName = "-updateStatusDataConfirmrequest:status:"
             landmarkType = "7">
             <Locations>
@@ -1064,12 +920,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/NotificationVC.m"
-                  timestampString = "535619903.79613"
+                  timestampString = "537793177.767756"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "251"
-                  endingLineNumber = "251"
-                  offsetFromSymbolStart = "362">
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "326">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1079,12 +935,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/NotificationVC.m"
-                  timestampString = "535619903.799198"
+                  timestampString = "537793177.77127"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "251"
-                  endingLineNumber = "251"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "19">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1096,11 +952,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
-            timestampString = "535305612.881769"
+            timestampString = "537786208.16732"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "254"
-            endingLineNumber = "254"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "-updateStatusDataConfirmrequest:status:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1111,268 +967,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.444328"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1321"
-            endingLineNumber = "1321"
-            landmarkName = "-userSessionAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.444418"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1366"
-            endingLineNumber = "1366"
-            landmarkName = "-userSessionAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.444518"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1144"
-            endingLineNumber = "1144"
-            landmarkName = "-getOpponentData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.444596"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1140"
-            endingLineNumber = "1140"
-            landmarkName = "-getOpponentData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/StatsVC.m"
-            timestampString = "535465350.977505"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "107"
-            endingLineNumber = "107"
-            landmarkName = "StatsVC"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/Views/GameView.m"
-            timestampString = "535350898.399392"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/StatsVC.m"
-            timestampString = "535465350.977712"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
-            landmarkName = "-getStatsData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[StatsVC getStatsData]"
-                  moduleName = "Jellyroll"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/StatsVC.m"
-                  timestampString = "535619903.848196"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "428">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__23-[StatsVC getStatsData]_block_invoke"
-                  moduleName = "Jellyroll"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/ViewController/StatsVC.m"
-                  timestampString = "535619903.851296"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "150"
-                  endingLineNumber = "150"
-                  offsetFromSymbolStart = "12">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/StatsVC.m"
-            timestampString = "535465350.977806"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-getStatsData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.332661"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1618"
-            endingLineNumber = "1618"
-            landmarkName = "-mapView:viewForAnnotation:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.446364"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1093"
-            endingLineNumber = "1093"
-            landmarkName = "-getUserGameData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.44652"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1086"
-            endingLineNumber = "1086"
-            landmarkName = "-getUserGameData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.446655"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "375"
-            endingLineNumber = "375"
-            landmarkName = "-updateView:games:session:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.446795"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "427"
-            endingLineNumber = "427"
-            landmarkName = "-updateView:games:session:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
-            timestampString = "535469320.447032"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
-            landmarkName = "-getAllRecentGameData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.334243"
+            timestampString = "536019302.928191"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "-showFBLoginDialog:userName:"
             landmarkType = "7">
             <Locations>
@@ -1384,12 +984,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/AppDelegate/AppDelegate.m"
-                  timestampString = "535619903.898205"
+                  timestampString = "537793177.792833"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "477"
-                  endingLineNumber = "477"
-                  offsetFromSymbolStart = "174">
+                  startingLineNumber = "473"
+                  endingLineNumber = "473"
+                  offsetFromSymbolStart = "157">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1399,12 +999,12 @@
                   moduleName = "Jellyroll"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/kapilkumar/SVNProjects/Projects/Bo%20Huang/iOS/JellyRole/JellyRole/Classes/AppDelegate/AppDelegate.m"
-                  timestampString = "535619903.900323"
+                  timestampString = "537793177.795048"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "477"
-                  endingLineNumber = "477"
-                  offsetFromSymbolStart = "12">
+                  startingLineNumber = "473"
+                  endingLineNumber = "473"
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1416,11 +1016,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.334645"
+            timestampString = "536019302.92837"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "497"
-            endingLineNumber = "497"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
             landmarkName = "-showFBLoginDialog:userName:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1432,11 +1032,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.335157"
+            timestampString = "536019302.929717"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
+            startingLineNumber = "528"
+            endingLineNumber = "528"
             landmarkName = "-checkFBLogin:username:params:"
             landmarkType = "7">
          </BreakpointContent>
@@ -1448,11 +1048,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.335876"
+            timestampString = "537793042.452455"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "-showSearchedLocation::"
             landmarkType = "7">
          </BreakpointContent>
@@ -1463,24 +1063,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/ViewController/MapVC.m"
-            timestampString = "535626616.337806"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1540"
-            endingLineNumber = "1540"
-            landmarkName = "-mapView:viewForAnnotation:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.340651"
+            timestampString = "536019302.933465"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "129"
@@ -1495,13 +1079,237 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JellyRole/Classes/AppDelegate/AppDelegate.m"
-            timestampString = "535626616.341136"
+            filePath = "JellyRole/Classes/ViewController/HomeVC.m"
+            timestampString = "537793042.453365"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
+            startingLineNumber = "338"
+            endingLineNumber = "338"
+            landmarkName = "-backButtonAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/MapVC.m"
+            timestampString = "537793042.453565"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "944"
+            endingLineNumber = "944"
+            landmarkName = "-createLocationAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
+            timestampString = "537786208.190057"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
+            landmarkName = "-updateBottomConstraint"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/NotificationVC.m"
+            timestampString = "537786208.191312"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "-updateBottomConstraint"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/Views/StatsRankingView.m"
+            timestampString = "537793042.454487"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.454852"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1347"
+            endingLineNumber = "1347"
+            landmarkName = "-chooseOpponent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.455985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1353"
+            endingLineNumber = "1353"
+            landmarkName = "-userGameAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.456992"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1334"
+            endingLineNumber = "1334"
+            landmarkName = "-userViewAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.461419"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1488"
+            endingLineNumber = "1488"
+            landmarkName = "-recentGameAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.464294"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1503"
+            endingLineNumber = "1503"
+            landmarkName = "-allGameAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.465925"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1517"
+            endingLineNumber = "1517"
+            landmarkName = "-recentFriendsAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.466887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1533"
+            endingLineNumber = "1533"
+            landmarkName = "-myFriendsAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.467567"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1549"
+            endingLineNumber = "1549"
+            landmarkName = "-inviteFriendAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793042.468224"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1306"
+            endingLineNumber = "1306"
+            landmarkName = "-backAction:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JellyRole/Classes/ViewController/QuickPlayVC.m"
+            timestampString = "537793174.2405601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
+            landmarkName = "-userView:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

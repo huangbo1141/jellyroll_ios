@@ -39,7 +39,7 @@
     // Override point for customization after application launch.
     
     
-    //NSLog(@".....%@", [UIFont familyNames]);
+    NSLog(@".....%f", [UIScreen mainScreen].bounds.size.height);
     
     /*if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"10.0")) {
         
@@ -147,10 +147,6 @@
     completionHandler(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge);
 }
 
-//Called to let your app know which action was selected by the user for a given notification.
--(void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler{
-    completionHandler();
-}
 
 #pragma mark -
 #pragma mark Private Methods

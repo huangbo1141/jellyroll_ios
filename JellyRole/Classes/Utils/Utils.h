@@ -18,6 +18,7 @@
 + (BOOL)isIphone5;
 + (BOOL)isIphone6;
 + (BOOL)isIphone6Plus;
++ (BOOL)isIphoneX;
 + (NSString *)getLocalResourceWithName:(NSString *)name;
 + (NSString *)getIpadResourceName:(NSString*)name;
 + (UIImage *)getImageWithName:(NSString *)imgName;

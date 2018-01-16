@@ -67,11 +67,14 @@
         
     }];
     
-    NSString* comp = [[_gAppPrefData.memberSince componentsSeparatedByString:@"-"] objectAtIndex:0];
+    NSArray* list = [_gAppPrefData.memberSince componentsSeparatedByString:@"-"];
+    
+//    NSString* comp = [[_gAppPrefData.memberSince componentsSeparatedByString:@"-"] objectAtIndex:0];
     
     [_label1 setText:_gAppPrefData.userName];
     [_label2 setText:_gAppPrefData.address];
-    [_label3 setText:[NSString stringWithFormat:@"Member since %@", comp]];
+    
+    [_label3 setText:[NSString stringWithFormat:@"Member since %@, %@", [self getMonth:[list[1] intValue]], list[0]]];
     
 }
 
@@ -82,7 +85,54 @@
       
 }
 
+- (NSString *)getMonth:(int)index {
 
+    NSString* month = @"";
+    switch (index) {
+        case 1:
+            month = @"Jan";
+            break;
+        case 2:
+            month = @"Feb";
+            break;
+        case 3:
+            month = @"Mar";
+            break;
+        case 4:
+            month = @"Apr";
+            break;
+        case 5:
+            month = @"May";
+            break;
+        case 6:
+            month = @"Jun";
+            break;
+        case 7:
+            month = @"Jul";
+            break;
+        case 8:
+            month = @"Aug";
+            break;
+        case 9:
+            month = @"Sep";
+            break;
+        case 10:
+            month = @"Oct";
+            break;
+        case 11:
+            month = @"Nov";
+            break;
+        case 12:
+            month = @"Dec";
+            break;
+            
+        default:
+            month = @"Dec";
+            break;
+    }
+    
+    return month;
+}
 
 #pragma mark
 #pragma mark Private Methods
@@ -104,6 +154,30 @@
     
     [Utils dropShadow:_tableView];
     [Utils dropShadow:_topShadowView];
+    
+//    self.view.layer.shadowOpacity = 0.6;
+//    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
+//    self.view.layer.shadowRadius = 10.0;
+//    self.view.layer.cornerRadius = 6.5;
+    //        topImageView.layer.masksToBounds = true;
+    
+//    self.view.layer.shadowOffset = CGSizeMake(0, 50);
+    
+    
+//    self.view.layer.shadowColor = [UIColor purpleColor].CGColor;
+//    self.view.layer.shadowOffset = CGSizeMake(4, 4);
+//    self.view.layer.shadowOpacity = 0.6;
+//    self.view.layer.shadowRadius = 10.0;
+    
+    
+//    _tableView.layer.shadowOpacity = 0.8;
+//    _tableView.layer.shadowOffset = CGSizeMake(0, 0);
+//    _tableView.layer.shadowRadius = 10.0;
+//    _tableView.layer.shadowColor = [UIColor yellowColor].CGColor;
+    
+//    CGRect shadowRect = CGRectInset(self.view.bounds, 8, 8);
+    //self.view.layer.shadowPath = [UIBezierPath bezierPathWithRect:shadowRect].CGPath;
+    
 }
 
 - (void)mailToUser

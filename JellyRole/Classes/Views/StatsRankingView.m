@@ -92,7 +92,7 @@
             //[label7 setText:@"0%  "];
             consts.constant = 0;
         } else {
-            consts.constant = (mainWidth*win)/100;
+            consts.constant = (view.frame.size.width*win)/100;
             
             [label7 setText:[NSString stringWithFormat:@"%d%%", win]];
         }

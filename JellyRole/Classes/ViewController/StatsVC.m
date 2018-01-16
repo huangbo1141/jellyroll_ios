@@ -68,7 +68,7 @@
 
 - (void)viewDidLayoutSubviews {
     
-    [_scrollView setContentSize:CGSizeMake(((20*30)+(20*3)+(20*10)), 0)];
+    [_scrollView setContentSize:CGSizeMake((40*8)+20, 0)];
 }
 
 #pragma mark

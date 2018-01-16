@@ -132,6 +132,9 @@ typedef enum
 @property (weak, nonatomic) IBOutlet UIView *oppoShadowView;
 
 @property (weak, nonatomic) IBOutlet UILabel *noRecordLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel2;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel3;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel4;
 
 @end
 
@@ -170,6 +173,10 @@ typedef enum
         
         _chooseOpponentBtn.selected = true;
         [self locationView:true];
+        [_delegate updateTitleQuickPlay:@"Location"];
+    } else {
+        
+        [_delegate updateTitleQuickPlay:@"Quick Play"];
     }
     
 }
@@ -198,6 +205,9 @@ typedef enum
     _mapImageView.image = _mapView;
     
     _noRecordLabel.hidden = true;
+    _noRecordLabel2.hidden = true;
+    _noRecordLabel3.hidden = true;
+    _noRecordLabel4.hidden = true;
     if (!_isLocation) {
         
         _selectedBar = [[NSMutableDictionary alloc] init];
@@ -237,6 +247,17 @@ typedef enum
     _friendsView.delegates = self;
     [_currentLabel setText:_gAppPrefData.userName];
 
+    UIView* viw = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:CGRectMake(6, 0, 14, 30)];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.image = [UIImage imageNamed:@"email.png"];
+    [viw addSubview:imageView];
+    _searchBar2.leftViewMode = UITextFieldViewModeAlways;
+    _searchBar2.leftView = viw;
+    
+    [_searchBar2 setValue:[UIColor colorWithRed:123.0/255.0 green:123.0/255.0 blue:128.0/255.0 alpha:1.0] forKeyPath:@"_placeholderLabel.textColor"];
+    
     [Utils dropShadow:_chooseOponentView];
     [Utils dropShadow:_locationShadowView];
     [Utils dropShadow:_topShadowView];
@@ -248,6 +269,7 @@ typedef enum
  
     if (isHide) {
         
+        [_delegate updateTitleQuickPlay:@"Record Game"];
         [_winSuperView addSubview:_winView];
         
         [_winSuperView addConstraint:_userMTrail];
@@ -262,6 +284,7 @@ typedef enum
         
     } else {
         
+        [_delegate updateTitleQuickPlay:@"Quick Play"];
         [_winView removeFromSuperview];
         
         _userSessionLeading.active = false;
@@ -300,6 +323,7 @@ typedef enum
     if (isHide) {
         
         
+        [_delegate updateTitleQuickPlay:@"Location"];
         [self.view addSubview:_locationSuperView];
         
         [self.view addConstraint:_locationTop];
@@ -323,11 +347,12 @@ typedef enum
         }
     } else {
         
+        [_delegate updateTitleQuickPlay:@"Quick Play"];
         [_locationSuperView removeFromSuperview];
 //        if (_isLocation) {
         if (false) {
         
-            [self opponentView:true];
+            //[self opponentView:true];
         } else {
         
             [self.view addSubview:_userSuperView];
@@ -379,10 +404,21 @@ typedef enum
     
     if (games != nil) {
         
+        if (games.count > 0) {
+        
+            _noRecordLabel4.hidden = true;
+        } else {
+        
+            _noRecordLabel4.hidden = false;
+        }
+        
         [_gameTableView updateData:games isRecent:false isState:false isSession:session];
+    } else {
+        
+        _noRecordLabel4.hidden = false;
     }
     
-    float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0, percent=0, percent_o=0;
+    /*float overMyWin=0, overMyLoss=0, overOppWin=0, overOppLoss=0, percent=0, percent_o=0;
     
     
     for (NSDictionary* myDict in dict[@"data"]) {
@@ -429,7 +465,14 @@ typedef enum
     if (mainArray.count > 0) {
         
         [_comparisionVC updateData:mainArray];
-    }    
+    }*/
+    
+    NSMutableArray* mainArray = [NSMutableArray arrayWithArray:dict[@"data"]];
+    if (mainArray.count > 0) {
+        
+        [_comparisionVC updateData:mainArray];
+    }
+    
 }
 
 
@@ -1019,6 +1062,9 @@ typedef enum
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 _noRecordLabel.hidden = true;
+                _noRecordLabel2.hidden = true;
+                _noRecordLabel3.hidden = true;
+                
                 NSArray* list = dict1[@"leaderboard"];
                 if (list != nil && list.count > 0) {
                 
@@ -1040,6 +1086,8 @@ typedef enum
                 [_myRank setText:[NSString stringWithFormat:@"My Ranking #%d", [dict1[@"my_rank_overall"] intValue]]];
                 
                 _noRecordLabel.hidden = false;
+                _noRecordLabel2.hidden = false;
+                _noRecordLabel3.hidden = false;
                 
                 /*NSString *strMESSAGE;
                 NSRange range = [[dict1 objectForKey:@"msg"] rangeOfString:@"No game found"];
@@ -1095,18 +1143,20 @@ typedef enum
             
             if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
-                NSArray* mainArray = dict1[@"data"];
+                _noRecordLabel4.hidden = true;
+                /*NSArray* mainArray = dict1[@"data"];
                 NSArray*_locData = [NSMutableArray arrayWithArray:[mainArray sortedArrayUsingComparator:^NSComparisonResult(NSMutableDictionary* a, NSMutableDictionary* b) {
                     double first = [a[@"total"] doubleValue];
                     double second = [b[@"total"] doubleValue];
                     return first<second;
-                }]];
+                }]];*/
                 
                 [_userGamesData addEntriesFromDictionary:dict1];
                 //[_list addObjectsFromArray:_locData];
                 [self updateView:dict1 games:dict1[@"recent_game"] session:false];
             } else {
                 
+                _noRecordLabel4.hidden = false;
             
                 [_gameTableView updateData:nil isRecent:false isState:false isSession:false];
                 [_comparisionVC updateData:nil];
@@ -1297,6 +1347,7 @@ typedef enum
     
     _chooseOpponentBtn.selected = false;
     [self opponentView:true];
+    [_delegate updateTitleQuickPlay:@"Choose Opponent"];
 }
 
 - (IBAction)userGameAction:(UIButton *)sender {
@@ -1315,6 +1366,7 @@ typedef enum
     [_userSessionBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
     
     [self updateView:_userGamesData games:_userGamesData[@"recent_game"] session:false];
+    [_delegate updateTitleQuickPlay:@"Choose Opponent"];
 }
 
 - (IBAction)userSessionAction:(UIButton *)sender {
@@ -1558,6 +1610,7 @@ typedef enum
     
     [_userUpDownButton setSelected:true];
     [self userView:true];
+    [_delegate updateTitleQuickPlay:@"Record Game"];
 }
 
 #pragma mark

@@ -352,6 +352,7 @@
     
     [picker dismissViewControllerAnimated:true completion:^{
     
+        
         _imageView.image = image;
         if (![Utils isIphone]) {
             cropViewController.popoverPresentationController.sourceView = self.view;
@@ -369,9 +370,12 @@
 - (void)cropViewController:(TOCropViewController *)cropViewController didCropToCircularImage:(UIImage *)image withRect:(CGRect)cropRect angle:(NSInteger)angle
 {
     // 'image' is the newly cropped, circular version of the original image
+    image = [image imageWithImage:image convertToSize:CGSizeMake(100, image.size.height)];
     [cropViewController dismissViewControllerAnimated:true completion:^{
  
+        
         _imageView.image = image;
+        
         [self uploadProfileImage:UIImageJPEGRepresentation(image, 0.4)];
     }];
 }
@@ -380,5 +384,6 @@
     
     [cropViewController dismissViewControllerAnimated:true completion:nil];
 }
+
 
 @end

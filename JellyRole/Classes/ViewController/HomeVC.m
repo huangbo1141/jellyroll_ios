@@ -16,7 +16,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface HomeVC () <MapVCDelegates, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
+@interface HomeVC () <MapVCDelegates, NotificationVCDelegates, UINavigationControllerDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, QuickPlayVCDelegates>
 {
     UINavigationController* _mainVC;
 }
@@ -380,6 +380,7 @@
 
         UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
         NotificationVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"NotificationSB"];
+        [vc setDelegate:self];
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         [_mainVC pushViewController:vc animated:true];
         
@@ -446,15 +447,32 @@
         QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
         vc->_mylatitude = mapVC->_mylatitude;
         vc->_myLongitude = mapVC->_myLongitude;
-        
+        vc.delegate = self;
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         vc->_isLocation = true;
+        vc->_isQuickPlay = true;
         vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:piece.data];
         
         [_mainVC pushViewController:vc animated:true];
+        
+        _topTitle.text = @"Quick Play";
     }
     
     
+}
+
+#pragma mark
+#pragma mark QuickPlayVCDelegates
+- (void)updateTitleQuickPlay:(NSString *)title {
+    
+    _topTitle.text = title;
+}
+
+#pragma mark
+#pragma mark NotificationVCDelegates
+- (void)updateTitleNotification:(NSString *)title {
+
+    _topTitle.text = title;
 }
 
 #pragma mark
@@ -494,9 +512,10 @@
         vc->_mapView = image != nil ? image : [mapVC captureViewS];
         vc->_isLocation = true;
         vc->_isFromMap = true;
+        vc->_isQuickPlay = false;
         vc->_mylatitude = mapVC->_mylatitude;
         vc->_myLongitude = mapVC->_myLongitude;
-        
+        vc.delegate = self;
         vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:data];
         
         [_mainVC pushViewController:vc animated:true];
@@ -511,7 +530,6 @@
 
     NSArray * viewControllers = [[self navigationController] viewControllers];
     
-    DebugLog(@"....%d", viewControllers.count);
     if (viewControllers.count > 0) {
         
     }

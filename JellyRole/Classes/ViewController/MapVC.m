@@ -72,6 +72,7 @@
 @property (weak, nonatomic) IBOutlet UIView *saveHomeLocatioView;
 @property (weak, nonatomic) IBOutlet UIButton *saveHomeLocationButton;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *searchBarTrailing;
 
 @end
 
@@ -134,6 +135,7 @@
 {
     [self.navigationController setNavigationBarHidden:true];
     
+    
     _isFirstTime = true;
     _isUserAnnotationView = false;
     
@@ -154,6 +156,7 @@
     CLLocationCoordinate2D coordy = CLLocationCoordinate2DMake(40.713020, -73.956091);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordy,300,300);
     [_MAP_VIEW setRegion:region animated:NO];
+    [_MAP_VIEW setShowsCompass:false];
     
     [self addLongPressGesture];
     
@@ -353,7 +356,7 @@
 
 - (UIImage*)captureView:(UIView *)view
 {
-    CGRect rect = view.frame;
+    //CGRect rect = view.frame;
     //UIGraphicsBeginImageContext(rect.size);
     UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, 0.0);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -463,7 +466,7 @@
             mainView.frame=CGRectMake(4, myvar, _scr_Search.frame.size.width-8, 30);
             
             UIButton* btn = [mainView viewWithTag:101];
-            [btn setTitle:[tempArray objectAtIndex:j][ @"location_name"] forState:UIControlStateNormal];
+            [btn setTitle:[[tempArray objectAtIndex:j][ @"location_name"] capitalizedString] forState:UIControlStateNormal];
             btn.accessibilityHint = [tempArray objectAtIndex:j][ @"lat"];
             [btn setAccessibilityLabel:[tempArray objectAtIndex:j][ @"long"]];
             [btn setAccessibilityValue:[tempArray objectAtIndex:j][ @"bar_id"]];
@@ -711,22 +714,22 @@
     
     NSString* city=@"", *zip=@"", *state=@"", *country=@"";
     for (EftGoogleAddressComponent*component in _gresult.result.address_components) {
-        int pos = [component.types indexOfObject:@"postal_code"];
+        int pos = (int)[component.types indexOfObject:@"postal_code"];
         if(pos != NSNotFound && pos>=0){
             zip = component.long_name;
         }
         
-        pos = [component.types indexOfObject:@"administrative_area_level_1"];
+        pos = (int)[component.types indexOfObject:@"administrative_area_level_1"];
         if(pos != NSNotFound && pos>=0){
             state = component.long_name;
         }
         
-        pos = [component.types indexOfObject:@"administrative_area_level_2"];
+        pos = (int)[component.types indexOfObject:@"administrative_area_level_2"];
         if(pos != NSNotFound && pos>=0){
             city = component.long_name;
         }
         
-        pos = [component.types indexOfObject:@"country"];
+        pos = (int)[component.types indexOfObject:@"country"];
         if(pos != NSNotFound && pos>=0){
             country = component.long_name;
         }
@@ -796,8 +799,8 @@
                 [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                     
                     _selectedBar = nil;
-                    _saveHomeLocatioView.hidden = true;
-                    _saveHomeLocationButton.hidden = true;
+                    //_saveHomeLocatioView.hidden = true;
+                    //_saveHomeLocationButton.hidden = true;
                     _saveLocationButton.userInteractionEnabled = false;
                     _saveLocationButton.alpha = 0.5;
                     
@@ -841,6 +844,8 @@
     }
     [_delegate updateTitle:@"Map"];
     _searchBar.text = @"";
+    _searchBar.placeholder = @"Search";
+    
     [_searchBar resignFirstResponder];
     [self resetScrollwithArray:nil];
     [_view_SearchOpponent setHidden:true];
@@ -859,6 +864,7 @@
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
         constr.constant = 38;
+        _searchBarTrailing.constant = 18;
     }
     
     _zoomInBtn.hidden = false;
@@ -891,6 +897,7 @@
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
         constr.constant = 0;
+        _searchBarTrailing.constant = -10;
     }
     
     _zoomInBtn.hidden = true;
@@ -942,6 +949,7 @@
     for (NSLayoutConstraint* constr in _searchButton.constraints) {
         
         constr.constant = 0;
+        _searchBarTrailing.constant = -10;
     }
     
     _zoomInBtn.hidden = true;
@@ -954,6 +962,7 @@
     [_clusteringManager displayAnnotations:nil onMapView:_MAP_VIEW];
     [self replaceMarkers];
     [_delegate updateTitle:@"Add Location"];
+    self.searchBar.placeholder = @"Search New Location";
 }
 
 - (IBAction)zoomOutAction:(id)sender {
@@ -1283,11 +1292,13 @@
     
     UIImageView* imageView = [cell viewWithTag:101];
     imageView.image = [UIImage imageNamed:data.imgname];
-    
+    imageView.layer.borderWidth = 1.5;
+    imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    imageView.layer.cornerRadius = 12.5;
     
     NSString* location = data.data[@"location_name"];
-    location = [location lowercaseString];
-    location = [location stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[location substringToIndex:1] uppercaseString]];
+    location = [location capitalizedString];
+    //location = [location stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[location substringToIndex:1] uppercaseString]];
     
     UILabel* userName = [cell viewWithTag:102];
     userName.text = location;
@@ -1577,9 +1588,9 @@
         UILabel*lbl;
         if (av == nil) {
             av = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:reuseId];
-            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 33, 20)];
+            lbl = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
             //lbl.font = [UIFont fontWithName:@"Avenir-Next-Regular" size:12];
-            [lbl setFont:[UIFont systemFontOfSize:6]];
+            [lbl setFont:[UIFont systemFontOfSize:10]];
             lbl.adjustsFontSizeToFitWidth = YES;
 //            lbl.layer.cornerRadius = 15.0;
             lbl.layer.masksToBounds = true;
@@ -1630,7 +1641,7 @@
             lbl.tag = 42;
             
             
-            lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(30, 32, 160, 20)];
+            lbl2 = [[UILabel alloc] initWithFrame:CGRectMake(20, 32, 170, 20)];
             [lbl2 setFont:[UIFont boldSystemFontOfSize:12.0]];
             lbl2.adjustsFontSizeToFitWidth = YES;
             [lbl2 setMinimumScaleFactor:8.0/[UIFont labelFontSize]];
@@ -1641,8 +1652,9 @@
             lbl2.tag = 43;
             av.image = [UIImage imageNamed:piece.imgname];
             
-            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 15, 20)];
+            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 10, 13)];
             imageView.tag = 44;
+            imageView.contentMode = UIViewContentModeScaleAspectFit;
             
             view = [[UIView alloc] initWithFrame:CGRectMake(-82, 35, 200, 35)];
             [view setTag:142];
@@ -1667,7 +1679,7 @@
         }else{
             lbl.text = [piece subtitle];
         }*/
-        lbl.text = [piece subtitle];
+        lbl.text = [[piece subtitle] capitalizedString];
         
         lbl.backgroundColor = [UIColor clearColor];
         av.canShowCallout = NO;

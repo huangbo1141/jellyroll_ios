@@ -94,7 +94,7 @@
         }
     }
     
-    [self setContentSize:CGSizeMake(xCord, 0)];
+    [self setContentSize:CGSizeMake(xCord+2000, 0)];
 }
 
 - (void)buttonAction:(UIButton *)sender {

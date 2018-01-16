@@ -147,8 +147,9 @@
         }
     }
     
+    
     if (_isState) {
-        [label3 setText:dict[@"location_name"]];
+        [label3 setText:[dict[@"location_name"] capitalizedString]];
     } else {
         
         [label3 setText:[Utils stringToTime:dict[@"insertime"]]];

@@ -31,13 +31,13 @@ typedef BOOL(^ MGSwipeButtonCallback)(MGSwipeTableCell * _Nonnull cell);
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title backgroundColor:(nullable UIColor *) color;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title backgroundColor:(nullable UIColor *) color padding:(NSInteger) padding;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title backgroundColor:(nullable UIColor *) color insets:(UIEdgeInsets) insets;
-+(instancetype) buttonWithTitle:(NSString *) title backgroundColor:(UIColor *) color textColor:(UIColor *)textColor callback:(MGSwipeButtonCallback) callback;
++(instancetype _Nullable ) buttonWithTitle:(NSString *_Nullable) title backgroundColor:(UIColor *_Nullable) color textColor:(UIColor *_Nullable)textColor callback:(MGSwipeButtonCallback _Nullable ) callback;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title backgroundColor:(nullable UIColor *) color padding:(NSInteger) padding callback:(nullable MGSwipeButtonCallback) callback;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title backgroundColor:(nullable UIColor *) color insets:(UIEdgeInsets) insets callback:(nullable MGSwipeButtonCallback) callback;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color padding:(NSInteger) padding;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color insets:(UIEdgeInsets) insets;
-+(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color textColor:(UIColor *)textColor callback:(nullable MGSwipeButtonCallback) callback;
++(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color textColor:(UIColor *_Nullable)textColor callback:(nullable MGSwipeButtonCallback) callback;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color padding:(NSInteger) padding callback:(nullable MGSwipeButtonCallback) callback;
 +(nonnull instancetype) buttonWithTitle:(nonnull NSString *) title icon:(nullable UIImage*) icon backgroundColor:(nullable UIColor *) color insets:(UIEdgeInsets) insets callback:(nullable MGSwipeButtonCallback) callback;
 

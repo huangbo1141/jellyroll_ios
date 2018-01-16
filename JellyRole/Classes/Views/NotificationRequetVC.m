@@ -56,7 +56,7 @@
     MGSwipeTableCell *cell = (MGSwipeTableCell *)[tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
-    [Utils dropShadow:cell];
+    //[Utils dropShadow:cell];
     
     NSDictionary* dict = [_list objectAtIndex:indexPath.row];
     
@@ -73,6 +73,8 @@
     
     userImage.layer.cornerRadius = 15;
     userImage.layer.masksToBounds = true;
+    userImage.layer.borderWidth = 1.5;
+    userImage.layer.borderColor = [UIColor whiteColor].CGColor;
     
     __weak typeof(UIImageView) *weakSelf = userImage;
     [userImage setImageWithURLRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"user_image"]]] placeholderImage:[UIImage imageNamed:@"placeholdernew"] success:^(NSURLRequest * _Nonnull request, NSHTTPURLResponse * _Nullable response, UIImage * _Nonnull image) {
