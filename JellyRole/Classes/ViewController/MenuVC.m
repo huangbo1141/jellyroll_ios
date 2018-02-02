@@ -74,7 +74,7 @@
     [_label1 setText:_gAppPrefData.userName];
     [_label2 setText:_gAppPrefData.address];
     
-    [_label3 setText:[NSString stringWithFormat:@"Member since %@, %@", [self getMonth:[list[1] intValue]], list[0]]];
+    [_label3 setText:[NSString stringWithFormat:@"Member Since %@, %@", [self getMonth:[list[1] intValue]], list[0]]];
     
 }
 

@@ -114,7 +114,7 @@
         
         if ([dict[@"bar_rank"] intValue] == 0) {
             
-            barRank.text = @"0";
+            barRank.text = @"n/a";
         } else {
             barRank.text = [NSString stringWithFormat:@"#%d", [dict[@"bar_rank"] intValue]];
         }

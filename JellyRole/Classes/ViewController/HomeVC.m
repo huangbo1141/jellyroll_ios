@@ -110,15 +110,23 @@
                 int pending_cnt = [p intValue];
                 
                 [[UIApplication sharedApplication] setApplicationIconBadgeNumber:confirm_cnt];
-                confirm_cnt = confirm_cnt + pending_cnt;
+                //confirm_cnt = confirm_cnt + pending_cnt;
                 if (confirm_cnt > 0) {
                 
+                    [_notifyButton setEnabled:true];
                     [_notifyButton setTitle:[NSString stringWithFormat:@"%d", confirm_cnt] forState:UIControlStateNormal];
                     [_notifyImage setImage:[UIImage imageNamed:@"notification1"]];
                 } else {
                 
+                    [_notifyButton setEnabled:false];
                     [_notifyButton setTitle:@"" forState:UIControlStateNormal];
                     [_notifyImage setImage:[UIImage imageNamed:@"notification"]];
+                }
+                
+                if (confirm_cnt > 0 || pending_cnt > 0) {
+                    [_notifyButton setEnabled:true];
+                } else {
+                    [_notifyButton setEnabled:false];
                 }
                 
             } else {
@@ -418,44 +426,45 @@
         MapVC* mapVC = (MapVC *)_mainVC.visibleViewController;
         
         NSMutableArray* allArtPiece = [mapVC getAllArtPiece];
+        if(allArtPiece.count > 0) {
         
-        NSMutableArray* list = [NSMutableArray array];
-        
-        CLLocation *locA = [[CLLocation alloc] initWithLatitude:mapVC->_mylatitude longitude:mapVC->_myLongitude];
-        for (int i=0; i< allArtPiece.count; i++) {
+            NSMutableArray* list = [NSMutableArray array];
             
-            ArtPiece* piece = allArtPiece[i];
-            CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
-            CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
-            CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+            CLLocation *locA = [[CLLocation alloc] initWithLatitude:mapVC->_mylatitude longitude:mapVC->_myLongitude];
+            for (int i=0; i< allArtPiece.count; i++) {
+                
+                ArtPiece* piece = allArtPiece[i];
+                CLLocationDegrees lat2 = [piece.data[@"lat"] doubleValue];
+                CLLocationDegrees long2 = [piece.data[@"long"] doubleValue];
+                CLLocation *locB = [[CLLocation alloc] initWithLatitude:lat2 longitude:long2];
+                
+                CLLocationDistance distance = [locA distanceFromLocation:locB];
+                piece.distance = [NSNumber numberWithDouble:distance];
+                
+                [list addObject:piece];
+            }
             
-            CLLocationDistance distance = [locA distanceFromLocation:locB];
-            piece.distance = [NSNumber numberWithDouble:distance];
+            NSArray* sorted = [NSMutableArray arrayWithArray:[list sortedArrayUsingComparator:^NSComparisonResult(ArtPiece* a, ArtPiece* b) {
+                double first = [a.distance doubleValue];
+                double second = [b.distance doubleValue];
+                return first>second;
+            }]];
             
-            [list addObject:piece];
+            ArtPiece* piece = [sorted objectAtIndex:0];
+            
+            UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
+            QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
+            vc->_mylatitude = mapVC->_mylatitude;
+            vc->_myLongitude = mapVC->_myLongitude;
+            vc.delegate = self;
+            vc->_mapView = image != nil ? image : [mapVC captureViewS];
+            vc->_isLocation = true;
+            vc->_isQuickPlay = true;
+            vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:piece.data];
+            
+            [_mainVC pushViewController:vc animated:true];
+            _topTitle.text = @"Quick Play";
         }
-        
-        NSArray* sorted = [NSMutableArray arrayWithArray:[list sortedArrayUsingComparator:^NSComparisonResult(ArtPiece* a, ArtPiece* b) {
-            double first = [a.distance doubleValue];
-            double second = [b.distance doubleValue];
-            return first>second;
-        }]];
-        
-        ArtPiece* piece = [sorted objectAtIndex:0];
-        
-        UIStoryboard* storyBoard = [UIStoryboard storyboardWithName:[Utils getIpadResourceName:@"Main"] bundle:nil];
-        QuickPlayVC* vc = [storyBoard instantiateViewControllerWithIdentifier:@"QuickSB"];
-        vc->_mylatitude = mapVC->_mylatitude;
-        vc->_myLongitude = mapVC->_myLongitude;
-        vc.delegate = self;
-        vc->_mapView = image != nil ? image : [mapVC captureViewS];
-        vc->_isLocation = true;
-        vc->_isQuickPlay = true;
-        vc->_selectedBar = [NSMutableDictionary dictionaryWithDictionary:piece.data];
-        
-        [_mainVC pushViewController:vc animated:true];
-        
-        _topTitle.text = @"Quick Play";
     }
     
     

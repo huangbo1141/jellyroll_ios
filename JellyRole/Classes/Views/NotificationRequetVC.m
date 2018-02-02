@@ -155,7 +155,7 @@
     }*/
     
     [userLabel setText:dict[@"username"]];
-    [barLabel setText:dict[@"location_name"]];
+    [barLabel setText: [dict[@"location_name"] capitalizedString]];
     [dateLabel setText:[Utils stringToDate:dict[@"insertime"]]];
     [timeLabel setText:[Utils stringToTime:dict[@"insertime"]]];
     

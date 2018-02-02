@@ -10,7 +10,7 @@
 
 @interface StatsRankingView : UITableView
 
-- (void)setView;
+- (void)setView:(CGFloat)width;
 - (void)updateData:(NSArray *)array;
 
 @end

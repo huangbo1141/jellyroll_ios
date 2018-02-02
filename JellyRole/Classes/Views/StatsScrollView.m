@@ -99,10 +99,18 @@
 
 - (void)buttonAction:(UIButton *)sender {
     
+    
 }
 
 - (void)buttonAction2:(UIButton *)sender {
-    
+
+    if(sender.tag != 1) {
+        
+        if (_delegates != nil) {
+            
+            [_delegates selectedBall];
+        }
+    }
 }
 
 @end

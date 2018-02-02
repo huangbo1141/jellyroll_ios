@@ -20,9 +20,9 @@
 
 #pragma mark -
 #pragma mark - Public Methods
-- (void)setView {
+- (void)setView:(CGFloat)width {
     
-    mainWidth = self.frame.size.width;
+    mainWidth = width - 84;
     
     [self setDataSource:self];
     [self setDelegate:self];
@@ -70,7 +70,7 @@
     label7.layer.masksToBounds = true;
     
     [label1 setText:[NSString stringWithFormat:@"#%@",dict[@"rank"]]];
-    [label2 setText:dict[@"location_name"]];
+    [label2 setText:[dict[@"location_name"] capitalizedString]];
     [label3 setText:dict[@"win"]];
     [label4 setText:[NSString stringWithFormat:@"of %@",dict[@"total"]]];
     
@@ -92,7 +92,7 @@
             //[label7 setText:@"0%  "];
             consts.constant = 0;
         } else {
-            consts.constant = (view.frame.size.width*win)/100;
+            consts.constant = (mainWidth * win)/100;
             
             [label7 setText:[NSString stringWithFormat:@"%d%%", win]];
         }

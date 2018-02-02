@@ -79,7 +79,9 @@
     
     _list = [[NSMutableArray alloc] init];
     [_gameTableView setView];
-    [_rankTableView setView];
+    
+    NSLog(@".....%f", self.view.frame.size.width);
+    [_rankTableView setView: self.view.frame.size.width];
     
     if ([Utils isIphone]) {
         
@@ -99,6 +101,7 @@
     _noRecordLabel1.hidden = true;
     _noRecordLabel2.hidden = true;
     
+    [_scrollView setDelegates:self];
     
 }
 
@@ -280,6 +283,22 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 
+}
+
+#pragma mark
+#pragma mark StatsScrollViewDelegate
+- (void)selectedBall {
+    
+    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Info" message:@"Stats page is locked" preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    
+    if (![Utils isIphone]) {
+        alert.popoverPresentationController.sourceView = self.view;
+    }
+    [self presentViewController:alert animated:true completion:nil];
 }
 
 @end

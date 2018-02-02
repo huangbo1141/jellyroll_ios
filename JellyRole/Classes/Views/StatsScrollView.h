@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol StatsScrollViewDelegate <NSObject>
+
+@optional
+
+- (void)selectedBall;
+
+@end
+
 @interface StatsScrollView : UIScrollView
+
+@property (assign, nonatomic) id delegates;
 
 -(void)updateView;
 

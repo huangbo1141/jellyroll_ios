@@ -174,7 +174,7 @@
                     int pending_cnt = [p intValue];
                     
                     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:confirm_cnt];
-                    confirm_cnt = confirm_cnt + pending_cnt;
+                    //confirm_cnt = confirm_cnt + pending_cnt;
                     
                     if ([mainVC isKindOfClass:[HomeVC class]]) {
                         
@@ -190,6 +190,12 @@
                             ;
                             [mainVC.notifyButton setTitle:@"" forState:UIControlStateNormal];
                             [mainVC.notifyImage setImage:[UIImage imageNamed:@"notification"]];
+                        }
+                        
+                        if (confirm_cnt > 0 || pending_cnt > 0) {
+                            [mainVC.notifyButton setEnabled:true];
+                        } else {
+                            [mainVC.notifyButton setEnabled:false];
                         }
                     }
                 } else {
@@ -382,12 +388,13 @@
 
 - (void)loginSucessful {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
+    [self initializeApplication:[self initialSetUpView:@"Main_SB"]];
+    [self getAllNotifyData];
+    
+    /*dispatch_async(dispatch_get_main_queue(), ^{
         
-        [self initializeApplication:[self initialSetUpView:@"Main_SB"]];
         
-        [self getAllNotifyData];
-    });
+    });*/
     
     
 }

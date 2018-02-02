@@ -30,6 +30,7 @@
 		D163A03E1F73D29A0047325C /* ForgetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A03D1F73D29A0047325C /* ForgetPassVC.m */; };
 		D163A0411F73D8290047325C /* VerifiyEmailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D163A0401F73D8290047325C /* VerifiyEmailVC.m */; };
 		D170E5041F86746500118C03 /* FriendsView.m in Sources */ = {isa = PBXBuildFile; fileRef = D170E5031F86746500118C03 /* FriendsView.m */; };
+		D178051A20248453008DB35E /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = D178051920248453008DB35E /* test.html */; };
 		D17D51961F61E1BE00AACDDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51951F61E1BE00AACDDC /* main.m */; };
 		D17D519F1F61E1BE00AACDDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D17D519D1F61E1BE00AACDDC /* Main.storyboard */; };
 		D17D51A11F61E1BE00AACDDC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D17D51A01F61E1BE00AACDDC /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 		D163A0401F73D8290047325C /* VerifiyEmailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifiyEmailVC.m; sourceTree = "<group>"; };
 		D170E5021F86746500118C03 /* FriendsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendsView.h; sourceTree = "<group>"; };
 		D170E5031F86746500118C03 /* FriendsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendsView.m; sourceTree = "<group>"; };
+		D178051920248453008DB35E /* test.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		D17D51911F61E1BE00AACDDC /* Jellyroll.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Jellyroll.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17D51951F61E1BE00AACDDC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D17D519E1F61E1BE00AACDDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				D17D51AE1F61E44400AACDDC /* AppDelegate.m */,
 				D17D51AF1F61E44400AACDDC /* B_Nav_VC.h */,
 				D17D51B01F61E44400AACDDC /* B_Nav_VC.m */,
+				D178051920248453008DB35E /* test.html */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				D17D51C71F61FB1000AACDDC /* OpenSans-ExtraBold.ttf in Resources */,
 				D17D51B91F61E7FE00AACDDC /* FontAwesome.otf in Resources */,
 				D17D51B81F61E7FE00AACDDC /* fontawesome-webfont.ttf in Resources */,
+				D178051A20248453008DB35E /* test.html in Resources */,
 				D17D51CA1F61FB1000AACDDC /* OpenSans-Light.ttf in Resources */,
 				D17D51CD1F61FB1000AACDDC /* OpenSans-SemiBold.ttf in Resources */,
 				D17D51A11F61E1BE00AACDDC /* Assets.xcassets in Resources */,

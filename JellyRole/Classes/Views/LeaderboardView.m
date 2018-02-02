@@ -70,7 +70,12 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:true];
-    
+ 
+    if (_delegates != nil) {
+ 
+        NSDictionary* dict = _list[indexPath.row];
+        [_delegates selectedUserDict:dict];
+    }
 }
 
 

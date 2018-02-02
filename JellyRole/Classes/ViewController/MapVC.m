@@ -65,6 +65,8 @@
 @property (strong, nonatomic) IBOutlet UIView *view_SearchOpponent;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *view_SearchOpponentHeight;
 @property (weak, nonatomic) IBOutlet UILabel *noRecordLabel;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel2;
+@property (weak, nonatomic) IBOutlet UIImageView *noRecordImage;
 
 @property (weak, nonatomic) IBOutlet UIView *saveLocatioView;
 @property (weak, nonatomic) IBOutlet UIButton *saveLocationButton;
@@ -95,7 +97,19 @@
     
     [_locationManager startUpdatingHeading];
     
-    [_delegate updateTitle:@"Map"];
+    if (_saveLocatioView.isHidden && _saveHomeLocatioView.isHidden) {
+    
+        [_delegate updateTitle:@"Map"];
+    } else if (!_saveHomeLocatioView.isHidden) {
+        
+        [_delegate updateTitle:@"Add Home Location"];
+    } else if (!_saveLocatioView.isHidden) {
+        
+        [_delegate updateTitle:@"Save Location"];
+    } else {
+        [_delegate updateTitle:@"Map"];
+    }
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
@@ -442,9 +456,22 @@
     
     if (tempArray.count > 0) {
         [_noRecordLabel setText:@""];
+        [_noRecordLabel2 setText:@""];
+        [_noRecordImage setHidden:true];
     } else {
         
-        [_noRecordLabel setText:@"No record found"];
+        [_noRecordLabel setText:@"No locations found"];
+        [_noRecordLabel2 setText:@"Add new location at bottom of map"];
+        
+        if (_saveLocatioView.isHidden == false) {
+            
+            [_noRecordImage setHidden:true];
+            [_noRecordLabel2 setHidden:true];
+        } else {
+            
+            [_noRecordImage setHidden:false];
+            [_noRecordLabel2 setHidden:false];
+        }
     }
     
 
@@ -961,7 +988,7 @@
     [_allLocation removeAllObjects];
     [_clusteringManager displayAnnotations:nil onMapView:_MAP_VIEW];
     [self replaceMarkers];
-    [_delegate updateTitle:@"Add Location"];
+    [_delegate updateTitle:@"Save Location"];
     self.searchBar.placeholder = @"Search New Location";
 }
 
@@ -1293,7 +1320,12 @@
     UIImageView* imageView = [cell viewWithTag:101];
     imageView.image = [UIImage imageNamed:data.imgname];
     imageView.layer.borderWidth = 1.5;
-    imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    if ([data.imgname isEqualToString:@"8ball"]) {
+    
+        imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    } else {
+        imageView.layer.borderColor = [UIColor clearColor].CGColor;
+    }    
     imageView.layer.cornerRadius = 12.5;
     
     NSString* location = data.data[@"location_name"];
@@ -1443,6 +1475,8 @@
             [self resetScrollwithArray:arrToSearch];
         } else {
             
+            [_noRecordImage setHidden:true];
+            [_noRecordLabel2 setHidden:true];
             [self getAutoCompletePlaces:str];
         }
         
@@ -1652,7 +1686,7 @@
             lbl2.tag = 43;
             av.image = [UIImage imageNamed:piece.imgname];
             
-            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 10, 13)];
+            imageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, 32, 10, 20)];
             imageView.tag = 44;
             imageView.contentMode = UIViewContentModeScaleAspectFit;
             

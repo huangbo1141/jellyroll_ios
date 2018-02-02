@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol LeaderboardViewDelegate <NSObject>
+
+@optional
+
+- (void)selectedUserDict:(NSDictionary *)dict;
+
+@end
+
 @interface LeaderboardView : UITableView
+
+@property (assign, nonatomic) id delegates;
 
 - (void)setView;
 - (void)updateData:(NSArray *)array;

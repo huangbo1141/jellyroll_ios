@@ -243,6 +243,8 @@ typedef enum
     [_gameLocationTableView setView];
     [_comparisionVC setView];
     [_leaderboardView setView];
+    _leaderboardView.delegates = self;
+    
     [_friendsView setView];
     _friendsView.delegates = self;
     [_currentLabel setText:_gAppPrefData.userName];
@@ -716,15 +718,15 @@ typedef enum
             NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
             NSLog(@"post function tag  ==%@",dict1);
             
-            [self mailToUser];
+            //[self mailToUser];
             
-            /*if ([dict1[@"success"] isEqualToString:@"true"]) {
+            if ([dict1[@"success"] isEqualToString:@"true"]) {
                 
                 [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
             } else {
                 
                 [_gAppDelegate showAlertDilog:@"Info" message:dict1[@"msg"]];
-            }*/
+            }
             
         }
     } failure:^(id result) {
@@ -1305,8 +1307,10 @@ typedef enum
 #pragma mark UIButton Action Methods
 - (IBAction)backAction:(id)sender {
     
-    if (_pickerType == PICKER_TYPE_USER && _winView.superview != nil) {
+    //if (_pickerType == PICKER_TYPE_USER && _winView.superview != nil) {
+    if (_pickerType == PICKER_TYPE_USER) {
     
+        [_userSuperView removeFromSuperview];
         [self chooseOpponent:nil];
     } else {
     
@@ -1587,6 +1591,35 @@ typedef enum
     [self showReportBarDialog];
 }
 
+
+#pragma mark
+#pragma mark LeaderboardViewDelegate Delegates
+- (void)selectedUserDict:(NSDictionary *)selctedUser {
+    
+    
+    _chooseOpponentBtn.selected = false;
+    [_locationSuperView removeFromSuperview];
+    
+    [_searchBar1 resignFirstResponder];
+    [_searchBar2 resignFirstResponder];
+    
+    [_data addEntriesFromDictionary:selctedUser];
+    
+    _userLabel.text = [_data[@"username"] capitalizedString];
+    [_otherUserLabel setText:[_data[@"username"] capitalizedString] ];
+    
+    [self opponentView:false];
+    
+    [self.view addSubview:_userSuperView];
+    [self.view addConstraint:_userMainTop];
+    [self.view addConstraint:_userMainBottom];
+    [self.view addConstraint:_userMainLead];
+    [self.view addConstraint:_userMainTrail];
+    
+    [_userUpDownButton setSelected:true];
+    [self userView:true];
+    [_delegate updateTitleQuickPlay:@"Record Game"];
+}
 
 #pragma mark
 #pragma mark FriendsView Delegates
