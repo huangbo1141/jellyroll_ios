@@ -35,6 +35,7 @@
 
 #define kAPI_ADDFRIEND [kHostURL stringByAppendingString:@"webservice/add_friend.php?user_id=%@&email=%@"]
 #define kAPI_ADDFRIEND2 [kHostURL stringByAppendingString:@"webservice/add_friend.php?action=share_byid&id1=%@&id2=%@"]
+#define kAPI_REMOVEFRIEND [kHostURL stringByAppendingString:@"webservice/add_friend.php?action=delete_byid&user_id=%@&email=%@"]
 
 
 #define kAPI_MYPROFILE [kHostURL stringByAppendingString:@"webservice/get_my_profile.php?user_id=%@"]

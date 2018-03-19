@@ -265,6 +265,25 @@ typedef enum
     [Utils dropShadow:_topShadowView];
     [Utils dropShadow:_oppoShadowView];
     [Utils dropShadow:_winSuperView];
+    
+    NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    //Step2 : Append placeholder to blank attributed string
+    NSString *strSearchHere = @"Search ";
+    NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subString = [[NSAttributedString alloc] initWithString:strSearchHere attributes:attributes];
+    [attributedString appendAttributedString:subString];
+    
+    NSString *strLongText = @"LongTextLongTextLong";
+    NSDictionary * attributesLong = [NSDictionary dictionaryWithObject:[UIColor clearColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subStringLong = [[NSAttributedString alloc] initWithString:strLongText attributes:attributesLong];
+    [attributedString appendAttributedString:subStringLong];
+    
+    //Step3 : Append dummy text to blank attributed string
+    
+    //Step4 : Set attributed placeholder string to searchBar textfield
+    UITextField *searchTextField = [self.searchBar1 valueForKey:@"_searchField"];
+    searchTextField.attributedPlaceholder = attributedString;
 }
 
 - (void)userView:(BOOL)isHide {
@@ -282,8 +301,6 @@ typedef enum
         
         [self getUserGameData];
         _pickerType = PICKER_TYPE_USER;
-
-        
     } else {
         
         [_delegate updateTitleQuickPlay:@"Quick Play"];
@@ -297,7 +314,6 @@ typedef enum
         
         [_userGameBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_userSessionBtn setTitleColor:[UIColor colorWithRed:141.0/255.0 green:141.0/255.0 blue:141.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-        
     }
 }
 
@@ -1295,6 +1311,8 @@ typedef enum
     }
     
     if (_pickerType == PICKER_TYPE_USER && _winView.superview != nil) {
+        
+        [_userSuperView removeFromSuperview];
         [self chooseOpponent:nil];
         return true;
     }
@@ -1765,6 +1783,22 @@ typedef enum
 {
     
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark
+#pragma mark Mail UITouchDelegate
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+        
+    CGPoint location = [touch locationInView:self.view];
+    if (location.y >= 202) {
+
+        if (_winView.superview == nil && _locationSuperView.superview == nil && _opponentSuperView.superview == nil) {
+            
+            [self.navigationController popViewControllerAnimated:true];
+        }
+    }
 }
 
 @end

@@ -69,7 +69,6 @@
     label7.layer.cornerRadius = 1.5;
     label7.layer.masksToBounds = true;
     
-    [label1 setText:[NSString stringWithFormat:@"#%@",dict[@"rank"]]];
     [label2 setText:[dict[@"location_name"] capitalizedString]];
     [label3 setText:dict[@"win"]];
     [label4 setText:[NSString stringWithFormat:@"of %@",dict[@"total"]]];
@@ -83,6 +82,12 @@
         win = (win*100)/total;
     }
     
+    if (total > 0) {
+        
+        [label1 setText:[NSString stringWithFormat:@"#%@",dict[@"rank"]]];
+    } else {
+        [label1 setText:@"n/a"];
+    }
     
     for (NSLayoutConstraint* consts in label7.constraints) {
         

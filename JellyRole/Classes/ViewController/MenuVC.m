@@ -35,6 +35,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *topShadowView;
+@property (weak, nonatomic) IBOutlet UIView *topShadowView2;
 
 @end
 
@@ -152,8 +153,9 @@
     _imageView.layer.borderWidth = 1.5;
     _imageView.layer.borderColor = [UIColor lightGrayColor].CGColor;
     
-    [Utils dropShadow:_tableView];
+    //[Utils dropShadow:_tableView];
     [Utils dropShadow:_topShadowView];
+    [Utils dropShadow:_topShadowView2];
     
 //    self.view.layer.shadowOpacity = 0.6;
 //    self.view.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -220,7 +222,7 @@
     {
         NSString* str = [NSString stringWithFormat:kSHAREMAILTEXT, _gAppPrefData.userName];
         MFMessageComposeViewController* vc = [[MFMessageComposeViewController alloc] init];
-        [vc setDelegate:self];
+        [vc setMessageComposeDelegate:self];
         [vc setBody:str];
         if (![Utils isIphone]) {
             vc.popoverPresentationController.sourceView = self.view;
@@ -245,8 +247,17 @@
 }
 
 
+-(BOOL)isFacebookAppInstalled {
+    NSURLComponents *components = [[NSURLComponents alloc] init];
+    components.scheme = @"fbauth2";
+    components.path = @"/";
+    return [[UIApplication sharedApplication]
+            canOpenURL:components.URL];
+}
+
 -(void)shareOnFacebook {
-    if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
+    if ([self isFacebookAppInstalled]) {
+        
         SLComposeViewController* fbSLComposeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         [fbSLComposeViewController setInitialText:kSHAREFACEBOOKTEXT];
         
@@ -269,7 +280,7 @@
     }
     else {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook Unavailable" message:@"Sorry, we're unable to find a Facebook account on your device.\nPlease setup an account in your devices settings and try again." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Facebook Unavailable" message:@"Sorry, we're unable to find a Facebook app on your device.\nPlease install Facebook app on your device and try again." preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Close" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             

@@ -79,10 +79,34 @@
     label5.attributedText = attString2;
     
     [label1 setText:[NSString stringWithFormat:@"%@",[dict[@"location"] capitalizedString]]];
-    [label2 setText:[NSString stringWithFormat:@"#%@", dict[@"my_rank"]]];
-    [label3 setText:[NSString stringWithFormat:@"#%@", dict[@"other_rank"]]];
-    [label6 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent"]]];
-    [label7 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent_o"]]];
+    
+    if ([dict[@"my_rank"] intValue] == 0) {
+        [label2 setText:@"n/a"];
+    } else {
+    
+        [label2 setText:[NSString stringWithFormat:@"#%@", dict[@"my_rank"]]];
+    }
+    
+    if ([dict[@"other_rank"] intValue] == 0) {
+        [label3 setText:@"n/a"];
+    } else {
+        
+        [label3 setText:[NSString stringWithFormat:@"#%@", dict[@"other_rank"]]];
+    }
+    
+    if ([dict[@"percent"] intValue] == 0) {
+        [label6 setText:@"n/a"];
+    } else {
+        
+        [label6 setText:[NSString stringWithFormat:@"#%@", dict[@"percent"]]];
+    }
+    
+    if ([dict[@"percent_o"] intValue] == 0) {
+        [label7 setText:@"n/a"];
+    } else {
+        
+        [label7 setText:[NSString stringWithFormat:@"#%@", dict[@"percent_o"]]];
+    }
     
     return cell;
 }

@@ -123,6 +123,26 @@
         [MBProgressHUD hideHUDForView:self.view animated:true];
     }];
 }
+- (void)performationAnimationON {
+    
+    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)performationAnimationOff {
+    
+    [UIView animateWithDuration:.5 delay:0.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        
+        [self.view layoutIfNeeded];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 
 #pragma mark
 #pragma mark UIButton Action's
@@ -145,12 +165,15 @@
         _constraint1.constant = 50;
         _txt_field1.text = @"";
         _barRow.hidden = true;
+        [self performationAnimationOff];
     } else {
         
         _barButton.selected = true;
-        _constraint1.constant = _constraintHeight;
+        
         _txt_field1.text = _list[@"bar_rule"];
         _barRow.hidden = false;
+        _constraint1.constant = _constraintHeight;
+        [self performationAnimationON];
     }
 
     _constraint2.constant = 50;
@@ -165,6 +188,8 @@
     _apaRow.hidden = true;
     _poolRule.hidden = true;
     
+    
+    
 }
 
 - (IBAction)apiRuleAction:(id)sender {
@@ -176,12 +201,14 @@
         _constraint2.constant = 50;
         _txt_field2.text = @"";
         _apaRow.hidden = true;
+        [self performationAnimationOff];
     } else {
         
         _apaButton.selected = true;
         _constraint2.constant = _constraintHeight;
         _txt_field2.text = _list[@"apa_rule"];
         _apaRow.hidden = false;
+        [self performationAnimationON];
     }
     
     _constraint1.constant = 50;
@@ -205,12 +232,15 @@
         _constraint3.constant = 50;
         _txt_field3.text = @"";
         _poolRule.hidden = true;
+        
+        [self performationAnimationOff];
     } else {
         
         _poolButton.selected = true;
         _constraint3.constant = _constraintHeight;
         _txt_field3.text = _list[@"terms"];
         _poolRule.hidden = false;
+        [self performationAnimationON];
     }
     
     _constraint1.constant = 50;

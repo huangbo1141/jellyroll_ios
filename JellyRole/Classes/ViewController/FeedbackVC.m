@@ -174,6 +174,7 @@
     {
         [textView resignFirstResponder];
     }
-    return textView.text.length + (text.length - range.length) <= 150;
+    return true;
+    //return textView.text.length + (text.length - range.length) <= 150;
 }
 @end

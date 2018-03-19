@@ -79,6 +79,25 @@
         [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
     }
     
+    NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    //Step2 : Append placeholder to blank attributed string
+    NSString *strSearchHere = @"Search ";
+    NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subString = [[NSAttributedString alloc] initWithString:strSearchHere attributes:attributes];
+    [attributedString appendAttributedString:subString];
+    
+    NSString *strLongText = @"LongTextLongTextLong";
+    NSDictionary * attributesLong = [NSDictionary dictionaryWithObject:[UIColor clearColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subStringLong = [[NSAttributedString alloc] initWithString:strLongText attributes:attributesLong];
+    [attributedString appendAttributedString:subStringLong];
+    
+    //Step3 : Append dummy text to blank attributed string
+    
+    //Step4 : Set attributed placeholder string to searchBar textfield
+    UITextField *searchTextField = [self.searchBar valueForKey:@"_searchField"];
+    searchTextField.attributedPlaceholder = attributedString;
+    
     [Utils dropShadow:_friendShadowView];
     [Utils dropShadow:_inviteShadowView];
     
@@ -214,6 +233,28 @@
             NSLog(@"post function tag  ==%@",dict1);
             
             [_gAppDelegate showAlertDilog:nil message:@"Friend Added to List"];
+            [self getFriendsData];
+        }
+    } failure:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+    }];
+}
+
+- (void)removeFriendsData:(NSString *)email {
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:true];
+    NSString* API = [NSString stringWithFormat:kAPI_REMOVEFRIEND, _gAppPrefData.userID, email];
+    
+    [_gAppData sendGETRequest:API completion:^(id result) {
+        
+        [MBProgressHUD hideHUDForView:self.view animated:true];
+        if (result != nil) {
+            
+            NSDictionary* dict1 = [NSJSONSerialization JSONObjectWithData:result options:NSJSONReadingMutableLeaves error:nil];
+            NSLog(@"post function tag  ==%@",dict1);
+            
+            [_gAppDelegate showAlertDilog:nil message:@"Friend removed from List"];
             [self getFriendsData];
         }
     } failure:^(id result) {
@@ -373,6 +414,25 @@
         return cell;
     }
 }
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    NSDictionary* dict = _listTemp[indexPath.row];
+    if (_searchBar.text.length > 0 && dict[@"address"] == nil) {
+        
+        return false;
+    } else {
+        return true;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ 
+    
+    NSDictionary* dict = [_list objectAtIndex:indexPath.row];
+    [self removeFriendsData:dict[@"user_id"]];
+}
+
 
 #pragma mark
 #pragma mark UITableView Delegates

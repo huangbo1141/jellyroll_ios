@@ -74,7 +74,11 @@
     if (_delegates != nil) {
  
         NSDictionary* dict = _list[indexPath.row];
-        [_delegates selectedUserDict:dict];
+        
+        if (![_gAppPrefData.userID isEqualToString:dict[@"user_id"]]) {
+
+            [_delegates selectedUserDict:dict];
+        }
     }
 }
 

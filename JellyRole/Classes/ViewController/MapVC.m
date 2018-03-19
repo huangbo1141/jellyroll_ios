@@ -20,6 +20,7 @@
     NSMutableArray *_allLocation, *_allArtPiece, *_allDialogList, *_allRecentList, *_allRecentArtPiece;
     CLLocationManager* _locationManager;
     FBClusteringManager* _clusteringManager;
+    MKAnnotationView* _userAnnotationView;
     
     NSTimer* _timer;
     GooglePlaceResult* _gresult;
@@ -174,13 +175,33 @@
     
     [self addLongPressGesture];
     
-    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
+   if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"9.0")) {
         
         [[UITextField appearanceWhenContainedInInstancesOfClasses:@[[UISearchBar class]]] setTextColor:[UIColor whiteColor]];
     } else {
         
         [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor whiteColor]];
     }
+    
+
+    NSMutableAttributedString * attributedString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    //Step2 : Append placeholder to blank attributed string
+    NSString *strSearchHere = @"Search ";
+    NSDictionary * attributes = [NSDictionary dictionaryWithObject:[UIColor whiteColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subString = [[NSAttributedString alloc] initWithString:strSearchHere attributes:attributes];
+    [attributedString appendAttributedString:subString];
+    
+    NSString *strLongText = @"LongTextLongTextLong";
+    NSDictionary * attributesLong = [NSDictionary dictionaryWithObject:[UIColor clearColor] forKey:NSForegroundColorAttributeName];
+    NSAttributedString * subStringLong = [[NSAttributedString alloc] initWithString:strLongText attributes:attributesLong];
+    [attributedString appendAttributedString:subStringLong];
+    
+    //Step3 : Append dummy text to blank attributed string
+    
+    //Step4 : Set attributed placeholder string to searchBar textfield
+    UITextField *searchTextField = [self.searchBar valueForKey:@"_searchField"];
+    searchTextField.attributedPlaceholder = attributedString;
     
     [self getAllBarData];
     [self getAllRecentBarData];
@@ -628,7 +649,7 @@
     } else {
     
         searchKey = [searchKey stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSString* url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&key=%@&types=bar%%7cnight_club&rankby=distance&keyword=%@", _mylatitude, _myLongitude, GoogleDirectionAPI,searchKey];
+        NSString* url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&key=%@&type=bar%%7cnight_club&rankby=distance&keyword=%@", _mylatitude, _myLongitude, GoogleDirectionAPI,searchKey];
         
         NSURL* googleRequestURL = [NSURL URLWithString:url];
         
@@ -1529,8 +1550,8 @@
         NSArray *annotations = [_clusteringManager clusteredAnnotationsWithinMapRect:mapView.visibleMapRect withZoomScale:scale];
         
         [_clusteringManager displayAnnotations:annotations onMapView:mapView];
+        
     }];
-
 }
 
 -(void)mapView:(MKMapView *)mapView didFailToLocateUserWithError:(NSError *)error
@@ -1556,10 +1577,10 @@
         
         _isFirstTime = false;
         
-        MKPointAnnotation *point1 = [[MKPointAnnotation alloc] init];
-        point1.coordinate = userLocation.coordinate;
+        //MKPointAnnotation *point1 = [[MKPointAnnotation alloc] init];
+        //point1.coordinate = userLocation.coordinate;
         
-        point1.title = @"Current Location";
+        //point1.title = @"Current Location";
         //[MAP_VIEW addAnnotation:point1];
     }
     
@@ -1579,6 +1600,36 @@
     //FLAG_regionChange=1;
 }
 
+- (void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views {
+    
+    /*for (MKAnnotationView * annView in views) {
+        if ([[annView annotation] isKindOfClass:MKUserLocation.class]) {
+            
+            //MKAnnotationView *view = [mapView viewForAnnotation:(MKUserLocation *)[annView annotation]];
+            //[view sendSubviewToBack:[view superview]];
+//            annView.layer.zPosition = 1;
+            //[[annView superview] bringSubviewToFront:annView];
+        } else if ([[annView annotation] isKindOfClass:[FBAnnotationCluster class]]){
+            
+            MKAnnotationView *view = [mapView viewForAnnotation:(FBAnnotationCluster *)[annView annotation]];
+            
+            [[_userAnnotationView superview] sendSubviewToBack:view];
+            [[view superview] bringSubviewToFront:_userAnnotationView];
+//            annView.layer.zPosition = 0;
+//            [[annView superview] sendSubviewToBack:annView];
+        }  else if ([[annView annotation] isKindOfClass:[ArtPiece class]]){
+            
+            MKAnnotationView *view = [mapView viewForAnnotation:(ArtPiece *)[annView annotation]];
+            [[_userAnnotationView superview] sendSubviewToBack:view];
+            [[view superview] bringSubviewToFront:_userAnnotationView];
+            
+            //[[view superview] bringSubviewToFront:view];
+            //            annView.layer.zPosition = 0;
+            //            [[annView superview] sendSubviewToBack:annView];
+        }
+    }*/
+    
+}
 
 - (MKAnnotationView *) mapView: (MKMapView *) mapView viewForAnnotation: (id<MKAnnotation>) annotation
 {
@@ -1609,11 +1660,13 @@
         }
         //userAnnotationView.annotation = annotation;
         userAnnotationView.enabled = YES;
-        userAnnotationView.canShowCallout = YES;
+        //userAnnotationView.canShowCallout = NO;
         
         userAnnotationView.image = [UIImage imageNamed:@"CUEBALL"];
         
         _isUserAnnotationView = true;
+        //[userAnnotationView sendSubviewToBack:_MAP_VIEW];
+        _userAnnotationView = userAnnotationView;
         return userAnnotationView;
     } else  if ([annotation isKindOfClass:[FBAnnotationCluster class]]) {
         FBAnnotationCluster *cluster = (FBAnnotationCluster *)annotation;

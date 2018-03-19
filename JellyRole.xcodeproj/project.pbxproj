@@ -58,6 +58,7 @@
 		D17D51E41F62254800AACDDC /* CustomeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E31F62254800AACDDC /* CustomeButton.m */; };
 		D17D51E71F62258900AACDDC /* UIButton+Font.m in Sources */ = {isa = PBXBuildFile; fileRef = D17D51E61F62258900AACDDC /* UIButton+Font.m */; };
 		D17D51EA1F6275FD00AACDDC /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D17D51E91F6275FD00AACDDC /* MapKit.framework */; };
+		D1B59EC0203A9E7A0008501D /* LeftAligin+UISearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = D1B59EBF203A9E7A0008501D /* LeftAligin+UISearchBar.m */; };
 		D1CEE0971FE3D3BE00A9F6FF /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */; };
 		D1DAB9891F83189B00F3BFB1 /* UserComparisionView.m in Sources */ = {isa = PBXBuildFile; fileRef = D1DAB9881F83189B00F3BFB1 /* UserComparisionView.m */; };
 		D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1DB98FF1F7674D2001CC21C /* View_SearchMAP.xib */; };
@@ -163,6 +164,8 @@
 		D17D51E51F62258900AACDDC /* UIButton+Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Font.h"; sourceTree = "<group>"; };
 		D17D51E61F62258900AACDDC /* UIButton+Font.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Font.m"; sourceTree = "<group>"; };
 		D17D51E91F6275FD00AACDDC /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D1B59EBE203A9E7A0008501D /* LeftAligin+UISearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LeftAligin+UISearchBar.h"; sourceTree = "<group>"; };
+		D1B59EBF203A9E7A0008501D /* LeftAligin+UISearchBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LeftAligin+UISearchBar.m"; sourceTree = "<group>"; };
 		D1CEE0951FE3D3BE00A9F6FF /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		D1D51F791FECE3AD006F8CFC /* Jellyroll.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Jellyroll.entitlements; sourceTree = "<group>"; };
@@ -439,6 +442,8 @@
 				D17D51E61F62258900AACDDC /* UIButton+Font.m */,
 				D1CEE0951FE3D3BE00A9F6FF /* UIImage+fixOrientation.h */,
 				D1CEE0961FE3D3BE00A9F6FF /* UIImage+fixOrientation.m */,
+				D1B59EBE203A9E7A0008501D /* LeftAligin+UISearchBar.h */,
+				D1B59EBF203A9E7A0008501D /* LeftAligin+UISearchBar.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -629,6 +634,7 @@
 				D1282F521F7520C80064ED2C /* testing.m in Sources */,
 				D1DB99651F79005B001CC21C /* NotificationVC.m in Sources */,
 				D17D51E11F6223A100AACDDC /* Utils.m in Sources */,
+				D1B59EC0203A9E7A0008501D /* LeftAligin+UISearchBar.m in Sources */,
 				D15B22E81F700695007EF10F /* HomeVC.m in Sources */,
 				D1282F4F1F74F4B30064ED2C /* ArtPiece.m in Sources */,
 				D15B22E51F700577007EF10F /* MenuVC.m in Sources */,
@@ -806,7 +812,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zac.jellyroll;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "86cfddfc-fa7e-4e45-92b0-f93fd602eec4";
+				PROVISIONING_PROFILE = "581bb081-f633-4516-a674-4a0612bff9aa";
 				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
 			};
 			name = Debug;
@@ -826,7 +832,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.zac.jellyroll;
 				PRODUCT_NAME = Jellyroll;
-				PROVISIONING_PROFILE = "86cfddfc-fa7e-4e45-92b0-f93fd602eec4";
+				PROVISIONING_PROFILE = "581bb081-f633-4516-a674-4a0612bff9aa";
 				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
 			};
 			name = Release;

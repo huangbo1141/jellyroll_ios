@@ -152,7 +152,13 @@
         [label3 setText:[dict[@"location_name"] capitalizedString]];
     } else {
         
-        [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
+        if (dict[@"location_name"] != nil) {
+            
+            [label3 setText:[dict[@"location_name"] capitalizedString]];
+        } else {
+            [label3 setText:[Utils stringToTime:dict[@"insertime"]]];
+        }
+        
     }
     [label4 setText:[Utils stringToDate:dict[@"insertime"]]];
  
