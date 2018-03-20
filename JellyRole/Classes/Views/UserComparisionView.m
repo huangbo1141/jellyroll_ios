@@ -98,14 +98,14 @@
         [label6 setText:@"n/a"];
     } else {
         
-        [label6 setText:[NSString stringWithFormat:@"#%@", dict[@"percent"]]];
+        [label6 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent"]]];
     }
     
     if ([dict[@"percent_o"] intValue] == 0) {
         [label7 setText:@"n/a"];
     } else {
         
-        [label7 setText:[NSString stringWithFormat:@"#%@", dict[@"percent_o"]]];
+        [label7 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent_o"]]];
     }
     
     return cell;

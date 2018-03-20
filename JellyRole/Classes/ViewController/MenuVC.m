@@ -259,7 +259,9 @@
     if ([self isFacebookAppInstalled]) {
         
         SLComposeViewController* fbSLComposeViewController = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
-        [fbSLComposeViewController setInitialText:kSHAREFACEBOOKTEXT];
+//        [fbSLComposeViewController setInitialText:kSHAREFACEBOOKTEXT];
+        [fbSLComposeViewController addImage:[UIImage imageNamed:@"481912406.jpg"]];
+//        [fbSLComposeViewController addURL:[NSURL URLWithString:@"http://jellyrollpool.com/"]];
         
         if (![Utils isIphone]) {
             fbSLComposeViewController.popoverPresentationController.sourceView = self.view;

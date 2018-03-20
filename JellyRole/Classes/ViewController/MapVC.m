@@ -649,7 +649,7 @@
     } else {
     
         searchKey = [searchKey stringByReplacingOccurrencesOfString:@" " withString:@""];
-        NSString* url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&key=%@&type=bar%%7cnight_club&rankby=distance&keyword=%@", _mylatitude, _myLongitude, GoogleDirectionAPI,searchKey];
+        NSString* url = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=%f,%f&key=%@&type=bar%%7cnight_club%%7cbowling_alley%%7ccafe%%7crestaurant&rankby=distance&keyword=%@", _mylatitude, _myLongitude, GoogleDirectionAPI,searchKey];
         
         NSURL* googleRequestURL = [NSURL URLWithString:url];
         
