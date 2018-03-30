@@ -198,6 +198,9 @@ static DataManager* gDataMgr = nil;
                 if (error == nil) {
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        NSString* dat = [[NSString alloc] initWithBytes:(char *)data.bytes length:data.length encoding:NSUTF8StringEncoding];
+                        NSLog(@".....%@",dat);
                         completionBlock(data);
                     });
                     

@@ -76,6 +76,7 @@
 		D1F699091F82A7BC005F37BA /* QuickPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F699081F82A7BC005F37BA /* QuickPlayVC.m */; };
 		D1F865441F71487D0004E422 /* PrivacyPolicyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */; };
 		D1F865471F71522E0004E422 /* PoolTermsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D1F865461F71522E0004E422 /* PoolTermsVC.m */; };
+		D1FD94BB2060EF43000A33EA /* 481912407.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D1FD94BA2060EF42000A33EA /* 481912407.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		D1F865431F71487C0004E422 /* PrivacyPolicyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyVC.m; sourceTree = "<group>"; };
 		D1F865451F71522E0004E422 /* PoolTermsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PoolTermsVC.h; sourceTree = "<group>"; };
 		D1F865461F71522E0004E422 /* PoolTermsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PoolTermsVC.m; sourceTree = "<group>"; };
+		D1FD94BA2060EF42000A33EA /* 481912407.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 481912407.jpg; sourceTree = "<group>"; };
 		FADABCACF4B3361F19DF6828 /* Pods-JellyRole.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JellyRole.debug.xcconfig"; path = "Pods/Target Support Files/Pods-JellyRole/Pods-JellyRole.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -378,6 +380,7 @@
 		D17D51B31F61E7FE00AACDDC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D1FD94BA2060EF42000A33EA /* 481912407.jpg */,
 				D1679BDA2060E74400F3366B /* 481912406.jpg */,
 				D17D51B41F61E7FE00AACDDC /* Fonts */,
 			);
@@ -556,6 +559,7 @@
 			files = (
 				D17D51CE1F61FB1000AACDDC /* OpenSans-SemiBoldItalic.ttf in Resources */,
 				D17D51A41F61E1BE00AACDDC /* LaunchScreen.storyboard in Resources */,
+				D1FD94BB2060EF43000A33EA /* 481912407.jpg in Resources */,
 				D17D51C91F61FB1000AACDDC /* OpenSans-Italic.ttf in Resources */,
 				D1679BDB2060E74400F3366B /* 481912406.jpg in Resources */,
 				D1DB99011F7674D2001CC21C /* View_SearchMAP.xib in Resources */,

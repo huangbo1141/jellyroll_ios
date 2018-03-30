@@ -69,10 +69,10 @@
     label4.attributedText = attString;
     
     
-    myString = [NSString stringWithFormat:@"%@/%@", dict[@"win_o"], dict[@"loss_o"]];
-    NSMutableAttributedString *attString2 = [[NSMutableAttributedString alloc] initWithString:myString];
-    range1 = [myString rangeOfString:dict[@"win_o"]];
-    range2 = [myString rangeOfString:[NSString stringWithFormat:@"/%@", dict[@"loss_o"]]];
+    NSString* myString2 = [NSString stringWithFormat:@"%@/%@", dict[@"win_o"], dict[@"loss_o"]];
+    NSMutableAttributedString *attString2 = [[NSMutableAttributedString alloc] initWithString:myString2];
+    range1 = [myString2 rangeOfString:dict[@"win_o"]];
+    range2 = [myString2 rangeOfString:[NSString stringWithFormat:@"/%@", dict[@"loss_o"]]];
     [attString2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:(15/255.0) green:(248/255.0) blue:(15/255.0) alpha:1.0] range:range1];
     [attString2 addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:range2];
     
@@ -80,14 +80,14 @@
     
     [label1 setText:[NSString stringWithFormat:@"%@",[dict[@"location"] capitalizedString]]];
     
-    if ([dict[@"my_rank"] intValue] == 0) {
+    if ([dict[@"my_rank"] intValue] == 0 || [myString isEqualToString:@"0/0"]) {
         [label2 setText:@"n/a"];
     } else {
     
         [label2 setText:[NSString stringWithFormat:@"#%@", dict[@"my_rank"]]];
     }
     
-    if ([dict[@"other_rank"] intValue] == 0) {
+    if ([dict[@"other_rank"] intValue] == 0 || [myString2 isEqualToString:@"0/0"]) {
         [label3 setText:@"n/a"];
     } else {
         
