@@ -94,14 +94,16 @@
         [label3 setText:[NSString stringWithFormat:@"#%@", dict[@"other_rank"]]];
     }
     
-    if ([dict[@"percent"] intValue] == 0) {
+    //if ([dict[@"percent"] intValue] == 0) {
+    if ([myString isEqualToString:@"0/0"]) {
         [label6 setText:@"n/a"];
     } else {
         
         [label6 setText:[NSString stringWithFormat:@"%@%%", dict[@"percent"]]];
     }
     
-    if ([dict[@"percent_o"] intValue] == 0) {
+//    if ([dict[@"percent_o"] intValue] == 0) {
+    if ([myString2 isEqualToString:@"0/0"]) {
         [label7 setText:@"n/a"];
     } else {
         
