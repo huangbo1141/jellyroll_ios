@@ -849,6 +849,11 @@
                     _selectedBar = nil;
                     //_saveHomeLocatioView.hidden = true;
                     //_saveHomeLocationButton.hidden = true;
+                    if (dict1[@"address"]!=nil) {
+                        AppPrefData* pref = _gAppPrefData;
+                        [pref setAddress:dict1[@"address"]];
+                        [pref saveAllData];
+                    }
                     _saveLocationButton.userInteractionEnabled = false;
                     _saveLocationButton.alpha = 0.5;
                     

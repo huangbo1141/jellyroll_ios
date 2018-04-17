@@ -270,7 +270,7 @@
     } else if(row == 4) {
         
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"SHARE" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Share this app" preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Mail" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -291,9 +291,12 @@
             
             [UIPasteboard generalPasteboard].string = kSHARECOPYTEXT;
         }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-        }]];
+        }];
+        [alert addAction:cancel];;
+        
+        [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
         
         if (![Utils isIphone]) {
             alert.popoverPresentationController.sourceView = self.view;

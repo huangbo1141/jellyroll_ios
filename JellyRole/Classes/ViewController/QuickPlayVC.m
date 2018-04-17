@@ -504,10 +504,12 @@ typedef enum
         NSString* message = (type == 0) ? @"Congratulations!" : @"Sorry!";
         UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:message preferredStyle:UIAlertControllerStyleAlert];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            
-        }]];
+        }];
+        [alert addAction:cancel];;
+        
+        [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -677,7 +679,12 @@ typedef enum
         [self reporBarData];
     }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:nil]];
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     if (![Utils isIphone]) {
         alert.popoverPresentationController.sourceView = self.view;
@@ -1577,23 +1584,25 @@ typedef enum
         
         [_searchBar1 resignFirstResponder];
         [_searchBar2 resignFirstResponder];
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Confirm Game" message:nil preferredStyle:UIAlertControllerStyleAlert];
         
         [alert addAction:[UIAlertAction actionWithTitle:@"Win" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [self invitewFriendAPI:_searchBar2.text win:@"win" loss:@"loss"];
         }]];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"Loose" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [alert addAction:[UIAlertAction actionWithTitle:@"Lose" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
             [self invitewFriendAPI:_searchBar2.text win:@"loss" loss:@"win"];
             
         }]];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            
-        }]];
+        }];
+        [alert addAction:cancel];;
+        
+        [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
         
         if (![Utils isIphone]) {
             alert.popoverPresentationController.sourceView = self.view;

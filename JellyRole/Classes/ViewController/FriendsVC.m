@@ -102,7 +102,6 @@
     [Utils dropShadow:_inviteShadowView];
     
     
-    
 }
 
 -(NSString *)validate:(NSString*)emailText
@@ -328,9 +327,12 @@
         
     }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-    }]];
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     if (![Utils isIphone]) {
         alert.popoverPresentationController.sourceView = self.view;
@@ -374,6 +376,9 @@
         
         UILabel* userName = [cell viewWithTag:101];
         userName.text = dict[@"username"];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        
         return cell;
     } else {
         
@@ -411,6 +416,7 @@
         UILabel* address = [cell viewWithTag:104];
         address.text = dict[@"address"];
         
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
 }
@@ -454,9 +460,12 @@
             
         }]];
         
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-        }]];
+        }];
+        [alert addAction:cancel];;
+        
+        [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
         
         if (![Utils isIphone]) {
             alert.popoverPresentationController.sourceView = self.view;

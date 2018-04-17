@@ -812,6 +812,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JellyRole/Jellyroll.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: TEN2ONE LLC (298D6TZ9B2)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 298D6TZ9B2;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -822,6 +823,7 @@
 				PRODUCT_NAME = Jellyroll;
 				PROVISIONING_PROFILE = "581bb081-f633-4516-a674-4a0612bff9aa";
 				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -832,6 +834,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JellyRole/Jellyroll.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: TEN2ONE LLC (298D6TZ9B2)";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 298D6TZ9B2;
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = JellyRole/PrefixHeader.pch;
@@ -842,6 +845,7 @@
 				PRODUCT_NAME = Jellyroll;
 				PROVISIONING_PROFILE = "581bb081-f633-4516-a674-4a0612bff9aa";
 				PROVISIONING_PROFILE_SPECIFIER = "jelly adhoc";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

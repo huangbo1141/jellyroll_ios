@@ -307,10 +307,12 @@
 
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure you want to confirm?" preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-    }]];
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Confirm" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
@@ -329,10 +331,12 @@
     
     UIAlertController* alert = [UIAlertController alertControllerWithTitle:nil message:@"Are you sure you want to decline?" preferredStyle:UIAlertControllerStyleAlert];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-    }]];
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Decline" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         

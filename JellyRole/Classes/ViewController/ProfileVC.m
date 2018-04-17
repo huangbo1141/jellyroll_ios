@@ -197,10 +197,12 @@
         
     }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-        
-    }]];
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     if (![Utils isIphone]) {
         alert.popoverPresentationController.sourceView = self.view;
@@ -263,9 +265,12 @@
         
     }]];
     
-    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertAction* cancel =[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         
-    }]];
+    }];
+    [alert addAction:cancel];;
+    
+    [cancel setValue:kAlertCancelColor forKey:@"titleTextColor"];
     
     if (![Utils isIphone]) {
         alert.popoverPresentationController.sourceView = self.view;
